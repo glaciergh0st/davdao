@@ -1,6 +1,5 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
@@ -11,27 +10,20 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
       @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       .visit-blog-button {
         display: inline-block;
-        padding: 0.4em 1.9em;
-        font-size: 0.90rem;
-        font-weight: 15;
+        padding: 0.6em 1.5em;
+        font-size: 0.9rem;
+        font-weight: 600;
         color: #333;
         text-decoration: none;
         border: 2px solid #333;
-        border-radius: 50px;
-        margin-top: -3rem;
-        max-width: 90vw;
+        border-radius: 40px;
+        margin-top: 1rem;
         background-color: transparent;
         transition: all 0.3s ease;
       }
@@ -48,34 +40,64 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       }
     </style>
   </head>
-  <body class="m-0 p-0 box-border bg-gray-50">
-    <Header />
 
+  <body class="m-0 p-0 box-border bg-gray-50">
+    <!-- Header -->
+    <header class="w-full shadow-sm bg-white sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+        <a href="/" class="text-xl md:text-2xl font-bold">davdao</a>
+
+        <nav class="hidden md:flex space-x-6 items-center">
+          <a href="/" class="hover:text-gray-700 font-medium">Home</a>
+          <a href="/blog" class="hover:text-gray-700 font-medium">Blog</a>
+          <a href="/about" class="hover:text-gray-700 font-medium">About</a>
+        </nav>
+
+        <button id="mobile-menu-btn" class="md:hidden focus:outline-none">
+          <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile menu links -->
+      <div id="mobile-menu" class="md:hidden hidden flex-col space-y-2 px-4 pb-4 bg-white">
+        <a href="/" class="block hover:text-gray-700 font-medium">Home</a>
+        <a href="/blog" class="block hover:text-gray-700 font-medium">Blog</a>
+        <a href="/about" class="block hover:text-gray-700 font-medium">About</a>
+      </div>
+    </header>
+
+    <!-- Hero -->
     <main class="w-full flex flex-col items-center justify-center py-12 px-4 text-center relative animate-fade-in">
-      <!-- Hero image centered with max width -->
       <img
         src="/hero.jpg"
         alt="Cybersecurity hero background"
         class="w-full max-w-3xl rounded-lg shadow-lg mb-8 object-cover"
       />
 
-      <!-- Welcome text -->
       <div class="max-w-2xl mx-auto animate-[fadeInUp_1s_ease-out]">
-        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Welcome to My Cybersecurity Hub
         </h1>
-        <p class="text-lg md:text-xl text-gray-700 mb-4">
+        <p class="text-base sm:text-lg text-gray-700 mb-4">
           Hi, I'm David — a security researcher with a passion for DevSecOps, AWS security, and Splunk monitoring and threat detection.
         </p>
-        <p class="text-md md:text-lg text-gray-700 mb-8">
+        <p class="text-md sm:text-lg text-gray-700 mb-8">
           Here you’ll find my projects, research, blog posts, and ways to get in touch.
         </p>
-        <a href="/blog" class="visit-blog-button">
-         See Blog
-        </a>
+        <a href="/blog" class="visit-blog-button">See Blog</a>
       </div>
     </main>
 
     <Footer />
+
+    <script>
+      document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+      });
+    </script>
   </body>
 </html>
+
