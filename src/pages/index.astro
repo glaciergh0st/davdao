@@ -1,0 +1,81 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .visit-blog-button {
+        display: inline-block;
+        padding: 0.4em 1.9em;
+        font-size: 0.90rem;
+        font-weight: 15;
+        color: #333;
+        text-decoration: none;
+        border: 2px solid #333;
+        border-radius: 50px;
+        margin-top: -3rem;
+        max-width: 90vw;
+        background-color: transparent;
+        transition: all 0.3s ease;
+      }
+
+      .visit-blog-button:hover {
+        color: #fff;
+        background-color: #333;
+        border-color: #333;
+        transform: translateY(-2px);
+      }
+
+      .visit-blog-button:active {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="m-0 p-0 box-border bg-gray-50">
+    <Header />
+
+    <main class="w-full flex flex-col items-center justify-center py-12 px-4 text-center relative animate-fade-in">
+      <!-- Hero image centered with max width -->
+      <img
+        src="/hero.jpg"
+        alt="Cybersecurity hero background"
+        class="w-full max-w-3xl rounded-lg shadow-lg mb-8 object-cover"
+      />
+
+      <!-- Welcome text -->
+      <div class="max-w-2xl mx-auto animate-[fadeInUp_1s_ease-out]">
+        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+          Welcome to My Cybersecurity Hub
+        </h1>
+        <p class="text-lg md:text-xl text-gray-700 mb-4">
+          Hi, I'm David — a security researcher with a passion for DevSecOps, AWS security, and Splunk monitoring and threat detection.
+        </p>
+        <p class="text-md md:text-lg text-gray-700 mb-8">
+          Here you’ll find my projects, research, blog posts, and ways to get in touch.
+        </p>
+        <a href="/blog" class="visit-blog-button">
+         See Blog
+        </a>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>
