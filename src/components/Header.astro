@@ -3,63 +3,61 @@ import HeaderLink from './HeaderLink.astro';
 ---
 
 <header>
-  <nav>
+  <nav class="header-nav">
+    <!-- Site Title -->
     <h2 class="site-title">
       <a href="/">
         davdao<span class="cursor"></span>
       </a>
     </h2>
+
+    <!-- Internal Links -->
     <div class="internal-links">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/blog">Blog</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
     </div>
+
+    <!-- Social Links -->
     <div class="social-links">
-              <a href="   " target="_blank">
-            <span class="sr-only">Follow David A on X</span>
-            <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/twitter"
-                ><path
-                    fill="currentColor"
-                    d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
-                ></path></svg
-            >
-        </a>
+      <a href="  " target="_blank" rel="noopener noreferrer" aria-label="Follow David A on X">
+        <iconify-icon icon="simple-icons:x" width="24"height="24"></iconify-icon>
       </a>
-              <a href="https://github.com/glaciergh0st" target="_blank">
-            <span class="sr-only">Go to David.A Github</span>
-            <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github"
-                ><path
-                    fill="currentColor"
-                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                ></path></svg
-            >
-        </a>
+      <a href="https://github.com/glaciergh0st" target="_blank" rel="noopener noreferrer" aria-label="Go to David.A Github">
+        <iconify-icon icon="mdi:github" width="24" height="24"></iconify-icon>
+      </a>
     </div>
   </nav>
 </header>
 
 <style>
   header {
-    margin: 0;
-    padding: 0 1em;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 1rem 1rem;
   }
-  nav {
+
+  .header-nav {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 1rem;
   }
+
   .site-title a {
-    font-family: ;
-    font-size: 0.5em;
+    font-size: 1.75rem;
+    font-weight: bold;
     color: black;
     text-decoration: none;
-    transition: text-decoration 0.3s;
   }
+
   .site-title a:hover {
     text-decoration: underline;
   }
+
   .cursor {
     display: inline-block;
     width: 0.8ch;
@@ -67,27 +65,72 @@ import HeaderLink from './HeaderLink.astro';
     margin-left: 4px;
     background-color: black;
     animation: blink 1s steps(2, start) infinite;
-    vertical-align: baseline;
   }
+
   @keyframes blink {
-    50% { opacity: 0; }
+    50% {
+      opacity: 0;
+    }
   }
+
+  .internal-links,
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+
   .internal-links a,
   .social-links a {
-    padding: 1em 0.5em;
+    font-size: 1rem;
     color: black;
     text-decoration: none;
     transition: transform 0.3s ease, color 0.3s ease;
   }
+
   .internal-links a:hover,
   .social-links a:hover {
-    transform: scale(1.1);
-    color: #1e40af; /* subtle dark blue on hover */
+    transform: scale(1.05);
+    color: #1e40af;
   }
-  .social-links svg {
+
+  .social-links iconify-icon {
     transition: transform 0.3s ease;
   }
-  .social-links svg:hover {
+
+  .social-links a:hover iconify-icon {
     transform: scale(1.2);
+    color: #1e40af;
+  }
+
+  @media (max-width: 640px) {
+  .header-nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .internal-links {
+    margin-bottom: 0.5rem;
+  }
+
+  .social-links {
+    margin-bottom: 0.5rem;
+  }
+
+  .site-title {
+    margin-bottom: 0.5rem;
+  }
+}
+
+
+  .sr-only {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
   }
 </style>
+
