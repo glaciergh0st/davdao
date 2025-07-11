@@ -1,9 +1,10 @@
 ---
 layout: ../../layouts/BlogPost.astro
 title: "Building an AI-Powered APT Detection Lab"
-description: "A practical guide to simulating, detecting, and analyzing APT-like behavior using AI-driven tooling, open source frameworks, and GCP."
+slug: "ai-powered-apt-detection-lab"
+description: "A practical guide to simulating, detecting, and analyzing APT-like behaviour using AI-driven tooling, open source frameworks, and GCP."
 pubDate: "2025-07-09"
-heroImage: "../../assets/blog-placeholder-2.jpg"
+heroImage: "../../../assets/blog-placeholder-2.jpg"
 ---
 
 ## Overview
