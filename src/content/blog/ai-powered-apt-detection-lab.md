@@ -4,7 +4,7 @@ title: "Building an AI-Powered APT Detection Lab"
 slug: "ai-powered-apt-detection-lab"
 description: "A practical guide to simulating, detecting, and analyzing APT-like behaviour using AI-driven tooling, open source frameworks, and GCP."
 pubDate: "2025-07-09"
-heroImage: "../../../assets/blog-placeholder-2.jpg"
+heroImage: "../../assets/blog-placeholder-2.jpg"
 ---
 
 ## Overview
@@ -41,12 +41,12 @@ Resources are auto-created and can be shut down to reduce cost using GCP credits
 
 ## Stack Highlights
 
-- ✅ **Elastic Stack / Splunk**: Core SIEM + ML detection
-- ✅ **Velociraptor**: DFIR + live response agent
-- ✅ **Zeek/Suricata**: Network telemetry
-- ✅ **Caldera**: APT-style behavior simulation
-- ✅ **Terraform**: IaC deployment
-- ✅ **GCP**: Cloud-native + cost-effective
+✔️ **Elastic Stack / Splunk**: Core SIEM + ML detection \
+✔️ **Velociraptor**: DFIR + live response agent \
+✔️ **Zeek/Suricata**: Network telemetry \
+✔️ **Caldera**: APT-style behavior simulation \
+✔️ **Terraform**: IaC deployment\
+✔️ **GCP**: Cloud-native + cost-effective
 
 ## Current Status
 
