@@ -1,0 +1,143 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Contact & Social';
+const description = 'Ways to connect, collaborate, and send encrypted messages to David.';
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
+  </head>
+  <body class="bg-white text-black dark:bg-gray-900 dark:text-white">
+    <Header />
+    <main class="max-w-2xl mx-auto px-4 py-12">
+      <h1 class="text-4xl font-bold mb-6">Contact & Social</h1>
+      <p class="mb-8 text-lg">
+        If you'd like to get in touch, collaborate, or connect professionally, here are my links:
+      </p>
+
+      <div class="contact-card-grid">
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/yourusername" class="contact-card">
+          <iconify-icon icon="mdi:linkedin" width="28" style="color:#0A66C2;"></iconify-icon>
+          <span>linkedin.com/in/yourusername</span>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:oludavid@protonmail.com" class="contact-card">
+          <iconify-icon icon="mdi:email" width="28" style="color:#EA4335;"></iconify-icon>
+          <span>oludavid@protonmail.com</span>
+        </a>
+
+        <!-- X (Twitter) -->
+        <a href="https://twitter.com/yourhandle" class="contact-card">
+          <iconify-icon icon="mdi:twitter" width="28" style="color:#1DA1F2;"></iconify-icon>
+          <span>@yourhandle</span>
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com/glaciergh0st" class="contact-card">
+          <iconify-icon icon="mdi:github" width="28" style="color:#181717;"></iconify-icon>
+          <span>github.com/glaciergh0st</span>
+        </a>
+
+        <!-- Keybase -->
+        <a href="https://keybase.io/glaciergh0st" class="contact-card">
+          <iconify-icon icon="simple-icons:keybase" width="28" style="color:#33A0FF;"></iconify-icon>
+          <span>keybase.io/glaciergh0st</span>
+        </a>
+      </div>
+
+      <!-- PGP Key Section -->
+      <div class="mt-12">
+        <h2 class="text-2xl font-semibold mb-2">PGP Key</h2>
+        <p class="mb-4">You can send me encrypted messages via PGP. Here's my public key:</p>
+        <div class="pgp-scrollable">
+          <pre class="pgp-block text-sm"><code>
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+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
+=4ki5
+-----END PGP PUBLIC KEY BLOCK-----
+          </code></pre>
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
