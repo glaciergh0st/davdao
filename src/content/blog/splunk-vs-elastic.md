@@ -78,7 +78,7 @@ flowchart TB
 
 - **Splunk**: Offers MLTK, pre-trained models, anomaly detection, and guided modeling.
 - **Elastic**: Native ML for anomaly detection, regression, outlier detection (paid tiers).
-> ℹ️ **Note**: Elastic ML is limited unless you’re on the **Platinum** or **Enterprise** tier[^1].
+> ⚠️ **Note**: Elastic ML is limited unless you’re on the **Platinum** or **Enterprise** tier[^1].
 
 [^1]: [Elastic ML licensing tiers](https://www.elastic.co/subscriptions)
 
