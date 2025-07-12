@@ -2,9 +2,15 @@
 layout: ../../layouts/BlogPost.astro
 title: "Building an AI-Powered APT Detection Lab"
 slug: "ai-powered-apt-detection-lab"
-description: "A practical guide to simulating, detecting, and analyzing APT-like behaviour using AI-driven tooling, open source frameworks, and GCP."
+description: "A practical guide to simulating, detecting, and analyzing APT-like behavior using AI-driven tooling, open source frameworks, and GCP."
 pubDate: "2025-07-09"
+updatedDate: "2025-07-11"
 heroImage: "../../assets/blog-placeholder-2.jpg"
+author:
+  name: "David A."
+  title: "Technical Writer | Security Engineer"
+  avatar: "/author1.jpg"
+tags: ["APT", "SOC", "Detection Engineering", "AI", "GCP"]
 ---
 
 ## Overview
@@ -17,6 +23,7 @@ This lab is built for SOC analysts, threat hunters, and detection engineers look
 - Modern SIEM + SOAR workflows
 - Elastic Stack, Splunk, or Security Onion
 
+#
 ## Lab Goals
 
 The goal is to replicate a full detection lifecycle using adversary simulation tools (like Atomic Red Team and Caldera), while capturing and analyzing logs with scalable infrastructure.
@@ -28,6 +35,7 @@ The goal is to replicate a full detection lifecycle using adversary simulation t
 - Apply AI/ML (Elastic ML or Splunk MLTK) to detect anomalies
 - Use SOAR/playbooks to triage findings
 
+#
 ## Architecture
 
 The lab is deployed on GCP using Terraform with auto-created instances for:
@@ -41,12 +49,13 @@ Resources are auto-created and can be shut down to reduce cost using GCP credits
 
 ## Stack Highlights
 
-✔️ **Elastic Stack / Splunk**: Core SIEM + ML detection \
-✔️ **Velociraptor**: DFIR + live response agent \
-✔️ **Zeek/Suricata**: Network telemetry \
-✔️ **Caldera**: APT-style behavior simulation \
-✔️ **Terraform**: IaC deployment\
+✔️ **Elastic Stack / Splunk**: Core SIEM + ML detection  
+✔️ **Velociraptor**: DFIR + live response agent  
+✔️ **Zeek/Suricata**: Network telemetry  
+✔️ **Caldera**: APT-style behavior simulation  
+✔️ **Terraform**: IaC deployment  
 ✔️ **GCP**: Cloud-native + cost-effective
+
 
 ## Current Status
 
@@ -55,6 +64,7 @@ Resources are auto-created and can be shut down to reduce cost using GCP credits
 - Building a LLM-based parser for noisy logs → summarized findings
 - Soon integrating FleetDM + Osquery to add visibility across VMs
 
+#
 ## What’s Next?
 
 - Auto-tagging alerts using AI
@@ -62,6 +72,7 @@ Resources are auto-created and can be shut down to reduce cost using GCP credits
 - Exporting dashboards and hunt reports
 - Packaging this as an LMS module for training SOC analysts
 
+#
 ## Get Involved
 
 You can clone or fork the project here:
@@ -73,4 +84,3 @@ Feel free to open issues, ask questions, or contribute ideas!
 ---
 
 Thanks for reading — follow along as I refine this lab into a reusable blueprint for blue teamers.
-

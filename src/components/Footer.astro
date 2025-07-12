@@ -3,34 +3,66 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} David A. All rights reserved.
-    <div class="social-links">
-      <a href="  " target="_blank" rel="noopener noreferrer" aria-label="Follow David A on X">
-        <iconify-icon icon="simple-icons:x" width="24"height="24"></iconify-icon>
-      </a>
-      <a href="https://github.com/glaciergh0st" target="_blank" rel="noopener noreferrer" aria-label="Go to David.A Github">
-        <iconify-icon icon="mdi:github" width="30" height="30"></iconify-icon>
-      </a>
-    </div>
+  <p>&copy; {today.getFullYear()} David A. All rights reserved.</p>
+
+  <div class="social-links">
+    <a href="" target="_blank" rel="noopener noreferrer" aria-label="Follow David A on X">
+      <span class="sr-only">Follow David A on X</span>
+      <iconify-icon icon="simple-icons:x" width="24" height="24"></iconify-icon>
+    </a>
+    <a href="https://github.com/glaciergh0st" target="_blank" rel="noopener noreferrer" aria-label="Go to David A's GitHub">
+      <span class="sr-only">Go to David A's GitHub</span>
+      <iconify-icon icon="mdi:github" width="24" height="24"></iconify-icon>
+    </a>
+  </div>
 </footer>
+
 <style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
+  footer {
+    padding: 2em 1em 6em;
+    background: linear-gradient(var(--gray-gradient)) no-repeat;
+    color: rgb(var(--gray));
+    text-align: center;
+  }
+
+  footer p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+  }
+
+  .social-links a {
+    color: rgb(var(--gray));
+    transition: color 0.25s ease, transform 0.25s ease;
+    text-decoration: none;
+  }
+
+  .social-links a:hover,
+  .social-links a:focus {
+    color: #1e40af;
+    transform: scale(1.15);
+    outline: none;
+  }
+
+  .social-links iconify-icon {
+    color: inherit;
+    transition: color 0.25s ease;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 </style>

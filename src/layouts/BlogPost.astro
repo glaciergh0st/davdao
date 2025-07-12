@@ -6,81 +6,273 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+  headings?: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  headings = [],
+} = Astro.props;
+
+const currentUrl = Astro.url.href;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+  <head>
+    <BaseHead title={title} description={description} />
+    <style>
+      main {
+        display: flex;
+        gap: 4rem;
+        justify-content: center;
+        padding: 2rem 1rem;
+        max-width: 1280px;
+        margin: 0 auto;
+        position: relative;
+      }
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+      .toc {
+        flex: 0 0 240px;
+        position: sticky;
+        top: 6rem;
+        align-self: flex-start;
+        border-left: 4px solid #1e40af;
+        border-radius: 12px;
+        padding-left: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        height: max-content;
+        font-size: 0.9rem;
+      }
+
+      .toc-title {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .toc ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .toc li {
+        margin: 0.5rem 0;
+      }
+
+      .toc li.depth-3 {
+        margin-left: 1rem;
+        font-size: 0.85rem;
+      }
+      }
+
+      .toc a {
+        color: #1e40af;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .toc a:hover,
+      .toc a.active {
+        color: #172554;
+        text-decoration: underline;
+      }
+
+      .content-wrapper {
+        flex: 1;
+        max-width: 760px;
+        padding: 0 1rem;
+      }
+
+      .title {
+        margin-bottom: 1em;
+        padding: 1em 0;
+      }
+
+      .title h1 {
+        margin: 0 0 0.5em 0;
+      }
+
+      .date {
+        margin-bottom: 0.5em;
+        color: rgb(100, 100, 100);
+      }
+
+      .last-updated-on {
+        font-style: italic;
+        font-size: 0.9em;
+      }
+
+      /* Author Card */
+      .author-card {
+        display: flex;
+        align-items: center;
+        background: #f8f9fc;
+        padding: 1rem 1.25rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        margin: 2rem 0;
+        gap: 1rem;
+      }
+
+      .author-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .author-info p {
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      .author-title {
+        font-size: 0.95rem;
+        color: rgb(var(--gray));
+      }
+
+      .share-buttons {
+        margin-top: 3em;
+        padding-top: 1em;
+        border-top: 1px solid #e5e7eb;
+        text-align: center;
+      }
+
+      .share-buttons p {
+        font-weight: bold;
+        margin-bottom: 0.5em;
+      }
+
+      .share-buttons a {
+        margin: 0 0.75em;
+        color: #1e40af;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .share-buttons a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 960px) {
+        main {
+          flex-direction: column;
+          padding: 1.5rem 1rem;
+        }
+
+        .toc {
+          display: none;
+        }
+
+        .content-wrapper {
+          max-width: 100%;
+        }
+
+        .author-card {
+          flex-direction: row;
+          justify-content: flex-start;
+        }
+
+        .author-avatar {
+          width: 36px;
+          height: 36px;
+        }
+      }
+      
+      .container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+  max-width: 768px;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      {headings.length > 0 && (
+        <nav class="toc" aria-label="Table of contents">
+          <h2 class="toc-title">Table of Contents</h2>
+          <ul>
+            {headings
+              .filter((h) => h.depth <= 3)
+              .map((h) => (
+                <li class={`depth-${h.depth}`}>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+          </ul>
+        </nav>
+      )}
+
+      <div class="content-wrapper">
+        <div class="title">
+          <div class="date">
+            <FormattedDate date={pubDate} />
+            {updatedDate && (
+              <div class="last-updated-on">
+                Last updated on <FormattedDate date={updatedDate} />
+              </div>
+            )}
+          </div>
+          <h1>{title}</h1>
+        </div>
+
+        {heroImage && (
+          <div class="hero-image">
+            <Image width={1020} height={510} src={heroImage} alt="" />
+          </div>
+        )}
+
+        <!-- Boxed Author Card -->
+        <div class="author-card">
+          <img src="/author1.jpg" alt="David A" class="author-avatar" />
+          <div class="author-info">
+            <p><strong>David A.</strong></p>
+            <p class="author-title">Technical Writer | Security Engineer</p>
+          </div>
+        </div>
+
+        <!-- Blog Content -->
+        <slot />
+
+        <!-- Share Buttons -->
+        <div class="share-buttons">
+          <p>Share this post:</p>
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${currentUrl}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            >X</a
+          >
+          <a
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=${encodeURIComponent(title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn</a
+          >
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
 </html>

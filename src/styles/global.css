@@ -181,3 +181,117 @@ table {
     font-size: 1.5em;
   }
 }
+
+
+.social-links iconify-icon {
+  color: rgb(var(--gray));
+  transition: color 0.2s ease;
+}
+.social-links a:hover iconify-icon {
+  color: rgb(var(--gray-dark));
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.blog-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+
+/* Global blog styles for consistency */
+
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+}
+
+.blog-table th,
+.blog-table td {
+  border: 1px solid #ccc;
+  padding: 0.75em;
+  text-align: left;
+}
+
+.blog-table th {
+  background-color: #f9fafb;
+  color: #111827;
+  font-weight: 600;
+}
+
+.blog-table tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+.blog-table tr:hover {
+  background-color: #e5e7eb;
+}
+
+.blog-table td.positive {
+  background-color: #ecfdf5;
+  color: #065f46;
+}
+
+.blog-table td.negative {
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+.blog-table td.neutral {
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-table {
+    font-size: 0.85rem;
+  }
+}
+/* Make all markdown tables scrollable on small screens */
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+/* Zebra striping for readability */
+.markdown table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Borders and spacing */
+.markdown table,
+.markdown th,
+.markdown td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Header styling */
+.markdown th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+}
+
+/* Allow long code blocks to wrap in table cells */
+.markdown td code {
+  white-space: normal;
+  word-break: break-word;
+}
