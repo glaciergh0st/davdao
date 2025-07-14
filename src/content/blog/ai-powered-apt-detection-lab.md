@@ -5,7 +5,7 @@ slug: "ai-powered-apt-detection-lab"
 description: "A practical guide to simulating, detecting, and analyzing APT-like behavior using AI-driven tooling, open source frameworks, and GCP."
 pubDate: "2025-07-09"
 updatedDate: "2025-07-11"
-heroImage: "../../assets/blog-placeholder-2.jpg"
+heroImage: "../../assets/apt-detection-lab.jpg"
 author:
   name: "David A."
   title: "Technical Writer | Security Engineer"

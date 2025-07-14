@@ -4,31 +4,49 @@ import HeaderLink from './HeaderLink.astro';
 
 <header>
   <nav class="header-nav">
-    <!-- Site Title -->
+    <!-- Logo -->
     <h2 class="site-title">
       <a href="/">
         davdao<span class="cursor"></span>
       </a>
     </h2>
 
-    <!-- Internal Links -->
-    <div class="internal-links">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
-      <HeaderLink href="/contact">Contact</HeaderLink>
-    </div>
+    <!-- Hamburger Button (mobile only) -->
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+      ☰
+    </button>
 
-    <!-- Social Links -->
-    <div class="social-links">
-      <a href="  " target="_blank" rel="noopener noreferrer" aria-label="Follow David A on X">
-        <iconify-icon icon="simple-icons:x" width="24"height="24"></iconify-icon>
-      </a>
-      <a href="https://github.com/glaciergh0st" target="_blank" rel="noopener noreferrer" aria-label="Go to David.A Github">
-        <iconify-icon icon="mdi:github" width="24" height="24"></iconify-icon>
-      </a>
+    <!-- Collapsible Nav -->
+    <div class="nav-wrapper" id="navMenu">
+      <div class="internal-links">
+        <HeaderLink href="/">Home</HeaderLink>
+        <HeaderLink href="/blog">Blog</HeaderLink>
+        <HeaderLink href="/about">About</HeaderLink>
+        <HeaderLink href="/contact">Contact</HeaderLink>
+      </div>
+
+      <div class="social-links">
+        <a href=" " target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+          <iconify-icon icon="simple-icons:x" width="24" height="24"></iconify-icon>
+        </a>
+        <a href="https://github.com/glaciergh0st" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <iconify-icon icon="mdi:github" width="24" height="24"></iconify-icon>
+        </a>
+      </div>
     </div>
   </nav>
+
+  <script type="text/javascript">
+    if (typeof window !== "undefined") {
+      document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("hamburgerBtn");
+        const nav = document.getElementById("navMenu");
+        btn.addEventListener("click", () => {
+          nav.classList.toggle("open");
+        });
+      });
+    }
+  </script>
 </header>
 
 <style>
@@ -40,12 +58,11 @@ import HeaderLink from './HeaderLink.astro';
 
   .header-nav {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .site-title a {
@@ -55,14 +72,10 @@ import HeaderLink from './HeaderLink.astro';
     text-decoration: none;
   }
 
-  .site-title a:hover {
-    text-decoration: underline;
-  }
-
   .cursor {
     display: inline-block;
     width: 0.8ch;
-    height: 1em;
+    height: .23em;
     margin-left: 4px;
     background-color: black;
     animation: blink 1s steps(2, start) infinite;
@@ -74,12 +87,26 @@ import HeaderLink from './HeaderLink.astro';
     }
   }
 
+  .hamburger {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
   .internal-links,
   .social-links {
     display: flex;
-    flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   .internal-links a,
@@ -106,32 +133,29 @@ import HeaderLink from './HeaderLink.astro';
   }
 
   @media (max-width: 640px) {
-  .header-nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .hamburger {
+      display: block;
+    }
 
-  .internal-links {
-    margin-bottom: 0.5rem;
-  }
+    .nav-wrapper {
+      display: none;
+      flex-direction: column;
+      align-items: flex-end;
+      width: 100%;
+      padding-top: 0.5rem;
+      text-align: right;
+      gap: 1rem;
+    }
 
-  .social-links {
-    margin-bottom: 0.5rem;
-  }
+    .nav-wrapper.open {
+      display: flex;
+    }
 
-  .site-title {
-    margin-bottom: 0.5rem;
-  }
-}
-
-
-  .sr-only {
-    position: absolute;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
+    .internal-links,
+    .social-links {
+      flex-direction: column;
+      align-items: flex-end;
+      width: 100%;
+    }
   }
 </style>
-
