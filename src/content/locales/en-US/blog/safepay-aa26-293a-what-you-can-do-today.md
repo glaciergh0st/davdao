@@ -12,8 +12,8 @@
     "Threat Hunting",
     "Threat Intelligence"
   ],
-"keyTakeaway": "The advisory’s indicators support immediate detection and response. Part 2 covers contextual and behavioral detections that maintain coverage as indicators change.",
-  "summary": "A practical guide to SafePay advisory AA26-293A: Prioritize which indicators to block, verify, or investigate, search historical logs, hunt historical logs, and deploy basic Sigma and YARA coverage while understanding what those layers miss.",
+"keyTakeaway": "The advisory’s indicators support immediate detection and response. Part 2 of this article series will cover contextual and behavioral detections that maintain coverage as indicators change.",
+  "summary": "A practical guide to SafePay advisory AA26-293A: Prioritize which indicators to block, verify, or investigate, hunt historical logs, and deploy basic Sigma and YARA coverage while understanding what those layers miss.",
   "author": "David Awosusi",
   "category": "Detection Engineering",
   "publishedAt": "2026-10-27",
