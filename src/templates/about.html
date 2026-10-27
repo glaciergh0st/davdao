@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="{{DESCRIPTION}}">
+  {{CANONICAL_LINK}}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <title>{{PAGE_TITLE}}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/content.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">{{SKIP_LABEL}}</a>
+  {{SIDE_NAV}}
+  {{MESSAGE_SHORTCUT}}
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="/" aria-label="{{BRAND_ARIA}}"><span class="brand-name">{{BRAND_NAME}}</span><span class="brand-byline">{{BRAND_BYLINE}}</span></a><nav aria-label="{{NAV_LABEL}}" data-content-nav>{{NAV_LINKS}}</nav></div></header>
+  <main id="main" class="container about-page" data-about-page>
+    <a class="blog-back" href="/">← DAVDAO home</a>
+    <header class="about-page-heading"><p class="eyebrow">Security consulting · IT operations</p><h1 data-bind="about.title">{{ABOUT_TITLE}}</h1></header>
+    <div class="about-copy" data-content-about>{{ABOUT_PARAGRAPHS}}{{ABOUT_WHY}}</div>
+  </main>
+  <footer class="container footer"><span>{{FOOTER}}</span><nav class="footer-social-links" aria-label="Social links" data-social-links>{{SOCIAL_LINKS}}</nav><a href="/">{{HOME_LABEL}}</a></footer>
+</body>
+</html>

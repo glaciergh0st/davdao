@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "pid-integrity",
+    "title": "Sysmon process integrity checks",
+    "summary": "A Go detector for ProcessGuid mismatches and activity reported after process termination.",
+    "status": "In progress",
+    "tags": ["Go", "Sysmon", "Detection engineering", "Windows telemetry"],
+    "markdown": "pid-integrity.md",
+    "externalUrl": ""
+  },
+  {
+    "slug": "telemetry-engineering",
+    "title": "SIEM pipeline tuning",
+    "summary": "A Cribl pipeline tuned to reduce and normalize security events while preserving fields needed for investigations.",
+    "status": "Consulting work · FINSEC",
+    "tags": ["Cribl Stream", "SIEM", "Telemetry pipeline"],
+    "markdown": "telemetry-engineering.md",
+    "externalUrl": ""
+  },
+  {
+    "slug": "adversary-detection-lab",
+    "title": "Cloud detection lab",
+    "summary": "A cloud SOC lab for testing adversary emulation and detections with Caldera, Splunk MLTK, Elastic ML, and Sigma.",
+    "status": "Repository",
+    "tags": ["GCP", "Caldera", "Splunk MLTK", "Elastic ML", "Sigma"],
+    "markdown": "adversary-detection-lab.md",
+    "externalUrl": "https://github.com/glaciergh0st/AI-APT-detection-lab"
+  }
+]

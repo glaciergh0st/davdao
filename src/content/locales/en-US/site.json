@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "locale": "en-US",
+  "direction": "ltr",
+  "site": {
+    "name": "DAVDAO",
+    "person": "David Awosusi",
+    "title": "DAVDAO — David Awosusi, Security Engineering",
+    "description": "David Awosusi is a security engineer focused on detection engineering, security operations, cloud and identity visibility, and incident response."
+  },
+  "labels": {
+    "skipToContent": "Skip to content",
+    "mainNavigation": "Main navigation",
+    "technologies": "Technologies",
+    "toolsCount": "{count} tools",
+    "readWriteup": "Read the write-up",
+    "repository": "Repository",
+    "backToTop": "Back to top",
+    "backToWork": "Return to Tools & Projects",
+    "home": "Home"
+  },
+  "navigation": [
+    { "label": "About", "href": "/about/" },
+    { "label": "Experience", "href": "#experience" },
+    { "label": "Tools & Projects", "href": "#work" },
+    { "label": "Blog", "href": "/blog/" },
+    { "label": "Professional development", "href": "#credentials" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "hero": {
+    "eyebrow": "Security consultant",
+    "title": "Security engineering.",
+    "highlight": "Detection & response.",
+    "description": "Security consultant with a strong foundation in IT operations, focused on detection engineering, incident response, and cloud security across financial services and healthcare.",
+    "primaryAction": "View projects",
+    "secondaryAction": "More about me",
+    "secondaryHref": "/about/"
+  },
+  "about": {
+    "title": "About me",
+    "description": "Security consultant with an IT operations background, focused on detection engineering, incident response, and cloud security.",
+    "points": [
+      { "icon": "server", "text": "Built a strong foundation in IT infrastructure and operations by supporting users, troubleshooting systems, and keeping services running." },
+      { "icon": "shield", "text": "Now focused on detection engineering, incident response, and cloud security in financial services and healthcare." },
+      { "icon": "lightbulb", "text": "Curious-minded, open-source contributor making a byte of effort toward securing the planet." },
+      { "icon": "route", "text": "Outside cybersecurity, I enjoy biking, running, and travel." }
+    ],
+    "whyHeading": "Why I write",
+    "whyText": "This site is my central notebook and a reflection of my passion for continuous technical growth. Here, I break down complex threat vectors and document what I learn along the way.\n\nCybersecurity moves quickly, so staying sharp means building, testing, and sharing. Thanks for stopping by. You’re welcome to connect and collaborate."
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "title": "Achievements",
+    "entries": [
+      {
+        "id": "security-consulting",
+        "label": "Security consulting",
+        "duration": "3.5 years",
+        "heading": "Accomplishments",
+        "description": "Led end-to-end detection and response for Fortune 10 healthcare organizations and global financial clients. Built detections and investigation playbooks across network, endpoint, identity, and cloud, mapped to NIST CSF 2.0 and MITRE ATT&CK.",
+        "outcomes": [
+          {
+            "metric": "4h → 45s",
+            "description": "Endpoint containment with SOAR-to-CrowdStrike API automation and approval controls."
+          },
+          {
+            "metric": "Kubernetes nodes/proxy RCE",
+            "description": "Investigated kubelet exec activity, contained the process, and confirmed recovery, preventing $380K in potential impact."
+          }
+        ]
+      },
+      {
+        "id": "it-operations",
+        "label": "IT operations",
+        "duration": "8 years",
+        "heading": "Keeping systems running",
+        "description": "Cut downtime and average resolution times by resolving 95%+ of remote and onsite technical issues end-to-end."
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "title": "Tools & Projects",
+    "description": "Each project explains the problem, how it was investigated or solved, and the outcome."
+  },
+  "blog": {
+    "eyebrow": "Writing",
+    "title": "Blog",
+    "description": "Notes on detection engineering, security operations, incident response, labs, walkthroughs, and more."
+  },
+  "professionalDevelopment": {
+    "title": "Professional development",
+    "credentials": [
+      {
+        "mark": "GIAC",
+        "name": "GCIA · GIAC Certified Intrusion Analyst",
+        "detail": "Network forensics, log analysis, Zeek, IDS/IPS, anomaly investigation.",
+        "url": "https://www.giac.org/certified-professional/David-Awosusi/185835"
+      },
+      {
+        "mark": "CompTIA",
+        "name": "Security+",
+        "detail": "Core security principles, risk management, and incident response."
+      },
+      {
+        "mark": "M.Eng.",
+        "name": "Cybersecurity Engineering",
+        "detail": "Master’s degree",
+        "url": "https://drive.google.com/file/d/1oLh0RAcbH01pXobsA1kUR-7bOQpjSmjp/view?pli=1"
+      }
+    ],
+    "toolCategories": [
+      {
+        "id": "detection-siem",
+        "name": "Detection & SIEM",
+        "tools": ["Splunk Enterprise Security", "Microsoft Sentinel", "SPL", "KQL", "Sigma", "MITRE ATT&CK"]
+      },
+      {
+        "id": "telemetry-cloud",
+        "name": "Telemetry & cloud",
+        "tools": ["Cribl Stream", "AWS CloudTrail", "AWS", "Azure", "Microsoft Defender"]
+      },
+      {
+        "id": "response-identity",
+        "name": "Response & identity",
+        "tools": ["Splunk SOAR", "CrowdStrike Falcon", "Microsoft Entra ID", "Python", "PowerShell", "API integrations"]
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let’s connect",
+    "highlight": ".",
+    "description": "You’re welcome to get in touch about security roles, consulting work, or a project you’d like to discuss.",
+    "emailSubject": "Security opportunity",
+    "emailLabel": "Email",
+    "githubLabel": "GitHub",
+    "githubUrl": "https://github.com/glaciergh0st",
+    "linkedinUrl": "https://linkedin.com/in/davdao",
+    "keybaseUrl": "https://keybase.io/glaciergh0st"
+  },
+  "footer": "© 2025 David A. All rights reserved."
+}
