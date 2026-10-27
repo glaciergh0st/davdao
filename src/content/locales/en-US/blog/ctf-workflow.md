@@ -7,7 +7,7 @@
   "openGraphImagePrompt": "A clean terminal-inspired editorial diagram for an eight-stage CTF workflow: scoping, setup, enumeration, foothold, shell, privilege escalation, pivoting, and reporting; charcoal background, restrained blue and teal accents, readable spacing, no logos or neon effects.",
   "tags": ["CTF", "Hack The Box", "Enumeration", "Privilege Escalation"],
   "keyTakeaway": "Eight stages, recon through report, for HTB and local VM labs.",
-  "summary": "How I primarily approach CTFs and Labs: Set up a workspace, enumerate deliberately, verify findings, record each step, and finish with a clear write-up. Each stage below is the commands I actually reach for, not an exhaustive tool list.",
+  "summary": "How I primarily approach CTFs and Labs: Set up a workspace, enumerate deliberately, verify findings, record each step, and finish with a clear write-up. The stages below reflect my typical process rather than an exhaustive command list.",
   "author": "David Awosusi",
   "category": "CTF Workflow",
   "publishedAt": "2021-08-12",
