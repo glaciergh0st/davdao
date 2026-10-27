@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="{{DESCRIPTION}}">
+  {{CANONICAL_LINK}}
+  <link rel="alternate" type="application/feed+json" href="/blog/feed.json" title="DAVDAO blog feed">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <title>{{PAGE_TITLE}}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/content.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">{{SKIP_LABEL}}</a>
+  {{SIDE_NAV}}
+  {{MESSAGE_SHORTCUT}}
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="/" aria-label="{{BRAND_ARIA}}"><span class="brand-name">{{BRAND_NAME}}</span><span class="brand-byline">{{BRAND_BYLINE}}</span></a><nav aria-label="{{NAV_LABEL}}" data-content-nav>{{NAV_LINKS}}</nav></div></header>
+  <main id="main" class="container blog-index" data-blog-index>
+    <a class="blog-back" href="/">← {{HOME_LABEL}}</a>
+    <header class="blog-index-heading"><p class="eyebrow">{{BLOG_EYEBROW}}</p><h1>{{BLOG_TITLE}}</h1><p>{{BLOG_DESCRIPTION}}</p></header>
+    <div class="blog-tools"><label for="blog-search">Search articles</label><input id="blog-search" type="search" data-blog-search placeholder="Search by topic or tool" autocomplete="off"><p class="blog-count" data-blog-count aria-live="polite">{{BLOG_COUNT}}</p></div>
+    <div class="blog-grid blog-index-grid" data-blog-list>{{BLOG_POSTS}}</div>
+    <p class="blog-empty" data-blog-empty hidden>No articles match that search.</p>
+  </main>
+  <footer class="container footer"><span>{{FOOTER}}</span><nav class="footer-social-links" aria-label="Social links" data-social-links>{{SOCIAL_LINKS}}</nav><a href="/">{{HOME_LABEL}}</a></footer>
+</body>
+</html>

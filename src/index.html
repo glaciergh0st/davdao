@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="{{DESCRIPTION}}">
+  {{CANONICAL_LINK}}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <title>{{PAGE_TITLE}}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/content.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">{{SKIP_LABEL}}</a>
+  {{SIDE_NAV}}
+  {{MESSAGE_SHORTCUT}}
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="{{BRAND_ARIA}}"><span class="brand-name">{{BRAND_NAME}}</span> <span class="brand-byline">{{BRAND_BYLINE}}</span></a>
+      <nav aria-label="{{NAV_LABEL}}" data-content-nav>{{NAV_LINKS}}</nav>
+    </div>
+  </header>
+  <main id="main" data-home-content>
+    <section class="container hero" aria-labelledby="hero-title">
+      <p class="eyebrow" data-bind="hero.eyebrow">{{HERO_EYEBROW}}</p>
+      <h1 id="hero-title"><span class="hero-title-main" data-bind="hero.title">{{HERO_TITLE}}</span><br><span class="hero-title-highlight" data-bind="hero.highlight">{{HERO_HIGHLIGHT}}</span></h1>
+      <div class="hero-lower">
+        <p class="hero-copy" data-bind="hero.description">{{HERO_DESCRIPTION}}</p>
+        <div class="hero-actions">
+          <a class="button button-primary" data-bind="hero.primaryAction" href="#work">{{HERO_PRIMARY}}</a>
+          <a class="text-link" data-bind="hero.secondaryAction" href="{{HERO_SECONDARY_HREF}}">{{HERO_SECONDARY}}</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading"><p class="eyebrow" data-bind="experience.eyebrow">{{EXPERIENCE_EYEBROW}}</p><h2 id="experience-title" data-bind="experience.title">{{EXPERIENCE_TITLE}}</h2></div>
+      <ol class="timeline" data-content-experience>{{EXPERIENCE_ENTRIES}}</ol>
+    </section>
+
+    <section class="work-band" id="work" aria-labelledby="work-title">
+      <div class="container section">
+        <div class="section-heading work-heading"><div><p class="eyebrow" data-bind="projects.eyebrow">{{PROJECTS_EYEBROW}}</p><h2 id="work-title" data-bind="projects.title">{{PROJECTS_TITLE}}</h2></div><p data-bind="projects.description">{{PROJECTS_DESCRIPTION}}</p></div>
+        <div class="project-grid" data-content-projects>{{PROJECT_CARDS}}</div>
+      </div>
+    </section>
+
+    <section class="container section" id="blog" aria-labelledby="blog-title">
+      <div class="section-heading"><p class="eyebrow" data-bind="blog.eyebrow">{{BLOG_EYEBROW}}</p><h2 id="blog-title" data-bind="blog.title">{{BLOG_TITLE}}</h2><p class="blog-description" data-bind="blog.description">{{BLOG_DESCRIPTION}}</p></div>
+      <div class="blog-grid" data-content-blog>{{BLOG_POSTS}}</div>
+      <p class="blog-index-link"><a class="text-link" href="/blog/">Browse all articles <span aria-hidden="true">→</span></a></p>
+    </section>
+
+    <section class="container section" id="credentials" aria-labelledby="credentials-title">
+      <div class="section-heading"><h2 id="credentials-title" data-bind="professionalDevelopment.title">{{DEVELOPMENT_TITLE}}</h2></div>
+      <div class="credentials-layout">
+        <div class="credential-list" data-content-credentials>{{CREDENTIALS}}</div>
+        <div class="toolkit" aria-label="{{TOOLS_LABEL}}" data-content-tools>{{TOOL_CATEGORIES}}</div>
+      </div>
+    </section>
+
+    <section class="contact-band" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-inner">
+        <div><h2 id="contact-title"><span data-bind="contact.title">{{CONTACT_TITLE}}</span><span class="contact-period" data-bind="contact.highlight">{{CONTACT_HIGHLIGHT}}</span></h2><p data-bind="contact.description">{{CONTACT_DESCRIPTION}}</p></div>
+      </div>
+    </section>
+  </main>
+  <footer class="container footer"><span data-bind="footer">{{FOOTER}}</span><nav class="footer-social-links" aria-label="Social links" data-social-links>{{SOCIAL_LINKS}}</nav><a data-bind="labels.backToTop" href="#main">{{BACK_TO_TOP}}</a></footer>
+</body>
+</html>
