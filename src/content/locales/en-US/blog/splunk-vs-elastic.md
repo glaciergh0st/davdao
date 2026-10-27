@@ -1,6 +1,6 @@
 ```json
 {
-  "title": "Splunk vs Elastic SIEM: How to Evaluate Both",
+  "title": "Splunk vs. Elastic SIEM: Choosing the Right Platform",
   "metaTitle": "Splunk vs Elastic SIEM: A Practical Guide",
   "metaDescription": "Compare Splunk Enterprise Security and Elastic Security by data onboarding, detections, investigations, and operating cost.",
   "slug": "splunk-vs-elastic",
