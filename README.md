@@ -1,6 +1,6 @@
 # David Awosusi — Security Engineering Portfolio
 
-A dependency-free static site with content served from same-origin JSON endpoints. 
+A dependency-free, highly customized site with content served from same-origin JSON endpoints. 
 
 ## Structure
 
