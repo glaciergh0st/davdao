@@ -158,7 +158,7 @@ async function loadPublicConfig() {
   if (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email)) throw new Error('PUBLIC_CONTACT_EMAIL is not a valid address');
   const locale = process.env.PUBLIC_SITE_LOCALE || local.PUBLIC_SITE_LOCALE || 'en-US';
   if (!/^[a-z]{2}(?:-[A-Z]{2})?$/.test(locale)) throw new Error('PUBLIC_SITE_LOCALE must look like en or en-US');
-  const rawSiteUrl = process.env.PUBLIC_SITE_URL || local.PUBLIC_SITE_URL || 'https://david-awosusi-security-portfolio.arcane-tulip-9591.chatgpt.site';
+  const rawSiteUrl = process.env.PUBLIC_SITE_URL || local.PUBLIC_SITE_URL || 'https://www.davdao.com';
   const siteUrl = rawSiteUrl ? safeHttpsUrl(rawSiteUrl) : '';
   if (rawSiteUrl && !siteUrl) throw new Error('PUBLIC_SITE_URL must be an HTTPS URL without credentials');
   return { email, locale, siteUrl: siteUrl ? siteUrl.replace(/\/$/, '') : '' };
