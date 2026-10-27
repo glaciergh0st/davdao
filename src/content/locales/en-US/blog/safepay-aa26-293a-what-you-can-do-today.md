@@ -12,15 +12,15 @@
     "Threat Hunting",
     "Threat Intelligence"
   ],
-  "keyTakeaway": "Part 1 buys time. Part 2 is what holds when the indicators change.",
+"keyTakeaway": "The advisory’s indicators support immediate detection and response. Part 2 covers contextual and behavioral detections that maintain coverage as indicators change.",
   "summary": "A practical reading of SafePay advisory AA26-293A: sort indicators by how to act on them, hunt historical logs, and deploy basic Sigma and YARA coverage while understanding what those layers miss.",
   "author": "David Awosusi",
   "category": "Detection Engineering",
   "publishedAt": "2026-10-27",
   "updatedAt": "2026-10-27",
   "visual": {
-    "title": "Sort before you load",
-    "caption": "So the first step is a small program that reads the bundle and puts each indicator into one of four tiers.",
+"title": "Review indicators before use",
+"caption": "Assign each indicator to one of four action groups: block, verify, alert, or hunt.",
     "steps": [
       {
         "label": "Block",
