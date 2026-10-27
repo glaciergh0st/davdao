@@ -7,7 +7,7 @@
   "openGraphImagePrompt": "A restrained technical illustration on a charcoal background: two distinct streams of security events flowing through clean field-mapping layers into one analyst investigation timeline; muted blue, teal, and small violet accents; editorial, precise, no logos, no text, no neon effects.",
   "tags": ["Splunk Enterprise Security", "Elastic Security", "SIEM", "Detection Engineering", "Security Operations"],
   "keyTakeaway": "Splunk Enterprise Security and Elastic Security can both support serious detection programs, but their day-to-day tradeoffs depend on how your team ingests, normalizes, searches, and maintains telemetry. Compare them with the same data and detection tests, then measure analyst effort and operating cost alongside coverage.",
-  "summary": "A practical comparison of Splunk Enterprise Security and Elastic Security, focused on telemetry, detection workflows, investigation quality, and how to run a fair pilot.",
+  "summary": "A practical comparison of Splunk Enterprise Security and Elastic Security, focused on telemetry, detection workflows, investigation quality, and how to test both platforms using the same telemetry.",
   "author": "David Awosusi",
   "category": "Detection Engineering",
   "publishedAt": "2026-10-25",
@@ -114,7 +114,7 @@ For each source, check:
 
 Good normalization reduces duplicated detection logic. Poor normalization hides data quality problems behind familiar field names.
 
-## Run a fair pilot with the same telemetry
+## Test both platforms using the same log sources and security events.
 
 Choose a short evaluation window and load the same representative data into both platforms. Include at least one endpoint source, one identity source, one cloud source, and one network source if those domains matter to your environment.
 
