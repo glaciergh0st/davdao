@@ -270,6 +270,66 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 .blog-prose .terminal-block pre code { display: block; min-width: max-content; padding: 0; background: transparent; color: inherit; font-family: inherit; font-size: 13px; font-weight: 400; line-height: inherit; white-space: pre; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .blog-prose table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 13px; }
 .table-scroll { overflow-x: auto; margin: 24px 0; border: 1px solid #333b48; border-radius: 6px; }
+/* Keep SafePay diagrams and tables readable on narrow screens. */
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .process-flow {
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x proximity;
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .process-step {
+  min-height: 150px;
+  scroll-snap-align: start;
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .process-step:not(:last-child)::after {
+  top: 44%;
+  right: -17px;
+  bottom: auto;
+  content: "→";
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .schema-flow {
+  grid-template-columns: 680px 60px 260px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .schema-standards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .schema-connector b {
+  transform: none;
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .table-scroll table {
+  min-width: 1200px;
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .table-scroll th,
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .table-scroll td {
+  min-width: 150px;
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .table-scroll th {
+  white-space: nowrap;
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] table:has(th:nth-child(5)) td:nth-child(3) {
+  white-space: nowrap;
+  min-width: 180px;
+}
+[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] :is(.process-flow, .schema-flow, .table-scroll) {
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #65749a #171c26;
+}
+@media (min-width: 521px) and (max-width: 900px) {
+  body:has([data-blog-page="safepay-aa26-293a-what-you-can-do-today"]) .header-inner {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  body:has([data-blog-page="safepay-aa26-293a-what-you-can-do-today"]) .header-inner nav {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+}
 .blog-prose th { padding: 12px; background: #171e2a; color: #d9e3fa; font-size: 11px; font-weight: 600; text-align: left; }
 .blog-prose td { padding: 12px; border-top: 1px solid #2b3039; color: var(--body); vertical-align: top; }
 .blog-prose tbody tr:nth-child(even) { background: #0e1115; }
