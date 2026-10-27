@@ -419,7 +419,7 @@ Both layers match what SafePay used, not what it does. The gaps are visible in t
 
 - Some steps run where no endpoint rule fires. The advisory describes entry through edge devices and resets of NAS devices that held backups. Those happen on firewalls, VPN gateways and storage appliances, which often run no endpoint sensor (inference, not stated in the advisory).
 
-Part 1 of this article shows how we can buy time. Part 2 focuses on building detection coverage that lasts as indicators change and attackers switch tools or variants. It follows the attack through the kill chain, combines behavioral detections with context, identifies blind spots, and tracks what is covered and what still needs work.
+Part 1 of this article shows how we can buy time. Part 2 focuses on building detection coverage that lasts as indicators change and attackers switch tools or roll out variants. It follows the attack through the kill chain, combines behavioral detections with context, identifies blind spots, and tracks what is covered and what still needs work.
 
 ## Sources
 
