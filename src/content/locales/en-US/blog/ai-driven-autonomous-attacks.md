@@ -2,12 +2,12 @@
 {
   "title": "Thoughts on AI-Driven Autonomous Attacks",
   "metaTitle": "AI-Driven Autonomous Attacks: A Defender's View",
-  "metaDescription": "Why AI compresses the attacker's workflow, and how to run an AI agent like a scoped service account: log its tool calls and gate production changes.",
+  "metaDescription": "AI shrinks the attacker's workflow, and most autonomous defense tools run with access no service account would get. Apply the discipline you enforce.",
   "slug": "ai-driven-autonomous-attacks",
   "openGraphImagePrompt": "Editorial cybersecurity infographic showing an AI-assisted attack workflow alongside a human-reviewed defense loop, charcoal background, restrained blue and teal with a small red accent, clear spacing, no logos, no text, no neon effects.",
   "tags": ["AI Security", "Autonomous Agents", "Threat Detection", "Adversary Emulation", "Cybersecurity"],
-  "keyTakeaway": "AI compresses the time between finding a weakness and exploiting it. Run an AI agent like a scoped service account: record every tool call, tie it to the endpoint and identity events it caused, and require approval before it changes production.",
-  "summary": "Why AI-driven attacks shrink the defender's response window, and how to run an AI agent in your environment like a scoped service account you can log, correlate, and approve.",
+  "keyTakeaway": "AI compresses the time between finding a weakness and exploiting it, and most autonomous defense tools run on broad, unlogged access no service account would get. Hold every agent to the bar you already enforce: its own least-privilege identity, every action in your SIEM, and approval before it touches production.",
+  "summary": "Why AI-driven attacks shrink the defender's response window, and why the fix for autonomous defense tools is the least-privilege, logged, approval-gated discipline teams already know but skip.",
   "author": "David Awosusi",
   "category": "AI Security",
   "publishedAt": "2025-08-24",
@@ -73,9 +73,9 @@ So here is the question I keep coming back to: what happens when an attacker aut
 
 ## Treat an agent like a service account
 
-An AI agent acting in your environment is an identity taking actions, so give it a scoped service-account identity and hold it to the same logging and review as any other. This is the part most "AI in the SOC" pitches skip, and it is the part that matters for detection.
+Here is the uncomfortable part. Many of the "autonomous" security tools being sold right now run on a human admin's credentials or a shared token, with broad access and no per-action logging. No competent team would stand up a service account that way, yet that is how agents keep getting deployed. The playbook already exists; it just is not being applied.
 
-For any agent that can touch production:
+An AI agent is an identity taking actions, so hold it to the same bar you enforce for every other non-human identity. For any agent that can touch production:
 
 - **Log the tool call, not just the chat.** Record the session, the exact action and tool, and the asset it touched. A transcript is not telemetry.
 - **Bind every action to an approved scope.** Give the agent a permission boundary like any service account. Anything outside it is an alert, not a judgment call.
