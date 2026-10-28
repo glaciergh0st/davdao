@@ -2,12 +2,12 @@
 {
   "title": "Thoughts on AI-Driven Autonomous Attacks",
   "metaTitle": "AI-Driven Autonomous Attacks: A Defender's View",
-  "metaDescription": "Why AI compresses the attacker's workflow, and how to treat an AI agent as an identity you log, scope, correlate to events, and gate behind review.",
+  "metaDescription": "Why AI compresses the attacker's workflow, and how to run an AI agent like a scoped service account: log its tool calls and gate production changes.",
   "slug": "ai-driven-autonomous-attacks",
   "openGraphImagePrompt": "Editorial cybersecurity infographic showing an AI-assisted attack workflow alongside a human-reviewed defense loop, charcoal background, restrained blue and teal with a small red accent, clear spacing, no logos, no text, no neon effects.",
   "tags": ["AI Security", "Autonomous Agents", "Threat Detection", "Adversary Emulation", "Cybersecurity"],
-  "keyTakeaway": "AI compresses the loop between finding a weakness and exploiting it. The defensible answer is to treat an AI agent as an identity you log, scope, correlate to real events, and gate behind human review.",
-  "summary": "Why AI-driven attacks shrink the defender's response window, and how to treat an AI agent in your environment as an identity you log, scope, and review.",
+  "keyTakeaway": "AI compresses the time between finding a weakness and exploiting it. Run an AI agent like a scoped service account: record every tool call, tie it to the endpoint and identity events it caused, and require approval before it changes production.",
+  "summary": "Why AI-driven attacks shrink the defender's response window, and how to run an AI agent in your environment like a scoped service account you can log, correlate, and approve.",
   "author": "David Awosusi",
   "category": "AI Security",
   "publishedAt": "2025-08-24",
@@ -71,9 +71,9 @@ The attacker automating faster is only half of it. The other half is us. Under p
 
 So here is the question I keep coming back to: what happens when an attacker automates more of discovery and exploitation, and the organization answers with AI-based defenses it has never actually evaluated? Fast offense against untested automation is where I would expect the next round of incidents.
 
-## Treat an agent like any other identity
+## Treat an agent like a service account
 
-An AI agent acting in your environment is an identity taking actions, and it should be logged, scoped, and reviewed like one. This is the part most "AI in the SOC" pitches skip, and it is the part that matters for detection.
+An AI agent acting in your environment is an identity taking actions, so give it a scoped service-account identity and hold it to the same logging and review as any other. This is the part most "AI in the SOC" pitches skip, and it is the part that matters for detection.
 
 For any agent that can touch production:
 
