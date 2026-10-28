@@ -227,8 +227,9 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 .article-visual-card figcaption .eyebrow { margin-bottom: 8px; color: #a9c2ff; font-size: 10px; }
 .article-visual-card figcaption h2 { margin: 0 0 10px; color: var(--ink); font-size: clamp(22px, 3.3vw, 29px); font-weight: 500; letter-spacing: -.035em; line-height: 1.2; }
 .article-visual-card figcaption > p:last-child { margin: 0; color: var(--body); font-size: 13px; }
-.process-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
-.process-step { position: relative; min-height: 150px; padding: 15px 13px; border: 1px solid #3c485b; border-top: 2px solid var(--step-accent, #82a9ff); border-radius: 5px; background: #10151c; }
+/* One horizontal lane that slides sideways, on every post and every width. */
+.process-flow { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(215px, 1fr); gap: 16px; margin: 0; padding: 0 0 12px; list-style: none; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; scrollbar-color: #65749a #171c26; overscroll-behavior-x: contain; }
+.process-step { position: relative; min-height: 150px; padding: 15px 13px; border: 1px solid #3c485b; border-top: 2px solid var(--step-accent, #82a9ff); border-radius: 5px; background: #10151c; scroll-snap-align: start; }
 .process-step:not(:last-child)::after { position: absolute; top: 44%; right: -16px; z-index: 1; color: #a891e6; content: "→"; font-size: 16px; }
 .process-step:nth-child(2) { --step-accent: #a891e6; }
 .process-step:nth-child(3) { --step-accent: #84aaff; }
@@ -270,24 +271,7 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 .blog-prose .terminal-block pre code { display: block; min-width: max-content; padding: 0; background: transparent; color: inherit; font-family: inherit; font-size: 13px; font-weight: 400; line-height: inherit; white-space: pre; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .blog-prose table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 13px; }
 .table-scroll { overflow-x: auto; margin: 24px 0; border: 1px solid #333b48; border-radius: 6px; }
-/* Keep SafePay diagrams and tables readable on narrow screens. */
-[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .process-flow {
-  grid-template-columns: repeat(4, minmax(240px, 1fr));
-  gap: 18px;
-  overflow-x: auto;
-  padding-bottom: 12px;
-  scroll-snap-type: x proximity;
-}
-[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .process-step {
-  min-height: 150px;
-  scroll-snap-align: start;
-}
-[data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .process-step:not(:last-child)::after {
-  top: 44%;
-  right: -17px;
-  bottom: auto;
-  content: "→";
-}
+/* Keep SafePay tables readable on narrow screens. */
 [data-blog-page="safepay-aa26-293a-what-you-can-do-today"] .schema-flow {
   grid-template-columns: 680px 60px 260px;
   overflow-x: auto;
@@ -340,7 +324,7 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 .article-footer p { margin: 0; color: var(--quiet); font-size: 11px; }
 
 /* This article's workflow is a field-level trace, so keep it in one readable horizontal lane. */
-[data-blog-page="ai-driven-autonomous-attacks"] .process-flow { grid-template-columns: repeat(5, minmax(145px, 1fr)); gap: 12px; }
+[data-blog-page="ai-driven-autonomous-attacks"] .process-flow { grid-auto-columns: minmax(175px, 1fr); }
 [data-blog-page="ai-driven-autonomous-attacks"] .process-step { min-height: 120px; padding: 14px 12px; }
 [data-blog-page="ai-driven-autonomous-attacks"] .process-step strong { overflow-wrap: anywhere; font: 600 11px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; color: #c5d6ff; }
 [data-blog-page="ai-driven-autonomous-attacks"] .schema-standards dl > div { grid-template-columns: minmax(0, 1.2fr) 1fr; }
@@ -362,17 +346,11 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
   .credentials-layout { grid-template-columns: 1fr; gap: 32px; }
   .blog-tools { grid-template-columns: 1fr; gap: 7px; }
   .blog-count { justify-self: start; }
-  .process-flow { grid-template-columns: 1fr; gap: 16px; }
-  .process-step { min-height: 0; }
-  .process-step:not(:last-child)::after { top: auto; right: 50%; bottom: -18px; content: "↓"; }
   .schema-flow { grid-template-columns: 1fr; }
   .schema-connector b { transform: rotate(90deg); }
   .evidence-grid { grid-template-columns: 1fr; }
   .evidence-card { min-height: 0; padding: 18px; }
   .contact-inner { min-height: 360px; }
-  [data-blog-page="ai-driven-autonomous-attacks"] .process-flow { grid-template-columns: repeat(5, minmax(175px, 1fr)); overflow-x: auto; padding: 0 0 8px; scroll-snap-type: x mandatory; scrollbar-color: #586a91 #171c26; scrollbar-width: thin; }
-  [data-blog-page="ai-driven-autonomous-attacks"] .process-step { min-height: 132px; scroll-snap-align: start; }
-  [data-blog-page="ai-driven-autonomous-attacks"] .process-step:not(:last-child)::after { top: 44%; right: -12px; bottom: auto; content: "→"; }
   [data-blog-page="ai-driven-autonomous-attacks"] .schema-flow { grid-template-columns: 1fr; }
   [data-blog-page="ai-driven-autonomous-attacks"] .schema-connector b { transform: rotate(90deg); }
 }
@@ -406,7 +384,7 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
 
 /* CTF diagrams stay left-to-right and can be swiped on narrow screens. */
-[data-blog-page="ctf-workflow"] .process-flow { grid-template-columns: repeat(7, minmax(200px, 1fr)); gap: 14px; overflow-x: auto; padding: 0 0 12px; scroll-snap-type: x mandatory; scrollbar-color: #65749a #171c26; scrollbar-width: thin; animation: ctf-diagram-slide 2s ease-out both; }
+[data-blog-page="ctf-workflow"] .process-flow { grid-auto-columns: minmax(200px, 1fr); animation: ctf-diagram-slide 2s ease-out both; }
 [data-blog-page="ctf-workflow"] .process-step { min-height: 142px; scroll-snap-align: start; }
 [data-blog-page="ctf-workflow"] .process-step:not(:last-child)::after { top: 44%; right: -13px; bottom: auto; content: "→"; }
 [data-blog-page="ctf-workflow"] .schema-card { overflow-x: auto; scrollbar-color: #65749a #171c26; scrollbar-width: thin; }
@@ -470,10 +448,8 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
 .reveal.is-visible { opacity: 1; transform: none; }
 
-/* Part 2's attack path has eight stages: two rows of four instead of one cramped lane. */
-[data-blog-page="safepay-aa26-293a-enhancing-your-defense-posture"] .process-flow { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-[data-blog-page="safepay-aa26-293a-enhancing-your-defense-posture"] .process-step:nth-child(4n)::after { content: none; }
-[data-blog-page="safepay-aa26-293a-enhancing-your-defense-posture"] .process-step:nth-child(4n+1) { --step-accent: #82a9ff; }
+/* Part 2's attack path: eight stages in the shared horizontal lane, entry and encryption flagged. */
+[data-blog-page="safepay-aa26-293a-enhancing-your-defense-posture"] .process-flow { grid-auto-columns: minmax(195px, 1fr); }
 [data-blog-page="safepay-aa26-293a-enhancing-your-defense-posture"] .process-step:is(:nth-child(1), :nth-child(8)) { --step-accent: #d56b75; }
 
 @media (max-width: 760px) {
@@ -481,12 +457,6 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
   .reading-top { right: auto; left: 14px; bottom: 18px; }
   .reading-status { left: 70px; bottom: 28px; }
   .article-toc { position: relative; top: auto; }
-  [data-blog-page="safepay-aa26-293a-enhancing-your-defense-posture"] .process-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  [data-blog-page="safepay-aa26-293a-enhancing-your-defense-posture"] .process-step::after { content: none; }
-}
-@media (max-width: 520px) {
-  [data-blog-page="safepay-aa26-293a-enhancing-your-defense-posture"] .process-flow { grid-template-columns: 1fr; }
-  [data-blog-page="safepay-aa26-293a-enhancing-your-defense-posture"] .process-step:not(:last-child)::after { top: auto; right: 50%; bottom: -18px; content: "↓"; }
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
