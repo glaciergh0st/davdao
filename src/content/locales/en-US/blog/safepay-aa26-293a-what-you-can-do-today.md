@@ -1,6 +1,6 @@
 ```json
 {
-  "title": "SafePay Ransomware (AA26-293A), Part 1: What You Can Do Today",
+  "title": "SafePay Ransomware (AA26-293A), Part 1: What Can Be Done Today",
   "metaTitle": "SafePay Ransomware (AA26-293A), Part 1",
   "metaDescription": "The advisory hands defenders two things they can use today, a downloadable list of indicators and a set of named tools and behaviors.",
   "slug": "safepay-aa26-293a-what-you-can-do-today",
