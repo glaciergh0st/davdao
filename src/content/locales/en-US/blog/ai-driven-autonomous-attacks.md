@@ -63,7 +63,7 @@
 
 In mid-2025, [XBOW](https://xbow.com/blog/top-1-how-xbow-did-it/)'s autonomous pentester reached the top of [HackerOne](https://www.hackerone.com/)'s US leaderboard, outscoring human researchers on real targets. That is the clearest signal so far of where this is heading.
 
-The worry was never that a model wakes up and becomes an attacker. It is that someone connects a capable model to tools, chains the steps together, and collapses the time between finding a weakness and exploiting it. Recon, triage, and a first exploit attempt that used to take a skilled person days can now run in a loop: plan, act, read the result, plan again. When that loop speeds up, defenders lose the slack they counted on to notice and respond.
+The concern was never that a model wakes up and becomes an attacker. It is that someone connects a capable model to tools, chains the steps together, and collapses the time between finding a weakness and exploiting it. Recon, triage, and a first exploit attempt used to take a skilled person days. Now they can run in one loop: plan, act, read the result, plan again. When that loop speeds up, defenders lose the slack they counted on to notice and respond.
 
 ## The temptation is on the defensive side too
 
