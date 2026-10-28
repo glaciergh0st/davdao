@@ -27,7 +27,7 @@
   },
   "schema": {
     "title": "Document the evidence at each breakthrough",
-    "caption": "At every step forward, record what you tested, the command, the result, and how you confirmed it.",
+    "caption": "At each step forward, record what is tested, the command, the result, and how it was confirmed.",
     "joinLabel": "target → finding → report",
     "standards": [
       {
