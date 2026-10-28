@@ -324,11 +324,6 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 .article-footer p { margin: 0; color: var(--quiet); font-size: 11px; }
 
 /* This article's workflow is a field-level trace, so keep it in one readable horizontal lane. */
-[data-blog-page="ai-driven-autonomous-attacks"] .process-flow { grid-auto-columns: minmax(175px, 1fr); }
-[data-blog-page="ai-driven-autonomous-attacks"] .process-step { min-height: 120px; padding: 14px 12px; }
-[data-blog-page="ai-driven-autonomous-attacks"] .process-step strong { overflow-wrap: anywhere; font: 600 11px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; color: #c5d6ff; }
-[data-blog-page="ai-driven-autonomous-attacks"] .schema-standards dl > div { grid-template-columns: minmax(0, 1.2fr) 1fr; }
-[data-blog-page="ai-driven-autonomous-attacks"] .schema-standard dt code { overflow-wrap: anywhere; }
 
 @media (max-width: 900px) {
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -351,8 +346,6 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
   .evidence-grid { grid-template-columns: 1fr; }
   .evidence-card { min-height: 0; padding: 18px; }
   .contact-inner { min-height: 360px; }
-  [data-blog-page="ai-driven-autonomous-attacks"] .schema-flow { grid-template-columns: 1fr; }
-  [data-blog-page="ai-driven-autonomous-attacks"] .schema-connector b { transform: rotate(90deg); }
 }
 @media (max-width: 520px) {
   body { font-size: 15px; }
@@ -379,7 +372,6 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
   .process-step { min-height: 0; }
   .process-number { margin-bottom: 10px; }
   .article-footer { align-items: flex-start; flex-direction: column; }
-  [data-blog-page="ai-driven-autonomous-attacks"] .schema-standards { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
 
