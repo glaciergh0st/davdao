@@ -2,11 +2,11 @@
 {
   "title": "My CTF Workflow: From Setup to Report",
   "metaTitle": "My CTF Workflow: From Setup to Report",
-  "metaDescription": "Eight stages for a CTF or Hack The Box lab, from scoping and recon through exploitation, pivoting, cleanup, and reporting.",
+  "metaDescription": "Eight stages for a CTF or HackTheBox lab, from scoping and recon through exploitation, pivoting, cleanup, and reporting.",
   "slug": "ctf-workflow",
   "openGraphImagePrompt": "A clean terminal-inspired editorial diagram for an eight-stage CTF workflow: scoping, setup, enumeration, foothold, exploitation, privilege escalation, pivoting, and reporting; charcoal background, restrained blue and teal accents, readable spacing, no logos or neon effects.",
-  "tags": ["CTF", "Hack The Box", "Enumeration", "Privilege Escalation"],
-  "keyTakeaway": "Eight stages, recon through report, for Hack The Box and local VM labs.",
+  "tags": ["CTF", "HackTheBox", "Enumeration", "Privilege Escalation"],
+  "keyTakeaway": "Eight stages, recon through report, for HackTheBox and local VM labs.",
   "summary": "How I primarily approach CTFs and Labs: Set up a workspace, enumerate deliberately, verify findings, record each step, and finish with a clear write-up. The stages below reflect my typical process rather than an exhaustive command list.",
   "author": "David Awosusi",
   "category": "CTF Workflow",
@@ -63,7 +63,7 @@ I work most boxes in the same eight stages and keep to the order. Each stage set
 
 ## Stage 1: Getting connected
 
-First the basics: a VPN session, the target box, and the wordlists I'll need. On Hack The Box I stay on my own instance.
+First the basics: a VPN session, the target box, and the wordlists I'll need. On HackTheBox I stay on my own instance.
 
 I connect with the platform's VPN profile:
 
