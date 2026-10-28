@@ -7,7 +7,7 @@
   "openGraphImagePrompt": "Editorial cybersecurity infographic showing an AI-assisted attack workflow alongside a human-reviewed defense loop, charcoal background, restrained blue and teal with a small red accent, clear spacing, no logos, no text, no neon effects.",
   "tags": ["AI Security", "Autonomous Agents", "Threat Detection", "Adversary Emulation", "Cybersecurity"],
   "keyTakeaway": "AI compresses the time between finding a weakness and exploiting it, and most autonomous defense tools run with broad access and no logging. Treat an AI agent like any automated account: give it its own login with only the permissions it needs, log everything it does, and require a person's approval before it changes a live system.",
-  "summary": "Why AI-driven attacks shrink the defender's response window, and why the fix for autonomous defense tools is the least-privilege, logged, approval-gated discipline teams already know but ignore.",
+  "summary": "AI lets attackers move faster, so defenders have less time to respond. Meanwhile the autonomous AI tools meant to help often run with too much access and no oversight. The post makes the case for running any AI agent like a locked-down account: limited permissions, full logging, and human approval before it changes anything live.",
   "author": "David Awosusi",
   "category": "AI Security",
   "publishedAt": "2025-08-24",
