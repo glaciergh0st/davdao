@@ -301,6 +301,7 @@
   }
 
   function setupBlogSearch(page) {
+    if (!page) return;
     const input = page.querySelector('[data-blog-search]');
     const list = page.querySelector('[data-blog-list]');
     if (!input || !list || page.dataset.searchReady === 'true') return;
