@@ -6,7 +6,7 @@
   "slug": "ai-driven-autonomous-attacks",
   "openGraphImagePrompt": "Editorial cybersecurity infographic showing an AI-assisted attack workflow alongside a human-reviewed defense loop, charcoal background, restrained blue and teal with a small red accent, clear spacing, no logos, no text, no neon effects.",
   "tags": ["AI Security", "Autonomous Agents", "Threat Detection", "Adversary Emulation", "Cybersecurity"],
-  "keyTakeaway": "AI can compress parts of an attack or defense workflow, but it does not remove the need for context, authorization, and human review. Security teams should test where automation helps, where it can cause harm, and how decisions are validated.",
+  "keyTakeaway": "AI can compress attack campaigns or defense workflows, but it does not remove the need for context, authorization, and human review. Security teams should test where automation helps, where it can cause harm, and how decisions are validated.",
   "summary": "A perspective on AI-assisted cyber operations, the risks of chained tool use, and the skills defenders need to evaluate automated actions.",
   "author": "David Awosusi",
   "category": "AI Security",
