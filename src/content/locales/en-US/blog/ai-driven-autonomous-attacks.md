@@ -6,7 +6,7 @@
   "slug": "ai-driven-autonomous-attacks",
   "openGraphImagePrompt": "Editorial cybersecurity infographic showing an AI-assisted attack workflow alongside a human-reviewed defense loop, charcoal background, restrained blue and teal with a small red accent, clear spacing, no logos, no text, no neon effects.",
   "tags": ["AI Security", "Autonomous Agents", "Threat Detection", "Adversary Emulation", "Cybersecurity"],
-  "keyTakeaway": "AI compresses the time between finding a weakness and exploiting it, and most autonomous defense tools run on broad, unlogged access no service account would get. Hold every agent to the bar you already enforce: its own least-privilege identity, every action in your SIEM, and approval before it touches production.",
+  "keyTakeaway": "AI compresses the time between finding a weakness and exploiting it, and most autonomous defense tools run with broad access and no logging. Treat an AI agent like any automated account: give it its own login with only the permissions it needs, log everything it does, and require a person's approval before it changes a live system.",
   "summary": "Why AI-driven attacks shrink the defender's response window, and why the fix for autonomous defense tools is the least-privilege, logged, approval-gated discipline teams already know but ignore.",
   "author": "David Awosusi",
   "category": "AI Security",
@@ -75,7 +75,7 @@ So here is the question I keep coming back to: what happens when an attacker aut
 
 Here is the uncomfortable part. Many of the "autonomous" security tools being sold right now run on a human admin's credentials or a shared token, with broad access and no per-action logging. No competent team would stand up a service account that way, yet that is how agents keep getting deployed. The playbook already exists; it just is not being applied.
 
-An AI agent is an identity taking actions, so hold it to the same bar you enforce for every other non-human identity. For any agent that can touch production:
+An AI agent is software taking actions on its own, so put the same controls on it that you would on any automated account. For any agent that can reach production:
 
 - **Log the tool call, not just the chat.** Record the session, the exact action and tool, and the asset it touched. A transcript is not telemetry.
 - **Bind every action to an approved scope.** Give the agent a permission boundary like any service account. Anything outside it is an alert, not a judgment call.
