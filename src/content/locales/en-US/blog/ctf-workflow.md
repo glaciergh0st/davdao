@@ -61,9 +61,9 @@
 
 Every box I work follows the same eight stages, and I keep to the order even when I'm tempted to jump ahead. The discipline is what makes the write-up easy later: if I can explain why each step followed the last, I've understood the machine instead of just owning it. What follows is how I actually work, not a complete command list.
 
-## Stage 1: Scope and rules
+## Stage 1: Getting connected
 
-I don't run a single command until I know what I'm allowed to touch. That means an active VPN session, a box that's actually assigned to me, and a quick read of the platform rules. On Hack The Box that's no attacking other players' instances and no knocking the machine offline.
+I line up the basics first: an active VPN session, the box I'm working, and the wordlists I'll probably reach for. On a shared platform like Hack The Box, that also means staying on my own instance.
 
 I connect with the platform's VPN profile:
 
@@ -77,7 +77,7 @@ Or, if the platform hands out a WireGuard config instead:
 sudo wg-quick up lab
 ```
 
-One habit worth keeping from the start: HTB only allows write-ups for retired machines, so I confirm a box is retired before I plan to publish anything about it.
+HTB only publishes write-ups for retired machines, so if I'm planning to write one up, I check the box has retired first.
 
 ## Stage 2: Set up the workspace
 
@@ -348,8 +348,8 @@ cat user.txt root.txt
 hostname; id; whoami
 ```
 
-Before I disconnect, I put the box back the way I found it. It's a lab with no real stakes, but cleaning up is the habit I want to have by reflex on real work, so I practise it here: I delete anything I uploaded (linpeas.sh, nc.exe, chisel), remove any users, keys or scheduled jobs I added, and restore files I changed.
+Before I disconnect, I put the box back the way I found it: I delete anything I uploaded (linpeas.sh, nc.exe, chisel), remove any users, keys or scheduled jobs I added, and restore files I changed. It keeps the environment clean for the next person, and it's good muscle memory for real engagements.
 
-Then I build the write-up from `engagement_log.txt` and my screenshots, in the order I actually worked, and I call out why each step worked. That reasoning is the difference between a write-up worth reading and a raw command transcript. I confirm the box is retired, and I blur out anything that would hand a still-active challenge to someone for free.
+Then I build the write-up from `engagement_log.txt` and my screenshots, in the order I actually worked, and I call out why each step worked. That reasoning is the difference between a write-up worth reading and a raw command transcript.
 
 What stays in the finished piece: the scope and the service map, the evidence that led to each next step, the weakness that let me in, enough detail to reproduce it, the escalation path with the flags blurred, and anything I changed on the box. The terminal log and scans stay on disk until that's written.
