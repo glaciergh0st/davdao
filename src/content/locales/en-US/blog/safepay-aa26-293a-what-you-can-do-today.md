@@ -41,7 +41,7 @@
     ]
   },
   "schema": {
-    "title": "What the advisory gives you",
+    "title": "What the advisory provides",
     "caption": "The advisory links STIX downloads on pages 2 and 4.",
     "standards": [
       {
@@ -98,7 +98,7 @@ SafePay enters with stolen or guessed credentials and through vulnerable interne
 
 The advisory hands defenders two things they can use today, a downloadable list of indicators and a set of named tools and behaviors. Layer 1 loads those indicators into firewalls, proxies and the SIEM, then hunts back through old logs. Layer 2a alerts on basic behavioral indicators and isolated events, such as a shadow-copy wipe or an `rclone.exe` launch.
 
-## What the advisory gives you
+## What the advisory provides
 
 The indicator tables list nine IP addresses, thirty file-name rows, ten file hashes and four hostnames, all observed between November 2024 and August 2026 (page 7). Only the hashes are safe to block outright.
 
