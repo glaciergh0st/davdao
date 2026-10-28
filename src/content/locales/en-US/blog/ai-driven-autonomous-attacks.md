@@ -1,17 +1,17 @@
 ```json
 {
-  "title": "A New Era: Thoughts on AI-Driven Autonomous Attacks",
-  "metaTitle": "AI-Driven Autonomous Attacks: A 2025 View",
-  "metaDescription": "A 2025 perspective on AI-assisted attacks, autonomous security tools, and the human judgment needed to keep cyber defenses grounded.",
+  "title": "Thoughts on AI-Driven Autonomous Attacks",
+  "metaTitle": "AI-Driven Autonomous Attacks: A Defender's View",
+  "metaDescription": "Why AI compresses the attacker's workflow, and how to treat an AI agent as an identity you log, scope, correlate to events, and gate behind review.",
   "slug": "ai-driven-autonomous-attacks",
   "openGraphImagePrompt": "Editorial cybersecurity infographic showing an AI-assisted attack workflow alongside a human-reviewed defense loop, charcoal background, restrained blue and teal with a small red accent, clear spacing, no logos, no text, no neon effects.",
   "tags": ["AI Security", "Autonomous Agents", "Threat Detection", "Adversary Emulation", "Cybersecurity"],
-  "keyTakeaway": "AI can compress parts of an attack or defense workflow, but it does not remove the need for context, authorization, and human review. Security teams should test where automation helps, where it can cause harm, and how decisions are validated.",
-  "summary": "A perspective on AI-assisted cyber operations, the risks of chained tool use, and the skills defenders need to evaluate automated actions.",
+  "keyTakeaway": "AI compresses the loop between finding a weakness and exploiting it. The defensible answer is to treat an AI agent as an identity you log, scope, correlate to real events, and gate behind human review.",
+  "summary": "Why AI-driven attacks shrink the defender's response window, and how to treat an AI agent in your environment as an identity you log, scope, and review.",
   "author": "David Awosusi",
   "category": "AI Security",
   "publishedAt": "2025-08-24",
-  "updatedAt": "2026-10-26",
+  "updatedAt": "2026-10-28",
   "visual": {
     "title": "Trace an AI tool call into security telemetry",
     "caption": "Correlate an agent action with the endpoint, identity, network, or cloud events it produces, then record the analyst’s decision.",
@@ -59,56 +59,41 @@
 }
 ```
 
-## A remark that stayed with me
+## When the attacker's workflow compresses
 
-> “AI would make it easier done than said, so don’t say it’s easier said than done.”
+In mid-2025, [XBOW](https://xbow.com/blog/top-1-how-xbow-did-it/)'s autonomous pentester reached the top of [HackerOne](https://www.hackerone.com/)'s US leaderboard, outscoring human researchers on real targets. That is the clearest signal so far of where this is heading.
 
-A close friend who is a scientist said this to me on the morning I wrote the original post. It stuck with me because AI was already changing how quickly people could write code, analyze data, and produce work that once took a team much longer.
+The worry was never that a model wakes up and becomes an attacker. It is that someone connects a capable model to tools, chains the steps together, and collapses the time between finding a weakness and exploiting it. Recon, triage, and a first exploit attempt that used to take a skilled person days can now run in a loop: plan, act, read the result, plan again. When that loop speeds up, defenders lose the slack they counted on to notice and respond.
 
-In security, the concern is not that a model becomes an attacker by itself. It is that people can connect models to tools, chain tasks together, and shorten the time between finding a weakness and trying to exploit it. That can compress attack campaigns and leave defenders less time to investigate.
+## The temptation is on the defensive side too
 
-## Adoption moves at different speeds
+The attacker automating faster is only half of it. The other half is us. Under pressure to keep up, teams bolt on AI features and assume a vendor's label, a new standard, or a "secure by design" badge means the thing is safe. None of that replaces testing it against your own environment and threat model.
 
-The technologies we trust do not become safe simply because they are widely adopted. They need sound implementation, clear ownership, and ongoing validation.
+So here is the question I keep coming back to: what happens when an attacker automates more of discovery and exploitation, and the organization answers with AI-based defenses it has never actually evaluated? Fast offense against untested automation is where I would expect the next round of incidents.
 
-- **Post-quantum cryptography:** Standards and migration plans deserve careful review. Organizations should validate implementations, key management, and transition plans instead of treating any standard as a substitute for testing.
-- **Blockchain:** Adoption can be slower where decentralization conflicts with an organization’s existing control and accountability model.
-- **Artificial intelligence:** Adoption is moving quickly because AI can reduce the time spent on coding, analysis, and repetitive work. That same speed can increase dependence on a small number of platforms and providers.
-- **Quantum computing and AI:** Their combined strategic potential is worth watching, but it should be treated as a future concern rather than a routine operational capability.
+## Treat an agent like any other identity
 
-## What changes when tasks are chained?
+An AI agent acting in your environment is an identity taking actions, and it should be logged, scoped, and reviewed like one. This is the part most "AI in the SOC" pitches skip, and it is the part that matters for detection.
 
-AI can help with individual security tasks, such as reviewing code or summarizing findings. When connected to tools, an agent may also propose follow-up actions based on what it observes. That creates a faster loop: plan, act, read the result, and plan again.
+For any agent that can touch production:
 
-The level of autonomy matters. A system that suggests a command for an analyst to review is different from one that executes a sequence of actions without a person checking scope and impact. Security teams should measure that difference instead of describing every AI-assisted tool as fully autonomous.
+- **Log the tool call, not just the chat.** Record the session, the exact action and tool, and the asset it touched. A transcript is not telemetry.
+- **Bind every action to an approved scope.** Give the agent a permission boundary like any service account. Anything outside it is an alert, not a judgment call.
+- **Correlate the call to what it produced.** Tie each tool call to the endpoint, identity, network, or cloud events that followed, so you see the real effect rather than the model's description of it.
+- **Keep a human gate before production impact.** Require scope, evidence, and approval before an automated action changes anything that matters.
+- **Check the outcome.** Confirm the containment or fix actually worked, and record what changed.
 
-[XBOW](https://xbow.com/blog/top-1-how-xbow-did-it)’s June 2025 announcement that its autonomous penetration tester reached the top of [HackerOne](https://www.hackerone.com/)’s U.S. leaderboard made this discussion more concrete. It showed how quickly automated systems could perform parts of vulnerability research. It did not mean that human judgment or organizational context had become unnecessary.
+Do that, and an agent's run becomes an investigation record you can audit instead of a black box you hope behaved.
 
-## The question defenders should ask
+## What I'm building toward
 
-What happens if an attacker can automate more of the discovery and testing process while the organization relies on AI-based defenses it has not evaluated?
+I expect a growing share of security work to shift from doing the task to supervising, testing, and validating the systems that do it. That is where I am putting my time:
 
-The risk is compounded when teams assume that a new standard, a vendor’s AI feature, or a secure development label guarantees safety. Each needs to be checked against the actual environment, threat model, and operational constraints.
+- **AI red teaming** — probing model behavior, tool permissions, and failure paths.
+- **Model governance** — how AI systems get approved, monitored, and bounded.
+- **AI-assisted threat hunting** — using automation to sort evidence, then checking findings against source data.
+- **Adversary emulation** — running realistic activity and seeing whether detection and response actually hold.
 
-## Where security teams can focus
+## The line that doesn't move
 
-- **Use zero trust as a baseline.** Keep access narrow, verify identity and device context, and review trust relationships regularly.
-- **Test against changing behavior.** Use authorized adversary emulation to evaluate detection and response when tools or tactics change.
-- **Strengthen secure development.** Review generated code, control dependencies, protect build systems, and validate third-party components.
-- **Keep a human decision point.** Require clear scope, evidence, and approval before an automated action can affect production systems.
-- **Check the result.** Record what changed and verify that containment or remediation worked.
-
-## Skills worth building
-
-AI will change many security roles. A larger share of the work may involve supervising, testing, and validating automated systems.
-
-- **AI security and red teaming:** Test model behavior, tool permissions, and failure paths.
-- **Model auditing and governance:** Assess how AI systems are approved, monitored, and used.
-- **AI-assisted threat hunting:** Use automation to sort evidence while validating findings against source data.
-- **Adversary emulation:** Simulate realistic activity and check whether defenses detect and contain it.
-
-## Human judgment still matters
-
-AI is an opportunity for security professionals to build new skills and improve how defenses are tested. It can help teams work faster, but the organization still has to decide what matters, what is authorized, and what action is safe in context.
-
-That judgment comes from understanding the systems, people, and risks involved. The next generation of cyber defense will depend on combining automation with careful review, not treating speed as proof that a decision is right.
+AI will make a lot of this faster, and I want it to. But speed is not the same as a correct decision. The organization still has to decide what matters, what is authorized, and what is safe in context. That judgment comes from understanding the systems, the people, and the risk, not from how quickly a tool returned an answer.
