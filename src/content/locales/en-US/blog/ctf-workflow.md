@@ -26,8 +26,8 @@
     ]
   },
   "schema": {
-    "title": "Keep evidence attached to the finding",
-    "caption": "Connect the target and service to the command, evidence, validation, and resulting access or impact.",
+    "title": "Document the evidence at each breakthrough",
+    "caption": "At every step forward, record what you tested, the command, the result, and how you confirmed it.",
     "joinLabel": "target → finding → report",
     "standards": [
       {
