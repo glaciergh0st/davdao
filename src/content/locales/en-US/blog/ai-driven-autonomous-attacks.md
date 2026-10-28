@@ -59,41 +59,46 @@
 }
 ```
 
-## When the attacker's workflow compresses
+## What's changing
 
-In mid-2025, [XBOW](https://xbow.com/blog/top-1-how-xbow-did-it/)'s autonomous pentester reached the top of [HackerOne](https://www.hackerone.com/)'s US leaderboard, outscoring human researchers on real targets. That is the clearest signal so far of where this is heading.
+In mid-2025, [XBOW](https://xbow.com/blog/top-1-how-xbow-did-it/)'s autonomous pentester reached the top of [HackerOne](https://www.hackerone.com/)'s US leaderboard, outscoring human researchers on real targets. It is a clear sign of where this is going.
 
-The concern was never that a model wakes up and becomes an attacker. It is that someone connects a capable model to tools, chains the steps together, and collapses the time between finding a weakness and exploiting it. Recon, triage, and a first exploit attempt used to take a skilled person days. Now they can run in one loop: plan, act, read the result, plan again. When that loop speeds up, defenders lose the slack they counted on to notice and respond.
+The concern was never that a model becomes an attacker on its own. It is that someone connects a capable model to tools, chains the steps, and shortens the time between finding a weakness and exploiting it. Recon, triage, and a first exploit attempt used to take a skilled person days. Now they can run in one loop: plan, act, read the result, and plan again. As that loop speeds up, defenders have less time to notice and respond.
 
-## The temptation is on the defensive side too
+## The risk cuts both ways
 
-The attacker automating faster is only half of it. The other half is us. Under pressure to keep up, teams bolt on AI features and assume a vendor's label, a new standard, or a "secure by design" badge means the thing is safe. None of that replaces testing it against your own environment and threat model.
+Faster attackers are only half of it. The other half is how defenders react. Under pressure to keep up, teams add AI features and assume a vendor's label, a new standard, or a "secure by design" badge means the tool is safe. None of that replaces testing it against your own environment.
 
-So here is the question I keep coming back to: what happens when an attacker automates more of discovery and exploitation, and the organization answers with AI-based defenses it has never actually evaluated? Fast offense against untested automation is where I would expect the next round of incidents.
+The question I keep coming back to: what happens when attackers automate more of their work, and the organization answers with AI defenses it has never actually tested? That is the gap worth watching.
 
-## Treat an agent like a service account
+## How I'd run an AI agent
 
-Here is the uncomfortable part. Many of the "autonomous" security tools being sold right now run on a human admin's credentials or a shared token, with broad access and no per-action logging. No competent team would stand up a service account that way, yet that is how agents keep getting deployed. The playbook already exists; it just is not being applied.
+An AI agent is software taking actions on its own. The safe way to run one is the same way you run any automated account, and it is the step most "AI in the SOC" tools skip.
 
-An AI agent is software taking actions on its own, so put the same controls on it that you would on any automated account. For any agent that can reach production:
+Start by splitting what the agent does into two groups:
 
-- **Log the tool call, not just the chat.** Record the session, the exact action and tool, and the asset it touched. A transcript is not telemetry.
-- **Bind every action to an approved scope.** Give the agent a permission boundary like any service account. Anything outside it is an alert, not a judgment call.
-- **Correlate the call to what it produced.** Tie each tool call to the endpoint, identity, network, or cloud events that followed, so you see the real effect rather than the model's description of it.
-- **Keep a human gate before production impact.** Require scope, evidence, and approval before an automated action changes anything that matters.
-- **Check the outcome.** Confirm the containment or fix actually worked, and record what changed.
+- **Let it read freely.** Pulling logs, enriching an alert, summarizing an investigation. Nothing changes, so there is little risk in letting it run.
+- **Hold anything that changes a live system.** Isolating a host, disabling an account, pushing a block rule. The agent proposes the action with its evidence, and a person approves it before it runs.
 
-Do that, and an agent's run becomes an investigation record you can audit instead of a black box you hope behaved.
+Around that split, five basics:
 
-## What I'm building toward
+- **Give it its own login.** Its own identity with only the permissions it needs, not a person's credentials or a shared token.
+- **Log every action.** Record the session, the exact action, and what it touched. A chat transcript is not a log.
+- **Tie each action to its effect.** Connect it to the endpoint, identity, or network events that followed, so you see what happened, not what the model said happened.
+- **Keep the human gate before production.** Scope, evidence, and approval before anything changes a live system.
+- **Confirm the result.** Check that the fix or containment worked, and record what changed.
 
-I expect a growing share of security work to shift from doing the task to supervising, testing, and validating the systems that do it. That is where I am putting my time:
+Do that, and an agent's run becomes a record you can audit instead of a black box.
 
-- **AI red teaming** — probing model behavior, tool permissions, and failure paths.
+## Where I'm focusing
+
+I expect more security work to move from doing the task to supervising and testing the systems that do it. That is where I am spending my time:
+
+- **AI red teaming** — testing model behavior, tool permissions, and failure paths.
 - **Model governance** — how AI systems get approved, monitored, and bounded.
-- **AI-assisted threat hunting** — using automation to sort evidence, then checking findings against source data.
-- **Adversary emulation** — running realistic activity and seeing whether detection and response actually hold.
+- **AI-assisted threat hunting** — using automation to sort evidence, then checking it against the source data.
+- **Adversary emulation** — running realistic activity to see whether detection and response hold.
 
-## The line that doesn't move
+## What automation can't replace
 
-AI will make a lot of this faster, and I want it to. But speed is not the same as a correct decision. The organization still has to decide what matters, what is authorized, and what is safe in context. That judgment comes from understanding the systems, the people, and the risk, not from how quickly a tool returned an answer.
+AI will make a lot of this faster, and that is good. But fast is not the same as right. Someone still has to decide what matters, what is authorized, and what is safe in context, and that comes from understanding the systems, the people, and the risk.
