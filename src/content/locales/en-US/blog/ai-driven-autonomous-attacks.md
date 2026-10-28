@@ -7,7 +7,7 @@
   "openGraphImagePrompt": "Editorial cybersecurity infographic showing an AI-assisted attack workflow alongside a human-reviewed defense loop, charcoal background, restrained blue and teal with a small red accent, clear spacing, no logos, no text, no neon effects.",
   "tags": ["AI Security", "Autonomous Agents", "Threat Detection", "Adversary Emulation", "Cybersecurity"],
   "keyTakeaway": "AI compresses the time between finding a weakness and exploiting it, and most autonomous defense tools run on broad, unlogged access no service account would get. Hold every agent to the bar you already enforce: its own least-privilege identity, every action in your SIEM, and approval before it touches production.",
-  "summary": "Why AI-driven attacks shrink the defender's response window, and why the fix for autonomous defense tools is the least-privilege, logged, approval-gated discipline teams already know but skip.",
+  "summary": "Why AI-driven attacks shrink the defender's response window, and why the fix for autonomous defense tools is the least-privilege, logged, approval-gated discipline teams already know but ignore.",
   "author": "David Awosusi",
   "category": "AI Security",
   "publishedAt": "2025-08-24",
