@@ -193,7 +193,7 @@ nxc smb "$IP" --shares -u '' -p ''
 
 A few other services are worth a look when the scans show them: SNMP (`snmpwalk -c public -v1 "$IP"`), anonymous FTP login, user enumeration over SMTP, and LDAP if the box is a domain controller, the server that runs a Windows network.
 
-## Stage 4: Find the way in
+## Stage 4: Finding a foothold
 
 I match what I found to a likely weakness and test it. A version number is a lead, not proof; plenty of "vulnerable" versions turn out patched.
 
@@ -201,7 +201,7 @@ I match what I found to a likely weakness and test it. A version number is a lea
 searchsploit "apache 2.4.52"
 ```
 
-If something looks right, I copy the exploit out by its ID (replace `12345` with the real one):
+If something looks right, I copy the exploit out by its ID (replace `12345` with the real one). I understand how it works and adapt it to the target rather than reinventing it:
 
 ```bash
 EDB_ID=12345
