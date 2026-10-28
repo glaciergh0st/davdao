@@ -59,38 +59,11 @@
 }
 ```
 
-## A remark that stayed with me
+## An noteworthy perspective 
+The premise that a model becomes an attacker autonomously is a secondary concern. What should be given more attention to is that bad actors of any skill level can connect models to tools, chain tasks together, and shorten the time between finding a weakness and trying to exploit it. That can compress attack campaigns and leave defenders less time to investigate and respond.
+In addition, AI-security risk is compounded when teams assume that a new standard, a vendor’s AI feature, or a secure development label guarantees safety. Each needs to be checked against the actual environment, threat model, and operational constraints.
 
-> “AI would make it easier done than said, so don’t say it’s easier said than done.”
-
-A close friend who is a scientist said this to me on the morning I wrote the original post. It stuck with me because AI was already changing how quickly people could write code, analyze data, and produce work that once took a team much longer.
-
-In security, the concern is not that a model becomes an attacker by itself. It is that people can connect models to tools, chain tasks together, and shorten the time between finding a weakness and trying to exploit it. That can compress attack campaigns and leave defenders less time to investigate.
-
-## Adoption moves at different speeds
-
-The technologies we trust do not become safe simply because they are widely adopted. They need sound implementation, clear ownership, and ongoing validation.
-
-- **Post-quantum cryptography:** Standards and migration plans deserve careful review. Organizations should validate implementations, key management, and transition plans instead of treating any standard as a substitute for testing.
-- **Blockchain:** Adoption can be slower where decentralization conflicts with an organization’s existing control and accountability model.
-- **Artificial intelligence:** Adoption is moving quickly because AI can reduce the time spent on coding, analysis, and repetitive work. That same speed can increase dependence on a small number of platforms and providers.
-- **Quantum computing and AI:** Their combined strategic potential is worth watching, but it should be treated as a future concern rather than a routine operational capability.
-
-## What changes when tasks are chained?
-
-AI can help with individual security tasks, such as reviewing code or summarizing findings. When connected to tools, an agent may also propose follow-up actions based on what it observes. That creates a faster loop: plan, act, read the result, and plan again.
-
-The level of autonomy matters. A system that suggests a command for an analyst to review is different from one that executes a sequence of actions without a person checking scope and impact. Security teams should measure that difference instead of describing every AI-assisted tool as fully autonomous.
-
-[XBOW](https://xbow.com/blog/top-1-how-xbow-did-it)’s June 2025 announcement that its autonomous penetration tester reached the top of [HackerOne](https://www.hackerone.com/)’s U.S. leaderboard made this discussion more concrete. It showed how quickly automated systems could perform parts of vulnerability research. It did not mean that human judgment or organizational context had become unnecessary.
-
-## The question defenders should ask
-
-What happens if an attacker can automate more of the discovery and testing process while the organization relies on AI-based defenses it has not evaluated?
-
-The risk is compounded when teams assume that a new standard, a vendor’s AI feature, or a secure development label guarantees safety. Each needs to be checked against the actual environment, threat model, and operational constraints.
-
-## Where security teams can focus
+## Where security teams can focus in a broad scheme
 
 - **Use zero trust as a baseline.** Keep access narrow, verify identity and device context, and review trust relationships regularly.
 - **Test against changing behavior.** Use authorized adversary emulation to evaluate detection and response when tools or tactics change.
