@@ -98,8 +98,6 @@ SafePay enters with stolen or guessed credentials and through vulnerable interne
 
 The advisory hands defenders two things they can use today, a downloadable list of indicators and a set of named tools and behaviors. Layer 1 loads those indicators into firewalls, proxies and the SIEM, then hunts back through old logs. Layer 2a alerts on basic behavioral indicators and isolated events, such as a shadow-copy wipe or an `rclone.exe` launch.
 
-Both layers match what SafePay used, not what it does. The advisory lists no domain names and no command lines, tells you to verify its IP addresses before blocking them, and names tools that are legitimate software. A rebuilt binary, a rotated address or a renamed tool slips past both. That gap is what Part 2 closes: the long-term work of contextual behavioral detection and validation.
-
 ## What the advisory gives you
 
 The indicator tables list nine IP addresses, thirty file-name rows, ten file hashes and four hostnames, all observed between November 2024 and August 2026 (page 7). Only the hashes are safe to block outright.
