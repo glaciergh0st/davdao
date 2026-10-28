@@ -343,6 +343,7 @@ await mkdir(path.join(output, 'blog'), { recursive: true });
 await mkdir(path.join(output, 'content'), { recursive: true });
 await cp(path.join(source, 'assets', 'styles.css'), path.join(output, 'assets', 'styles.css'));
 await cp(path.join(source, 'assets', 'content.js'), path.join(output, 'assets', 'content.js'));
+await cp(path.join(source, 'assets', 'reader.js'), path.join(output, 'assets', 'reader.js'));
 await cp(path.join(source, 'assets', 'icons'), path.join(output, 'assets', 'icons'), { recursive: true });
 await cp(path.join(root, 'public', '_headers'), path.join(output, '_headers'));
 await cp(path.join(root, 'public', 'robots.txt'), path.join(output, 'robots.txt'));
@@ -575,8 +576,8 @@ for (const post of publicBlog) {
     .replaceAll('{{BLOG_AUTHOR}}', escapeHtml(post.author))
     .replaceAll('{{BLOG_TAGS}}', tags)
     .replaceAll('{{KEY_TAKEAWAY}}', escapeHtml(post.keyTakeaway))
-    .replaceAll('{{BLOG_INFOGRAPHICS}}', renderBlogInfographics(post))
-    .replaceAll('{{BLOG_BODY}}', renderMarkdown(post.bodyMarkdown, 0))
+    .replaceAll('{{BLOG_INFOGRAPHICS}}', () => renderBlogInfographics(post))
+    .replaceAll('{{BLOG_BODY}}', () => renderMarkdown(post.bodyMarkdown, 0))
     .replaceAll('{{FOOTER}}', escapeHtml(siteContent.footer))
     .replaceAll('{{HOME_LABEL}}', escapeHtml(siteContent.labels.home));
   if (/\{\{[A-Z_]+\}\}/.test(html)) throw new Error(`Unresolved template token in blog/${post.slug}`);
@@ -618,7 +619,7 @@ for (const project of projectEntries) {
     .replaceAll('{{STATUS}}', escapeHtml(project.status))
     .replaceAll('{{SUMMARY}}', escapeHtml(project.summary))
     .replaceAll('{{TAGS}}', tags)
-    .replaceAll('{{BODY}}', renderMarkdown(markdown));
+    .replaceAll('{{BODY}}', () => renderMarkdown(markdown));
   if (/\{\{[A-Z_]+\}\}/.test(html)) throw new Error(`Unresolved template token in ${project.slug}`);
   await writeFile(path.join(output, 'projects', `${project.slug}.html`), html);
 }

@@ -301,6 +301,7 @@
   }
 
   function setupBlogSearch(page) {
+    if (!page) return;
     const input = page.querySelector('[data-blog-search]');
     const list = page.querySelector('[data-blog-list]');
     if (!input || !list || page.dataset.searchReady === 'true') return;
@@ -752,6 +753,46 @@
     setText('[data-bind="labels.home"]', site.labels.home);
   }
 
+  // Collapse the top navigation into a three-line menu button on narrow screens.
+  function setupMenuButton() {
+    const header = document.querySelector('.site-header');
+    const nav = header?.querySelector('nav[data-content-nav]');
+    if (!header || !nav || header.querySelector('.menu-toggle')) return;
+    const ns = 'http://www.w3.org/2000/svg';
+    const button = make('button', 'menu-toggle');
+    button.type = 'button';
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-label', 'Open menu');
+    if (!nav.id) nav.id = 'site-menu';
+    button.setAttribute('aria-controls', nav.id);
+    const icon = document.createElementNS(ns, 'svg');
+    icon.setAttribute('viewBox', '0 0 24 24');
+    icon.setAttribute('aria-hidden', 'true');
+    for (const y of ['7', '12', '17']) {
+      const line = document.createElementNS(ns, 'line');
+      for (const [key, value] of Object.entries({ x1: '4', x2: '20', y1: y, y2: y })) line.setAttribute(key, value);
+      icon.append(line);
+    }
+    button.append(icon);
+    nav.before(button);
+    header.classList.add('has-menu');
+
+    const setOpen = (open) => {
+      header.classList.toggle('menu-open', open);
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    button.addEventListener('click', () => setOpen(!header.classList.contains('menu-open')));
+    nav.addEventListener('click', (event) => { if (event.target.closest('a')) setOpen(false); });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && header.classList.contains('menu-open')) { setOpen(false); button.focus(); }
+    });
+    document.addEventListener('click', (event) => {
+      if (header.classList.contains('menu-open') && !header.contains(event.target)) setOpen(false);
+    });
+    window.matchMedia('(min-width: 901px)').addEventListener('change', (event) => { if (event.matches) setOpen(false); });
+  }
+
   async function hydrate() {
     try {
       const [site, projects, blog] = await Promise.all([fetchJson('/content/site.json'), fetchJson('/content/projects.json'), fetchJson('/content/blog.json')]);
@@ -773,6 +814,7 @@
   }
 
   setupSideNavigator();
+  setupMenuButton();
   setupBlogSearch(document.querySelector('[data-blog-index]'));
   setupTerminalCopy();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hydrate, { once: true });
