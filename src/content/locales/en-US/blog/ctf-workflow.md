@@ -77,7 +77,7 @@ Or, if the platform hands out a WireGuard config instead:
 sudo wg-quick up lab
 ```
 
-Hack The Box only publishes write-ups for retired machines, so I check a box has retired before writing one.
+HTB only permits publishing write-ups for retired machines, so I check a box has retired before writing one.
 
 ## Stage 2: Set up the workspace
 
