@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "intro": {
+    "eyebrow": "SkillJar",
+    "title": "25,000 hours toward Principal",
+    "highlight": "One lab at a time.",
+    "description": "Every lab I run gets logged here and sorted by domain, documented down to the skill, subskill, lesson, tools, and platform, then tagged so related work links together. Each jar fills toward a domain target; together they climb toward 25,000 hours of deliberate practice on the road to Principal Security Engineer and trusted security SME.",
+    "goalHours": 25000
+  },
+  "teams": [
+    {
+      "id": "blue",
+      "name": "Blue Team",
+      "tagline": "Defensive · TDIR",
+      "framework": "NIST SP 800-61 Rev. 3 + CSF 2.0 (Govern, Identify, Protect, Detect, Respond, Recover)",
+      "concepts": ["OCSF", "Dwell time < 1 hr", "ITDR"],
+      "stack": ["Sentinel / Splunk", "CrowdStrike / SentinelOne", "Cortex XSOAR / Tines", "Velociraptor", "Zeek"]
+    },
+    {
+      "id": "red",
+      "name": "Red Team",
+      "tagline": "Offensive · Adversary emulation",
+      "framework": "TIBER-EU / Red Team Maturity Model (RTMM)",
+      "concepts": ["Living off the Land", "OPSEC", "Malleable C2"],
+      "stack": ["Cobalt Strike / Havoc", "Evilginx3", "Terraform / Ansible", "BloodHound", "Rust / Go loaders"]
+    },
+    {
+      "id": "yellow",
+      "name": "Yellow Team",
+      "tagline": "Builders · DevSecOps & Ops",
+      "framework": "OWASP ASVS + NIST SSDF (shift-left)",
+      "concepts": ["DORA metrics", "SCA", "Infrastructure as Code"],
+      "stack": ["Snyk / GitHub Advanced Security", "Wiz / Prisma Cloud", "SLSA", "HashiCorp Vault", "Aqua Security"]
+    },
+    {
+      "id": "purple",
+      "name": "Purple Team",
+      "tagline": "Validation · The feedback loop",
+      "framework": "MITRE ATT&CK",
+      "concepts": ["Continuous Security Validation", "Detection engineering", "TTP-focused testing"],
+      "stack": ["AttackIQ / Scythe", "Atomic Red Team", "PlexTrac / VECTR", "Sigma"]
+    }
+  ],
+  "domains": [
+    { "id": "threat-detection-ir", "name": "Threat Detection & Incident Response", "team": "blue", "blurb": "SIEM, EDR, threat hunting, digital forensics.", "targetHours": 5000 },
+    { "id": "identity-access-security", "name": "Identity & Access Security", "team": "blue", "blurb": "IAM, PAM, Zero Trust, identity threat detection.", "targetHours": 3000 },
+    { "id": "security-engineering-architecture", "name": "Security Engineering & Architecture", "team": "purple", "blurb": "Splunk, detection engineering, enterprise security design.", "targetHours": 4000 },
+    { "id": "offensive-security-validation", "name": "Offensive Security & Security Validation", "team": "red", "blurb": "Penetration testing, adversary emulation, detection testing.", "targetHours": 3500 },
+    { "id": "cloud-infrastructure-security", "name": "Cloud & Infrastructure Security", "team": "yellow", "blurb": "AWS, Azure, Linux, Kubernetes, networking.", "targetHours": 3000 },
+    { "id": "security-data-engineering", "name": "Security Data Engineering & Analytics", "team": "yellow", "blurb": "Kafka, data pipelines, distributed systems, security analytics.", "targetHours": 2500 },
+    { "id": "software-engineering-automation", "name": "Software Engineering & Automation", "team": "yellow", "blurb": "Python, Go, APIs, CI/CD, infrastructure-as-code.", "targetHours": 2000 },
+    { "id": "infrastructure-ops-reliability", "name": "Infrastructure Operations & Reliability", "team": "yellow", "blurb": "Systems administration, performance, scalability, availability, troubleshooting.", "targetHours": 2000 }
+  ],
+  "platforms": [
+    { "id": "htb", "name": "Hack The Box" },
+    { "id": "prolabs", "name": "HTB Pro Labs" },
+    { "id": "offsec", "name": "OffSec" },
+    { "id": "btlo", "name": "Blue Team Labs Online" },
+    { "id": "cyberdefenders", "name": "CyberDefenders" },
+    { "id": "splunk-bots", "name": "Splunk BOTS" },
+    { "id": "pwnedlabs", "name": "pwnedlabs.io" },
+    { "id": "cveplayground", "name": "CVE Playground" }
+  ],
+  "labs": [
+    {
+      "id": "splunk-bots-v3",
+      "title": "Splunk BOTS v3 — SOC investigation",
+      "platform": "splunk-bots",
+      "domain": "threat-detection-ir",
+      "skill": "SIEM investigation",
+      "subskill": "SPL correlation & threat hunting",
+      "lesson": "Pivoting across data models to rebuild an intrusion timeline from endpoint, proxy, and cloud events.",
+      "tools": ["Splunk", "SPL", "MITRE ATT&CK Navigator"],
+      "tags": ["Detection Engineering", "MITRE ATT&CK", "OCSF", "Threat Hunting"],
+      "hours": 8,
+      "date": "2026-10-18",
+      "walkthroughUrl": ""
+    },
+    {
+      "id": "cyberdefenders-detectlog4j",
+      "title": "CyberDefenders — DetectLog4j",
+      "platform": "cyberdefenders",
+      "domain": "threat-detection-ir",
+      "skill": "Network & log forensics",
+      "subskill": "Exploitation triage from packet and log evidence",
+      "lesson": "Confirming Log4Shell exploitation and scoping the blast radius before escalation shortens dwell time.",
+      "tools": ["Zeek", "Wireshark", "Sigma"],
+      "tags": ["Digital Forensics", "Dwell Time", "MITRE ATT&CK"],
+      "hours": 5,
+      "date": "2026-10-21",
+      "walkthroughUrl": ""
+    },
+    {
+      "id": "htb-active",
+      "title": "Hack The Box — Active (AD)",
+      "platform": "htb",
+      "domain": "offensive-security-validation",
+      "skill": "Active Directory attack path",
+      "subskill": "GPP credential recovery & Kerberoasting",
+      "lesson": "Low-noise AD footholds that mirror real operator tradecraft, documented so the blue side can be built to catch them.",
+      "tools": ["BloodHound", "impacket", "CrackMapExec"],
+      "tags": ["Red Teaming", "RTMM", "Living off the Land", "Active Directory"],
+      "hours": 4,
+      "date": "2026-10-24",
+      "walkthroughUrl": ""
+    },
+    {
+      "id": "pwnedlabs-aws-iam-privesc",
+      "title": "pwnedlabs.io — AWS IAM privilege escalation",
+      "platform": "pwnedlabs",
+      "domain": "cloud-infrastructure-security",
+      "skill": "Cloud attack & defense",
+      "subskill": "IAM misconfiguration exploitation and detection",
+      "lesson": "Over-permissive IAM policies are the cloud's privilege-escalation highway; CloudTrail tells the story if you model the identity.",
+      "tools": ["AWS CLI", "Pacu", "CloudTrail"],
+      "tags": ["Cloud", "ITDR", "IAM"],
+      "hours": 3,
+      "date": "2026-10-26",
+      "walkthroughUrl": ""
+    },
+    {
+      "id": "cveplayground-detection-build",
+      "title": "CVE Playground — detection engineering drill",
+      "platform": "cveplayground",
+      "domain": "security-engineering-architecture",
+      "skill": "Detection engineering",
+      "subskill": "Sigma authoring, test, and coverage measurement",
+      "lesson": "Turn a working exploit into a durable, behavior-based rule, then try to break it before it ships.",
+      "tools": ["Sigma", "pySigma", "Atomic Red Team"],
+      "tags": ["Detection Engineering", "Continuous Security Validation", "Sigma", "MITRE ATT&CK"],
+      "hours": 4,
+      "date": "2026-10-27",
+      "walkthroughUrl": ""
+    }
+  ]
+}

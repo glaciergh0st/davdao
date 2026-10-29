@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="{{DESCRIPTION}}">
+  {{CANONICAL_LINK}}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <title>{{PAGE_TITLE}}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/content.js" defer></script>
+  <script src="/assets/skilljar.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">{{SKIP_LABEL}}</a>
+  {{SIDE_NAV}}
+  {{MESSAGE_SHORTCUT}}
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="/" aria-label="{{BRAND_ARIA}}"><span class="brand-name">{{BRAND_NAME}}</span><span class="brand-byline">{{BRAND_BYLINE}}</span></a><nav aria-label="{{NAV_LABEL}}" data-content-nav>{{NAV_LINKS}}</nav></div></header>
+  <main id="main" class="container skilljar-page" data-skilljar-page>
+    <a class="blog-back" href="/">← DAVDAO home</a>
+
+    <header class="sj-hero">
+      <p class="eyebrow">{{SKILLJAR_EYEBROW}}</p>
+      <h1>{{SKILLJAR_TITLE}} <span class="sj-hero-highlight">{{SKILLJAR_HIGHLIGHT}}</span></h1>
+      <p class="sj-hero-lede">{{SKILLJAR_DESCRIPTION}}</p>
+      <div class="sj-progress" role="group" aria-label="Overall progress toward 25,000 hours">
+        <div class="sj-progress-head">
+          <span class="sj-progress-now" data-sj-total data-countup="{{SJ_TOTAL}}">{{SJ_TOTAL}}</span>
+          <span class="sj-progress-goal">/ {{SJ_GOAL}} hrs logged</span>
+        </div>
+        <div class="sj-progress-track"><div class="sj-progress-bar" style="--pct: {{SJ_PCT}}%" data-sj-bar></div></div>
+        <dl class="sj-progress-stats">
+          <div><dt>Progress</dt><dd>{{SJ_PCT_LABEL}}</dd></div>
+          <div><dt>Labs logged</dt><dd data-countup="{{SJ_LABS}}">{{SJ_LABS}}</dd></div>
+          <div><dt>Domains</dt><dd data-countup="{{SJ_DOMAINS}}">{{SJ_DOMAINS}}</dd></div>
+          <div><dt>Remaining</dt><dd>{{SJ_REMAINING}} hrs</dd></div>
+        </dl>
+      </div>
+    </header>
+
+    <section class="sj-controls" aria-label="Filter the lab log">
+      <div class="sj-search">
+        <label class="sr-only" for="sj-search-input">Search labs</label>
+        <input id="sj-search-input" type="search" placeholder="Search labs, skills, tools, tags…" data-sj-search autocomplete="off">
+      </div>
+      <div class="sj-facets" data-sj-facets>{{SKILLJAR_FILTERBAR}}</div>
+    </section>
+
+    <section class="sj-jars" aria-label="Skill jars by team and domain">
+      {{SKILLJAR_BANDS}}
+    </section>
+
+    <section class="sj-catalog" aria-label="Lab log" data-sj-catalog>
+      <div class="sj-catalog-head">
+        <h2>The lab log</h2>
+        <p class="sj-catalog-count" data-sj-count aria-live="polite">{{SJ_LABS}} labs</p>
+      </div>
+      <ul class="sj-lab-list" data-sj-labs>
+        {{SKILLJAR_LABS}}
+      </ul>
+      <p class="sj-empty" data-sj-empty hidden>No labs match these filters. <button type="button" class="sj-clear" data-sj-clear>Clear filters</button></p>
+    </section>
+  </main>
+  <footer class="container footer"><span>{{FOOTER}}</span><nav class="footer-social-links" aria-label="Social links" data-social-links>{{SOCIAL_LINKS}}</nav><a href="/">{{HOME_LABEL}}</a></footer>
+</body>
+</html>
