@@ -136,7 +136,7 @@ As an advisor, my central focus would be to address SafePay Ransomware concerns 
 2. **Defend.** Rank behaviors by how early they fire and how few false positives they produce. Write each detection as code with a hypothesis, data source, false-positive notes and a test. Run it in detect-only mode, then promote clean rules to prevent. Close exposure in parallel (patching, MFA, backups), because detection is the second line.
 3. **Report.** Write for two readers: one page for leadership (are we exposed, top three actions, owners, dates) and a technical report for engineers (confidence, kill chain with coverage status, test results, IOCs as an appendix).
 
-In Falcon terms, Custom IOAs cover endpoint behavior (process, file, network and domain patterns with parent context), Next-Gen SIEM correlation rules cover VPN, identity and backup logs, and Fusion workflows handle containment. At a vendor's scale, add one step before shipping a behavioral rule: retro-hunt historical telemetry to price its false positives. This is a general principal-level workflow, not a description of CrowdStrike's internal process.
+In Falcon terms, Custom IOAs cover endpoint behavior (process, file, network and domain patterns with parent context), Next-Gen SIEM correlation rules cover VPN, identity and backup logs, and Fusion workflows handle containment. At a vendor's scale, add one step before shipping a behavioral rule: retro-hunt historical telemetry to price its false positives. This is a general detection-engineering practice, not a description of CrowdStrike's internal process.
 
 ## Source and confidence
 
