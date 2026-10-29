@@ -325,6 +325,21 @@
     update();
   }
 
+  function setupCaseStudyToggles() {
+    document.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-case-toggle]');
+      if (!button) return;
+      const card = button.closest('.project-card');
+      const panel = card && card.querySelector('.case-panel');
+      if (!panel) return;
+      const open = panel.hidden;
+      panel.hidden = !open;
+      button.setAttribute('aria-expanded', String(open));
+      const mark = button.querySelector('.case-toggle-mark');
+      if (mark) mark.textContent = open ? '−' : '+';
+    });
+  }
+
   function setupTerminalCopy() {
     document.addEventListener('click', async (event) => {
       const button = event.target.closest('[data-copy-terminal]');
@@ -410,6 +425,7 @@
       }
       const copy = make('div');
       const heading = make('h3', '', item.name);
+      if (isText(item.status)) heading.append(make('span', 'credential-status', item.status));
       copy.append(heading, make('p', '', item.detail));
       card.append(make('span', 'credential-mark', item.mark), copy);
       return card;
@@ -620,7 +636,8 @@
     }
     renderSideNavigation(document.querySelector('[data-content-side-links]'), site);
     renderExperience(root.querySelector('[data-content-experience]'), site);
-    renderProjects(root.querySelector('[data-content-projects]'), projects, site.labels);
+    // Project cards are rendered at build time with their case-study panels; the client
+    // keeps the static markup rather than re-rendering a simpler version over it.
     renderBlog(root.querySelector('[data-content-blog]'), blog.items);
     renderCredentials(root.querySelector('[data-content-credentials]'), site);
     renderTools(root.querySelector('[data-content-tools]'), site, site.labels);
@@ -710,10 +727,10 @@
     if (updated) { updated.dateTime = post.updatedAt || post.publishedAt; updated.textContent = post.updatedAt || post.publishedAt; }
     const tags = page.querySelector('[data-bind="blog.tags"]');
     if (tags) tags.replaceChildren(...post.tags.map((tag) => make('span', '', tag)));
-    const infographics = page.querySelector('[data-blog-infographics]');
-    if (infographics) infographics.replaceWith(renderBlogInfographics(post));
-    const body = page.querySelector('[data-bind="blog.body"]');
-    if (body) body.replaceChildren(renderMarkdown(post.bodyMarkdown, 0));
+    // The article body (including infographics and code blocks) is rendered at
+    // build time, enhanced into interactive steppers by stepper.js and given
+    // syntax highlighting by highlight-init.js; the client leaves the static
+    // markup in place rather than re-rendering and wiping those enhancements.
   }
 
   function hydrateProject(site, projects) {
@@ -815,6 +832,7 @@
 
   setupSideNavigator();
   setupMenuButton();
+  setupCaseStudyToggles();
   setupBlogSearch(document.querySelector('[data-blog-index]'));
   setupTerminalCopy();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hydrate, { once: true });

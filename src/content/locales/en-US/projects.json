@@ -4,26 +4,44 @@
     "title": "Sysmon process integrity checks",
     "summary": "A Go detector for ProcessGuid mismatches and activity reported after process termination.",
     "status": "In progress",
+    "metric": "Flags PID reuse & post-termination activity",
     "tags": ["Go", "Sysmon", "Detection engineering", "Windows telemetry"],
     "markdown": "pid-integrity.md",
-    "externalUrl": ""
+    "externalUrl": "",
+    "caseStudy": {
+      "problem": "Sysmon telemetry can't be trusted if PIDs mutate or events arrive after a process ends, which can hide tampering.",
+      "build": "A Go detector records the ProcessGuid for each PID on Event ID 1 and flags a later event that reuses the PID with a different ProcessGuid, plus activity reported after an Event ID 5 termination. It keeps both event time and ingestion time to separate delivery lag from a real inconsistency.",
+      "validation": "A hit is an anomaly to investigate, not proof of kernel tampering. Next step is replayable test data for normal creation, PID reuse, late events, and mismatched identities."
+    }
   },
   {
     "slug": "telemetry-engineering",
     "title": "SIEM pipeline tuning",
     "summary": "A Cribl pipeline tuned to reduce and normalize security events while preserving fields needed for investigations.",
     "status": "Consulting work · FINSEC",
+    "metric": "35% less SIEM ingestion",
     "tags": ["Cribl Stream", "SIEM", "Telemetry pipeline"],
     "markdown": "telemetry-engineering.md",
-    "externalUrl": ""
+    "externalUrl": "",
+    "caseStudy": {
+      "problem": "Too much security data drives up SIEM cost and slows investigations, but filtering only helps if it keeps the fields detections and analysts rely on.",
+      "build": "On a consulting engagement, a Cribl pipeline filtered and normalized events before they reached the SIEM. Ingestion dropped 35%.",
+      "validation": "Confirmed detections kept their required fields and event types, duplicate and low-value data removed, with a rollback plan for parser and routing changes. Client and environment details are confidential."
+    }
   },
   {
     "slug": "adversary-detection-lab",
     "title": "Cloud detection lab",
     "summary": "A cloud SOC lab for testing adversary emulation and detections with Caldera, Splunk MLTK, Elastic ML, and Sigma.",
     "status": "Repository",
+    "metric": "Caldera → Splunk/Elastic ML → Sigma",
     "tags": ["GCP", "Caldera", "Splunk MLTK", "Elastic ML", "Sigma"],
     "markdown": "adversary-detection-lab.md",
-    "externalUrl": "https://github.com/glaciergh0st/AI-APT-detection-lab"
+    "externalUrl": "https://github.com/glaciergh0st/AI-APT-detection-lab",
+    "caseStudy": {
+      "problem": "Detection ideas need a safe place to generate real adversary activity and measure what the logs and models actually catch.",
+      "build": "A cloud SOC lab wiring Caldera, Splunk MLTK, Elastic ML, and Sigma: generate activity with Caldera, test detections across the three, and check the context an analyst would need to investigate an alert.",
+      "validation": "A personal lab, kept separate from consulting engagements. The GitHub repository has the current setup."
+    }
   }
 ]
