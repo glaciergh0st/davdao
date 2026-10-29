@@ -549,7 +549,7 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 .skills-stage { position: relative; display: flex; flex-wrap: wrap; gap: 9px; align-items: center; justify-content: center; min-height: 160px; }
 .skills-stage.is-3d { display: block; height: clamp(360px, 48vw, 480px); perspective: 1000px; cursor: grab; touch-action: pan-y; }
 .skills-stage.is-3d:active { cursor: grabbing; }
-.skill-node { padding: 6px 12px; border: 1px solid color-mix(in srgb, var(--node, #3a4660) 45%, #2a3344); border-radius: 999px; background: rgb(12 18 28 / 82%); color: #d6e0ee; font: 600 12px/1 var(--mono); white-space: nowrap; cursor: pointer; }
+.skill-node { padding: 6px 12px; border: 1px solid color-mix(in srgb, var(--node, #3a4660) 58%, #2a3344); border-radius: 999px; background: color-mix(in srgb, var(--node, #3a4660) 14%, #0c1420); color: #e4ecf6; font: 600 12px/1 var(--mono); white-space: nowrap; cursor: pointer; }
 .skills-stage.is-3d .skill-node { position: absolute; left: 50%; top: 50%; margin: 0; transition: opacity .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease; will-change: transform, opacity; }
 .skill-node:hover, .skill-node:focus-visible { border-color: var(--node); color: #fff; box-shadow: 0 0 18px -3px var(--node); outline: none; }
 .skill-node.is-dim { opacity: .16 !important; }
@@ -561,3 +561,19 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 .credential-status { display: inline-block; margin-left: 9px; padding: 2px 8px; border: 1px solid #39614d; border-radius: 999px; background: rgb(23 58 43 / 38%); color: #7fdcae; font: 600 10px/1.5 var(--mono); letter-spacing: .02em; vertical-align: middle; white-space: nowrap; }
 
 @media (prefers-reduced-motion: reduce) { .hero-field { display: none; } }
+
+/* ---- Interactive step stepper (assets/stepper.js) ------------------------------- */
+.stepper { display: grid; gap: 16px; }
+.process-flow.is-stepper .process-step { min-height: 0; padding: 13px 15px; cursor: pointer; scroll-snap-align: start; transition: opacity .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+.process-flow.is-stepper .process-step strong { margin: 0; }
+.process-flow.is-stepper .process-step.is-dim { opacity: .5; }
+.process-flow.is-stepper .process-step.is-active { opacity: 1; border-color: var(--step-accent, #82a9ff); box-shadow: 0 0 0 1px var(--step-accent, #82a9ff), 0 10px 26px -12px rgb(0 0 0 / 45%); transform: translateY(-2px); }
+.process-flow.is-stepper .process-step:focus-visible { outline: 2px solid #a891e6; outline-offset: 2px; }
+.stepper-panel { padding: 18px 20px; border: 1px solid #2a3342; border-left: 3px solid var(--accent); border-radius: 10px; background: linear-gradient(150deg, #0f1620, #0b0f16 72%); }
+.stepper-count { margin: 0 0 8px; color: #8fb0ff; font: 650 10px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+.stepper-label { margin: 0 0 7px; color: var(--ink); font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+.stepper-detail { margin: 0; max-width: 640px; color: var(--body); font-size: 14px; line-height: 1.6; }
+.stepper-dots { display: flex; gap: 5px; }
+.stepper-dot { width: 22px; height: 4px; border-radius: 2px; background: #27303e; transition: background .2s ease; }
+.stepper-dot.on { background: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .process-flow.is-stepper .process-step.is-active { transform: none; } }

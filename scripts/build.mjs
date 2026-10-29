@@ -351,6 +351,7 @@ await cp(path.join(source, 'assets', 'styles.css'), path.join(output, 'assets', 
 await cp(path.join(source, 'assets', 'content.js'), path.join(output, 'assets', 'content.js'));
 await cp(path.join(source, 'assets', 'reader.js'), path.join(output, 'assets', 'reader.js'));
 await cp(path.join(source, 'assets', 'interactive.js'), path.join(output, 'assets', 'interactive.js'));
+await cp(path.join(source, 'assets', 'stepper.js'), path.join(output, 'assets', 'stepper.js'));
 await cp(path.join(source, 'assets', 'icons'), path.join(output, 'assets', 'icons'), { recursive: true });
 await cp(path.join(root, 'public', '_headers'), path.join(output, '_headers'));
 await cp(path.join(root, 'public', 'robots.txt'), path.join(output, 'robots.txt'));

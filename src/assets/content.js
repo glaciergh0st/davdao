@@ -727,8 +727,8 @@
     if (updated) { updated.dateTime = post.updatedAt || post.publishedAt; updated.textContent = post.updatedAt || post.publishedAt; }
     const tags = page.querySelector('[data-bind="blog.tags"]');
     if (tags) tags.replaceChildren(...post.tags.map((tag) => make('span', '', tag)));
-    const infographics = page.querySelector('[data-blog-infographics]');
-    if (infographics) infographics.replaceWith(renderBlogInfographics(post));
+    // The infographics are rendered at build time and enhanced into an interactive
+    // stepper by stepper.js; the client leaves the static markup in place.
     const body = page.querySelector('[data-bind="blog.body"]');
     if (body) body.replaceChildren(renderMarkdown(post.bodyMarkdown, 0));
   }
