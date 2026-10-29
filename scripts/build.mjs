@@ -350,6 +350,7 @@ await mkdir(path.join(output, 'content'), { recursive: true });
 await cp(path.join(source, 'assets', 'styles.css'), path.join(output, 'assets', 'styles.css'));
 await cp(path.join(source, 'assets', 'content.js'), path.join(output, 'assets', 'content.js'));
 await cp(path.join(source, 'assets', 'reader.js'), path.join(output, 'assets', 'reader.js'));
+await cp(path.join(source, 'assets', 'interactive.js'), path.join(output, 'assets', 'interactive.js'));
 await cp(path.join(source, 'assets', 'icons'), path.join(output, 'assets', 'icons'), { recursive: true });
 await cp(path.join(root, 'public', '_headers'), path.join(output, '_headers'));
 await cp(path.join(root, 'public', 'robots.txt'), path.join(output, 'robots.txt'));
@@ -426,7 +427,8 @@ const aboutParagraphs = renderAboutPoints(siteContent.about.points);
 const aboutWhy = `<section class="about-why" aria-labelledby="about-why-title"><h2 id="about-why-title">${escapeHtml(siteContent.about.whyHeading)}</h2><div class="about-why-copy">${siteContent.about.whyText.split(/\n\s*\n/).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')}</div></section>`;
 
 const credentialsMarkup = siteContent.professionalDevelopment.credentials.map((item) => {
-  const content = `<span class="credential-mark">${escapeHtml(item.mark)}</span><div><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(item.detail)}</p></div>`;
+  const status = item.status ? `<span class="credential-status">${escapeHtml(item.status)}</span>` : '';
+  const content = `<span class="credential-mark">${escapeHtml(item.mark)}</span><div><h3>${escapeHtml(item.name)}${status}</h3><p>${escapeHtml(item.detail)}</p></div>`;
   return item.url
     ? `<a class="credential credential-link-card" href="${escapeHtml(item.url)}" rel="noreferrer" aria-label="Open official verification page for ${escapeHtml(item.name)}">${content}</a>`
     : `<article class="credential">${content}</article>`;
@@ -438,6 +440,14 @@ const toolCategories = siteContent.professionalDevelopment.toolCategories.map((c
   const count = siteContent.labels.toolsCount.replace('{count}', String(category.tools.length));
   return `<article class="tool-category" data-category="${escapeHtml(category.id)}"><div class="tool-card-heading"><span class="tool-index">${number}</span><h3>${escapeHtml(category.name)}</h3><span class="tool-count">${escapeHtml(count)}</span></div><ul class="tool-chip-list" aria-label="${escapeHtml(category.name)}">${tools}</ul></article>`;
 }).join('\n');
+
+const skillPalette = ['#83aaff', '#5fd49a', '#a891e6', '#d08b6a'];
+const skillNodes = siteContent.professionalDevelopment.toolCategories.flatMap((cat, ci) =>
+  cat.tools.map((tool) => `<button type="button" class="skill-node" data-cat="${ci}" style="--node:${skillPalette[ci % skillPalette.length]}">${escapeHtml(tool)}</button>`)
+).join('');
+const skillLegend = siteContent.professionalDevelopment.toolCategories.map((cat, ci) =>
+  `<li data-legend="${ci}" style="--node:${skillPalette[ci % skillPalette.length]}"><span class="legend-dot" aria-hidden="true"></span>${escapeHtml(cat.name)}</li>`
+).join('');
 
 const cards = projects.map((project) => {
   const external = project.externalUrl
@@ -479,6 +489,8 @@ const indexHtml = indexTemplate
   .replaceAll('{{SPOTLIGHT_LABEL}}', escapeHtml(siteContent.spotlight.result.label))
   .replaceAll('{{SPOTLIGHT_NOTE}}', escapeHtml(siteContent.spotlight.result.note))
   .replaceAll('{{SPOTLIGHT_FACTS}}', siteContent.spotlight.facts.map((f) => `<div class="fact"><dt>${escapeHtml(f.label)}</dt><dd>${escapeHtml(f.value)}</dd></div>`).join(''))
+  .replaceAll('{{SKILL_NODES}}', skillNodes)
+  .replaceAll('{{SKILL_LEGEND}}', skillLegend)
   .replaceAll('{{FEATURED_EYEBROW}}', escapeHtml(siteContent.featured.eyebrow))
   .replaceAll('{{FEATURED_TITLE}}', escapeHtml(siteContent.featured.title))
   .replaceAll('{{FEATURED_SUMMARY}}', escapeHtml(siteContent.featured.summary))

@@ -11,6 +11,7 @@
   <title>{{PAGE_TITLE}}</title>
   <link rel="stylesheet" href="/assets/styles.css">
   <script src="/assets/content.js" defer></script>
+  <script src="/assets/interactive.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">{{SKIP_LABEL}}</a>
@@ -24,6 +25,7 @@
   </header>
   <main id="main" data-home-content>
     <section class="container hero" aria-labelledby="hero-title">
+      <canvas class="hero-field" data-hero-field aria-hidden="true"></canvas>
       <p class="status-badge"><span class="status-dot" aria-hidden="true"></span>{{HERO_BADGE}}</p>
       <p class="eyebrow" data-bind="hero.eyebrow">{{HERO_EYEBROW}}</p>
       <h1 id="hero-title"><span class="hero-title-main" data-bind="hero.title">{{HERO_TITLE}}</span><br><span class="hero-title-highlight" data-bind="hero.highlight">{{HERO_HIGHLIGHT}}</span></h1>
@@ -39,7 +41,7 @@
     <section class="container spotlight" aria-label="Headline result and quick facts">
       <article class="result-card">
         <p class="result-eyebrow">Headline result</p>
-        <p class="result-metric"><span class="result-before">{{SPOTLIGHT_BEFORE}}</span><span class="result-arrow" aria-hidden="true">→</span><span class="result-after">{{SPOTLIGHT_AFTER}}</span></p>
+        <p class="result-metric"><span class="result-before" data-countup>{{SPOTLIGHT_BEFORE}}</span><span class="result-arrow" aria-hidden="true">→</span><span class="result-after" data-countup>{{SPOTLIGHT_AFTER}}</span></p>
         <p class="result-label">{{SPOTLIGHT_LABEL}}</p>
         <p class="result-note">{{SPOTLIGHT_NOTE}}</p>
       </article>
@@ -79,6 +81,14 @@
       <div class="section-heading"><p class="eyebrow" data-bind="blog.eyebrow">{{BLOG_EYEBROW}}</p><h2 id="blog-title" data-bind="blog.title">{{BLOG_TITLE}}</h2><p class="blog-description" data-bind="blog.description">{{BLOG_DESCRIPTION}}</p></div>
       <div class="blog-grid" data-content-blog>{{BLOG_POSTS}}</div>
       <p class="blog-index-link"><a class="text-link" href="/blog/">Browse all articles <span aria-hidden="true">→</span></a></p>
+    </section>
+
+    <section class="container section" id="skills" aria-labelledby="skills-title">
+      <div class="section-heading"><p class="eyebrow">Skills</p><h2 id="skills-title">The toolchain, wired to the work</h2></div>
+      <div class="skills-wrap">
+        <div class="skills-stage" data-skills role="img" aria-label="Interactive graph of tools, grouped by category. The full list follows.">{{SKILL_NODES}}</div>
+        <ul class="skills-legend" aria-hidden="true">{{SKILL_LEGEND}}</ul>
+      </div>
     </section>
 
     <section class="container section" id="credentials" aria-labelledby="credentials-title">

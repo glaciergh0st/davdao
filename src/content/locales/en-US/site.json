@@ -137,6 +137,12 @@
     "credentials": [
       {
         "mark": "GIAC",
+        "name": "GXPN · Exploit Researcher & Advanced Pen Tester",
+        "detail": "SANS SEC660. Advanced exploitation, network attacks, and penetration testing.",
+        "status": "In progress · exam Dec 19, 2026"
+      },
+      {
+        "mark": "GIAC",
         "name": "GCIA · GIAC Certified Intrusion Analyst",
         "detail": "Network forensics, log analysis, Zeek, IDS/IPS, anomaly investigation.",
         "url": "https://www.giac.org/certified-professional/David-Awosusi/185835"

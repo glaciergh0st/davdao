@@ -425,6 +425,7 @@
       }
       const copy = make('div');
       const heading = make('h3', '', item.name);
+      if (isText(item.status)) heading.append(make('span', 'credential-status', item.status));
       copy.append(heading, make('p', '', item.detail));
       card.append(make('span', 'credential-mark', item.mark), copy);
       return card;
