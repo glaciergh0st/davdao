@@ -125,13 +125,11 @@
   },
   "journey": {
     "eyebrow": "The route so far",
-    "title": "From help desk to detection & response",
+    "title": "From IT operations to detection & response",
     "hops": [
       { "n": "01", "title": "IT operations", "detail": "Eight years supporting users and keeping systems running, resolving 95%+ of remote and onsite issues end-to-end." },
       { "n": "02", "title": "Security consulting", "detail": "3.5 years leading detection and response for Fortune 10 healthcare and global financial clients." },
-      { "n": "03", "title": "M.Eng. Cybersecurity", "detail": "Graduate study in cybersecurity engineering at the University of Maryland." },
-      { "n": "04", "title": "GIAC GCIA", "detail": "Certified Intrusion Analyst since 2020, with eCPPT and Security+ alongside." },
-      { "n": "05", "title": "Now", "detail": "Detection engineering, cloud and identity visibility, and incident response across network, endpoint, identity, and cloud." }
+      { "n": "03", "title": "Now", "detail": "Detection engineering, cloud and identity visibility, and incident response across network, endpoint, identity, and cloud." }
     ]
   },
   "professionalDevelopment": {
