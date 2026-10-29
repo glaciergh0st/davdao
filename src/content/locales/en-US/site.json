@@ -28,6 +28,7 @@
     { "label": "Contact", "href": "#contact" }
   ],
   "hero": {
+    "badge": "Open to detection & response roles",
     "eyebrow": "Security consultant",
     "title": "Security engineering.",
     "highlight": "Detection & response.",
@@ -35,6 +36,20 @@
     "primaryAction": "View projects",
     "secondaryAction": "More about me",
     "secondaryHref": "/about/"
+  },
+  "spotlight": {
+    "result": {
+      "label": "Endpoint containment",
+      "before": "4 hours",
+      "after": "45 seconds",
+      "note": "SOAR-to-CrowdStrike API automation with approval controls, on Fortune 10 healthcare response."
+    },
+    "facts": [
+      { "label": "Focus", "value": "Detection & response engineering" },
+      { "label": "Experience", "value": "3.5 yrs consulting · 8 yrs IT ops" },
+      { "label": "Certifications", "value": "GIAC GCIA · eCPPT · Security+" },
+      { "label": "Education", "value": "M.Eng. Cybersecurity, Univ. of Maryland" }
+    ]
   },
   "about": {
     "title": "About me",

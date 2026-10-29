@@ -24,6 +24,7 @@
   </header>
   <main id="main" data-home-content>
     <section class="container hero" aria-labelledby="hero-title">
+      <p class="status-badge"><span class="status-dot" aria-hidden="true"></span>{{HERO_BADGE}}</p>
       <p class="eyebrow" data-bind="hero.eyebrow">{{HERO_EYEBROW}}</p>
       <h1 id="hero-title"><span class="hero-title-main" data-bind="hero.title">{{HERO_TITLE}}</span><br><span class="hero-title-highlight" data-bind="hero.highlight">{{HERO_HIGHLIGHT}}</span></h1>
       <div class="hero-lower">
@@ -33,6 +34,16 @@
           <a class="text-link" data-bind="hero.secondaryAction" href="{{HERO_SECONDARY_HREF}}">{{HERO_SECONDARY}}</a>
         </div>
       </div>
+    </section>
+
+    <section class="container spotlight" aria-label="Headline result and quick facts">
+      <article class="result-card">
+        <p class="result-eyebrow">Headline result</p>
+        <p class="result-metric"><span class="result-before">{{SPOTLIGHT_BEFORE}}</span><span class="result-arrow" aria-hidden="true">→</span><span class="result-after">{{SPOTLIGHT_AFTER}}</span></p>
+        <p class="result-label">{{SPOTLIGHT_LABEL}}</p>
+        <p class="result-note">{{SPOTLIGHT_NOTE}}</p>
+      </article>
+      <dl class="facts-grid">{{SPOTLIGHT_FACTS}}</dl>
     </section>
 
     <section class="container section" id="experience" aria-labelledby="experience-title">
