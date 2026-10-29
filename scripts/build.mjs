@@ -176,7 +176,13 @@ function validateProject(project, index) {
   }
   const externalUrl = project.externalUrl === '' ? '' : safeHttpsUrl(project.externalUrl);
   if (project.externalUrl !== '' && !externalUrl) throw new Error(`${slug} externalUrl must be HTTPS`);
-  return { slug, title, summary, status, markdown, tags: project.tags.map((tag) => tag.trim()), externalUrl };
+  const metric = typeof project.metric === 'string' ? project.metric.trim() : '';
+  let caseStudy = null;
+  if (isRecord(project.caseStudy)) {
+    for (const key of ['problem', 'build', 'validation']) requireString(project.caseStudy[key], `${slug} caseStudy.${key}`);
+    caseStudy = { problem: project.caseStudy.problem, build: project.caseStudy.build, validation: project.caseStudy.validation };
+  }
+  return { slug, title, summary, status, markdown, tags: project.tags.map((tag) => tag.trim()), externalUrl, metric, caseStudy };
 }
 
 function isRecord(value) {
@@ -437,7 +443,16 @@ const cards = projects.map((project) => {
   const external = project.externalUrl
     ? `<a href="${escapeHtml(project.externalUrl)}" rel="noreferrer">${escapeHtml(siteContent.labels.repository)}</a>`
     : '';
-  return `<article class="project-card"><span class="project-status">${escapeHtml(project.status)}</span><h3>${escapeHtml(project.title)}</h3><p>${escapeHtml(project.summary)}</p><div class="project-actions"><a href="/projects/${escapeHtml(project.slug)}.html">${escapeHtml(siteContent.labels.readWriteup)}</a>${external}</div></article>`;
+  const metric = project.metric ? `<span class="project-metric">${escapeHtml(project.metric)}</span>` : '';
+  const tags = (project.tags || []).map((tag) => `<span>${escapeHtml(tag)}</span>`).join('');
+  const cs = project.caseStudy;
+  const panel = cs
+    ? `<div class="case-panel" hidden><div class="case-step"><h4>Problem</h4><p>${escapeHtml(cs.problem)}</p></div><div class="case-step"><h4>Build</h4><p>${escapeHtml(cs.build)}</p></div><div class="case-step"><h4>Validation</h4><p>${escapeHtml(cs.validation)}</p></div></div>`
+    : '';
+  const toggle = cs
+    ? `<button class="case-toggle" type="button" aria-expanded="false" data-case-toggle>Read the case study <span class="case-toggle-mark" aria-hidden="true">+</span></button>`
+    : '';
+  return `<article class="project-card"><div class="project-card-head"><span class="project-status">${escapeHtml(project.status)}</span>${metric}</div><h3>${escapeHtml(project.title)}</h3><p>${escapeHtml(project.summary)}</p><div class="tag-list">${tags}</div><div class="project-actions">${toggle}<a href="/projects/${escapeHtml(project.slug)}.html">${escapeHtml(siteContent.labels.readWriteup)}</a>${external}</div>${panel}</article>`;
 }).join('\n');
 const blogPosts = publicBlog.slice(0, 3).map((post) => `<article class="blog-card"><p class="blog-card-label">${escapeHtml(post.category)} · ${escapeHtml(post.publishedAt)} · ${post.readingTimeMinutes} min read</p><h3>${escapeHtml(post.title)}</h3><p>${escapeHtml(post.summary)}</p><div class="blog-card-tags">${post.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div><a href="${escapeHtml(post.url)}">Read article <span aria-hidden="true">→</span></a></article>`).join('\n');
 const blogIndexCards = publicBlog.map((post) => `<article class="blog-card" data-blog-card data-search-text="${escapeHtml([post.title, post.summary, post.category, ...post.tags].join(' ').toLowerCase())}" data-search-tags="${escapeHtml(post.tags.join(' '))}"><p class="blog-card-label">${escapeHtml(post.category)} · ${escapeHtml(post.publishedAt)} · ${post.readingTimeMinutes} min read</p><h2><a href="${escapeHtml(post.url)}">${escapeHtml(post.title)}</a></h2><p>${escapeHtml(post.summary)}</p><div class="blog-card-tags">${post.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div><a class="blog-read-link" href="${escapeHtml(post.url)}">Read article <span aria-hidden="true">→</span></a></article>`).join('\n');
@@ -464,6 +479,18 @@ const indexHtml = indexTemplate
   .replaceAll('{{SPOTLIGHT_LABEL}}', escapeHtml(siteContent.spotlight.result.label))
   .replaceAll('{{SPOTLIGHT_NOTE}}', escapeHtml(siteContent.spotlight.result.note))
   .replaceAll('{{SPOTLIGHT_FACTS}}', siteContent.spotlight.facts.map((f) => `<div class="fact"><dt>${escapeHtml(f.label)}</dt><dd>${escapeHtml(f.value)}</dd></div>`).join(''))
+  .replaceAll('{{FEATURED_EYEBROW}}', escapeHtml(siteContent.featured.eyebrow))
+  .replaceAll('{{FEATURED_TITLE}}', escapeHtml(siteContent.featured.title))
+  .replaceAll('{{FEATURED_SUMMARY}}', escapeHtml(siteContent.featured.summary))
+  .replaceAll('{{FEATURED_POINTS}}', siteContent.featured.points.map((p) => `<li>${escapeHtml(p)}</li>`).join(''))
+  .replaceAll('{{FEATURED_META}}', siteContent.featured.meta.map((m) => `<div class="featured-fact"><dt>${escapeHtml(m.label)}</dt><dd>${escapeHtml(m.value)}</dd></div>`).join(''))
+  .replaceAll('{{FEATURED_PRIMARY_HREF}}', escapeHtml(siteContent.featured.primaryHref))
+  .replaceAll('{{FEATURED_PRIMARY_LABEL}}', escapeHtml(siteContent.featured.primaryLabel))
+  .replaceAll('{{FEATURED_SECONDARY_HREF}}', escapeHtml(siteContent.featured.secondaryHref))
+  .replaceAll('{{FEATURED_SECONDARY_LABEL}}', escapeHtml(siteContent.featured.secondaryLabel))
+  .replaceAll('{{JOURNEY_EYEBROW}}', escapeHtml(siteContent.journey.eyebrow))
+  .replaceAll('{{JOURNEY_TITLE}}', escapeHtml(siteContent.journey.title))
+  .replaceAll('{{JOURNEY_HOPS}}', siteContent.journey.hops.map((h) => `<li class="route-hop"><span class="route-n">${escapeHtml(h.n)}</span><div class="route-body"><h3>${escapeHtml(h.title)}</h3><p>${escapeHtml(h.detail)}</p></div></li>`).join(''))
   .replaceAll('{{HERO_EYEBROW}}', escapeHtml(siteContent.hero.eyebrow))
   .replaceAll('{{HERO_TITLE}}', escapeHtml(siteContent.hero.title))
   .replaceAll('{{HERO_HIGHLIGHT}}', escapeHtml(siteContent.hero.highlight))

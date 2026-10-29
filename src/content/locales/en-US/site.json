@@ -98,10 +98,41 @@
     "title": "Tools & Projects",
     "description": "Each project explains the problem, how it was investigated or solved, and the outcome."
   },
+  "featured": {
+    "eyebrow": "Featured deep-dive",
+    "title": "SafePay ransomware, deconstructed",
+    "summary": "A two-part breakdown of CISA advisory AA26-293A: what can be done today, and the long-term detection engineering that holds as indicators change.",
+    "meta": [
+      { "label": "Source", "value": "CISA AA26-293A" },
+      { "label": "Scope", "value": "Kill chain, detections, validation" },
+      { "label": "Output", "value": "2-part series + tooling" },
+      { "label": "Stack", "value": "STIX · Sigma · YARA · LogScale" }
+    ],
+    "points": [
+      "Sort every indicator into block, verify, alert, or hunt before loading it.",
+      "Build detections in the order they fire, earliest attack step first.",
+      "Validate each rule by trying to break it, and report coverage per kill-chain stage."
+    ],
+    "primaryHref": "/blog/safepay-aa26-293a-what-you-can-do-today/",
+    "primaryLabel": "Read Part 1",
+    "secondaryHref": "/blog/safepay-aa26-293a-enhancing-your-defense-posture/",
+    "secondaryLabel": "Read Part 2"
+  },
   "blog": {
     "eyebrow": "Writing",
     "title": "Blog",
     "description": "Notes on detection engineering, security operations, incident response, labs, walkthroughs, and more."
+  },
+  "journey": {
+    "eyebrow": "The route so far",
+    "title": "From help desk to detection & response",
+    "hops": [
+      { "n": "01", "title": "IT operations", "detail": "Eight years supporting users and keeping systems running, resolving 95%+ of remote and onsite issues end-to-end." },
+      { "n": "02", "title": "Security consulting", "detail": "3.5 years leading detection and response for Fortune 10 healthcare and global financial clients." },
+      { "n": "03", "title": "M.Eng. Cybersecurity", "detail": "Graduate study in cybersecurity engineering at the University of Maryland." },
+      { "n": "04", "title": "GIAC GCIA", "detail": "Certified Intrusion Analyst since 2020, with eCPPT and Security+ alongside." },
+      { "n": "05", "title": "Now", "detail": "Detection engineering, cloud and identity visibility, and incident response across network, endpoint, identity, and cloud." }
+    ]
   },
   "professionalDevelopment": {
     "title": "Professional development",

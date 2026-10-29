@@ -58,6 +58,23 @@
       </div>
     </section>
 
+    <section class="featured-band" id="featured" aria-labelledby="featured-title">
+      <div class="container section">
+        <div class="section-heading"><p class="eyebrow">{{FEATURED_EYEBROW}}</p><h2 id="featured-title">{{FEATURED_TITLE}}</h2></div>
+        <div class="featured-layout">
+          <div class="featured-main">
+            <p class="featured-summary">{{FEATURED_SUMMARY}}</p>
+            <ul class="featured-points">{{FEATURED_POINTS}}</ul>
+            <div class="featured-actions">
+              <a class="button button-primary" href="{{FEATURED_PRIMARY_HREF}}">{{FEATURED_PRIMARY_LABEL}}</a>
+              <a class="text-link" href="{{FEATURED_SECONDARY_HREF}}">{{FEATURED_SECONDARY_LABEL}} <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <dl class="featured-meta">{{FEATURED_META}}</dl>
+        </div>
+      </div>
+    </section>
+
     <section class="container section" id="blog" aria-labelledby="blog-title">
       <div class="section-heading"><p class="eyebrow" data-bind="blog.eyebrow">{{BLOG_EYEBROW}}</p><h2 id="blog-title" data-bind="blog.title">{{BLOG_TITLE}}</h2><p class="blog-description" data-bind="blog.description">{{BLOG_DESCRIPTION}}</p></div>
       <div class="blog-grid" data-content-blog>{{BLOG_POSTS}}</div>
@@ -70,6 +87,11 @@
         <div class="credential-list" data-content-credentials>{{CREDENTIALS}}</div>
         <div class="toolkit" aria-label="{{TOOLS_LABEL}}" data-content-tools>{{TOOL_CATEGORIES}}</div>
       </div>
+    </section>
+
+    <section class="container section" id="journey" aria-labelledby="journey-title">
+      <div class="section-heading"><p class="eyebrow">{{JOURNEY_EYEBROW}}</p><h2 id="journey-title">{{JOURNEY_TITLE}}</h2></div>
+      <ol class="route">{{JOURNEY_HOPS}}</ol>
     </section>
 
     <section class="contact-band" id="contact" aria-labelledby="contact-title">
