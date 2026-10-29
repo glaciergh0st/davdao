@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "intro": {
     "eyebrow": "SkillJar",
-    "title": "25,000 hours toward Principal",
+    "title": "25,000 hours to mastery",
     "highlight": "One lab at a time.",
     "description": "My journey to becoming a Security SME is forged here. Tons of labs, notes in my own words that I can reference and reflect on.",
     "goalHours": 25000
@@ -67,6 +67,7 @@
       "title": "Splunk BOTS v3 — SOC investigation",
       "platform": "splunk-bots",
       "domain": "threat-detection-ir",
+      "alsoDomains": ["security-engineering-architecture", "security-data-engineering"],
       "level": "advanced",
       "skill": "SIEM investigation",
       "subskill": "SPL correlation & threat hunting",

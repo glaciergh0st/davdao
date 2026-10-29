@@ -97,12 +97,15 @@
   }
 
   function apply() {
-    var shown = 0;
+    // Count DISTINCT labs, not card instances: a cross-listed card shares its
+    // lab id with its home card, so the "N labs" total never double-counts.
+    var seen = {};
     cards.forEach(function (el) {
       var ok = cardMatches(el);
       el.hidden = !ok;
-      if (ok) shown += 1;
+      if (ok) seen[el.dataset.labId] = true;
     });
+    var shown = Object.keys(seen).length;
     rows.forEach(function (row) { row.hidden = !row.querySelector('.sj-card:not([hidden])'); });
     if (countEl) countEl.textContent = shown + (shown === 1 ? ' lab' : ' labs');
     if (emptyEl) emptyEl.hidden = shown !== 0;
