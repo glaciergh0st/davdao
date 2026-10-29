@@ -68,20 +68,22 @@
   }
 
   /* ---------- Filtering ---------- */
-  var labs = Array.prototype.slice.call(page.querySelectorAll('.sj-lab'));
+  var cards = Array.prototype.slice.call(page.querySelectorAll('.sj-card'));
+  var rows = Array.prototype.slice.call(page.querySelectorAll('.sj-row'));
   var jars = Array.prototype.slice.call(page.querySelectorAll('.sj-jar'));
   var countEl = page.querySelector('[data-sj-count]');
   var emptyEl = page.querySelector('[data-sj-empty]');
   var searchEl = page.querySelector('[data-sj-search]');
   var catalog = page.querySelector('[data-sj-catalog]');
 
-  var filters = { team: new Set(), platform: new Set(), tag: new Set() };
+  var filters = { team: new Set(), level: new Set(), platform: new Set(), tag: new Set() };
   var domainFilter = null;
   var searchTerm = '';
 
-  function labMatches(li) {
-    var d = li.dataset;
+  function cardMatches(el) {
+    var d = el.dataset;
     if (filters.team.size && !filters.team.has(d.team)) return false;
+    if (filters.level.size && !filters.level.has(d.level)) return false;
     if (filters.platform.size && !filters.platform.has(d.platform)) return false;
     if (filters.tag.size) {
       var tags = (d.tags || '').split('|');
@@ -96,15 +98,15 @@
 
   function apply() {
     var shown = 0;
-    labs.forEach(function (li) {
-      var ok = labMatches(li);
-      li.hidden = !ok;
+    cards.forEach(function (el) {
+      var ok = cardMatches(el);
+      el.hidden = !ok;
       if (ok) shown += 1;
     });
+    rows.forEach(function (row) { row.hidden = !row.querySelector('.sj-card:not([hidden])'); });
     if (countEl) countEl.textContent = shown + (shown === 1 ? ' lab' : ' labs');
     if (emptyEl) emptyEl.hidden = shown !== 0;
 
-    // Dim jars outside an active team filter; mark the domain-focused jar.
     jars.forEach(function (jar) {
       var dimmed = filters.team.size > 0 && !filters.team.has(jar.dataset.team);
       jar.classList.toggle('is-dimmed', dimmed);
@@ -134,32 +136,57 @@
   }
 
   function clearAll() {
-    filters.team.clear();
-    filters.platform.clear();
-    filters.tag.clear();
+    ['team', 'level', 'platform', 'tag'].forEach(function (g) { filters[g].clear(); setChipState(g); });
     domainFilter = null;
     searchTerm = '';
     if (searchEl) searchEl.value = '';
-    setChipState('team');
-    setChipState('platform');
-    setChipState('tag');
     apply();
   }
 
-  // Delegated clicks: facet chips, tag buttons, jar buttons, clear button.
-  page.addEventListener('click', function (event) {
-    var chip = event.target.closest('.sj-chip');
-    if (chip && page.contains(chip)) { onChip(chip); return; }
+  /* ---------- Detail modal (Netflix-card expand) ---------- */
+  var modal = document.querySelector('[data-sj-modal]');
+  var modalBody = document.querySelector('[data-sj-modal-body]');
+  var modalPanel = modal ? modal.querySelector('.sj-modal-panel') : null;
+  var lastFocus = null;
+
+  function openModal(card) {
+    if (!modal || !modalBody || !card) return;
+    var tpl = card.querySelector('.sj-card-detail');
+    if (!tpl || !tpl.content) return;
+    modalBody.innerHTML = '';
+    modalBody.appendChild(tpl.content.cloneNode(true));
+    lastFocus = document.activeElement;
+    modal.hidden = false;
+    try { document.body.style.overflow = 'hidden'; } catch (e) { /* noop */ }
+    if (modalPanel) modalPanel.focus();
+  }
+  function closeModal() {
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    modalBody.innerHTML = '';
+    try { document.body.style.overflow = ''; } catch (e) { /* noop */ }
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  // Delegated on document: the modal lives outside <main>.
+  document.addEventListener('click', function (event) {
+    if (event.target.closest('[data-sj-close]')) { closeModal(); return; }
+
+    var openBtn = event.target.closest('[data-sj-open]');
+    if (openBtn && page.contains(openBtn)) { openModal(openBtn.closest('.sj-card')); return; }
 
     var tagBtn = event.target.closest('[data-sj-tag]');
-    if (tagBtn && page.contains(tagBtn)) {
-      var tag = tagBtn.getAttribute('data-sj-tag');
-      if (!filters.tag.has(tag)) filters.tag.add(tag);
+    if (tagBtn) {
+      filters.tag.add(tagBtn.getAttribute('data-sj-tag'));
       setChipState('tag');
+      closeModal();
       apply();
       if (catalog) catalog.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
       return;
     }
+
+    var chip = event.target.closest('.sj-chip');
+    if (chip && page.contains(chip)) { onChip(chip); return; }
 
     var jarBtn = event.target.closest('[data-sj-jar]');
     if (jarBtn && page.contains(jarBtn)) {
@@ -170,8 +197,11 @@
       return;
     }
 
-    var clearBtn = event.target.closest('[data-sj-clear]');
-    if (clearBtn && page.contains(clearBtn)) { clearAll(); return; }
+    if (event.target.closest('[data-sj-clear]')) { clearAll(); return; }
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closeModal();
   });
 
   if (searchEl) {

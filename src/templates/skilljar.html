@@ -57,12 +57,20 @@
         <h2>The lab log</h2>
         <p class="sj-catalog-count" data-sj-count aria-live="polite">{{SJ_LABS}} labs</p>
       </div>
-      <ul class="sj-lab-list" data-sj-labs>
+      <div class="sj-rows" data-sj-rows>
         {{SKILLJAR_LABS}}
-      </ul>
+      </div>
       <p class="sj-empty" data-sj-empty hidden>No labs match these filters. <button type="button" class="sj-clear" data-sj-clear>Clear filters</button></p>
     </section>
   </main>
+
+  <div class="sj-modal" data-sj-modal hidden>
+    <div class="sj-modal-backdrop" data-sj-close></div>
+    <div class="sj-modal-panel" role="dialog" aria-modal="true" aria-label="Lab details" tabindex="-1">
+      <button type="button" class="sj-modal-close" data-sj-close aria-label="Close details">&times;</button>
+      <div class="sj-modal-body" data-sj-modal-body></div>
+    </div>
+  </div>
   <footer class="container footer"><span>{{FOOTER}}</span><nav class="footer-social-links" aria-label="Social links" data-social-links>{{SOCIAL_LINKS}}</nav><a href="/">{{HOME_LABEL}}</a></footer>
 </body>
 </html>

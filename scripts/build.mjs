@@ -287,6 +287,8 @@ function validateSkillJar(data) {
     if (!platformIds.has(l.platform)) throw new Error(`skilljar.labs[${i}].platform '${l.platform}' is not a defined platform`);
     requireString(l.domain, `skilljar.labs[${i}].domain`);
     if (!domainIds.has(l.domain)) throw new Error(`skilljar.labs[${i}].domain '${l.domain}' is not a defined domain`);
+    requireString(l.level, `skilljar.labs[${i}].level`);
+    if (!['beginner', 'intermediate', 'advanced'].includes(l.level)) throw new Error(`skilljar.labs[${i}].level must be beginner, intermediate, or advanced`);
     if (typeof l.hours !== 'number' || l.hours < 0) throw new Error(`skilljar.labs[${i}].hours must be a non-negative number`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(l.date || '')) throw new Error(`skilljar.labs[${i}].date must be YYYY-MM-DD`);
     if (!Array.isArray(l.tools) || l.tools.some((v) => typeof v !== 'string' || !v.trim())) throw new Error(`skilljar.labs[${i}].tools must be a string array`);
@@ -333,26 +335,41 @@ function renderSkillJar(sj) {
   const usedPlatforms = sj.platforms.filter((p) => sj.labs.some((l) => l.platform === p.id));
   const usedTags = [...new Set(sj.labs.flatMap((l) => l.tags))].sort((a, b) => a.localeCompare(b));
   const usedTeams = sj.teams.filter((t) => sj.domains.some((d) => d.team === t.id && agg.get(d.id).count > 0));
+  const levelOrder = ['beginner', 'intermediate', 'advanced'];
+  const usedLevels = levelOrder.filter((lv) => sj.labs.some((l) => l.level === lv));
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
   const teamChips = `<button type="button" class="sj-chip is-on" data-group="team" data-facet="all">All teams</button>` +
     usedTeams.map((t) => `<button type="button" class="sj-chip sj-chip-team sj-team-${escapeHtml(t.id)}" data-group="team" data-facet="${escapeHtml(t.id)}">${escapeHtml(t.name)}</button>`).join('');
+  const levelChips = `<button type="button" class="sj-chip is-on" data-group="level" data-facet="all">All levels</button>` +
+    usedLevels.map((lv) => `<button type="button" class="sj-chip sj-chip-level lvl-${lv}" data-group="level" data-facet="${lv}">${cap(lv)}</button>`).join('');
   const platformChips = `<button type="button" class="sj-chip is-on" data-group="platform" data-facet="all">All platforms</button>` +
     usedPlatforms.map((p) => `<button type="button" class="sj-chip" data-group="platform" data-facet="${escapeHtml(p.id)}">${escapeHtml(p.name)}</button>`).join('');
   const tagChips = `<button type="button" class="sj-chip is-on" data-group="tag" data-facet="all">All tags</button>` +
     usedTags.map((t) => `<button type="button" class="sj-chip" data-group="tag" data-facet="${escapeHtml(t.toLowerCase())}">${escapeHtml(t)}</button>`).join('');
-  const filterbar = `<div class="sj-facet-row"><span class="sj-facet-label">Team</span><div class="sj-facet-group" role="group" aria-label="Filter by team">${teamChips}</div></div><div class="sj-facet-row"><span class="sj-facet-label">Platform</span><div class="sj-facet-group" role="group" aria-label="Filter by platform">${platformChips}</div></div><div class="sj-facet-row"><span class="sj-facet-label">Tag</span><div class="sj-facet-group" role="group" aria-label="Filter by tag">${tagChips}</div></div>`;
+  const filterbar = `<div class="sj-facet-row"><span class="sj-facet-label">Team</span><div class="sj-facet-group" role="group" aria-label="Filter by team">${teamChips}</div></div><div class="sj-facet-row"><span class="sj-facet-label">Level</span><div class="sj-facet-group" role="group" aria-label="Filter by level">${levelChips}</div></div><div class="sj-facet-row"><span class="sj-facet-label">Platform</span><div class="sj-facet-group" role="group" aria-label="Filter by platform">${platformChips}</div></div><div class="sj-facet-row"><span class="sj-facet-label">Tag</span><div class="sj-facet-group" role="group" aria-label="Filter by tag">${tagChips}</div></div>`;
 
   const labsSorted = [...sj.labs].sort((a, b) => b.date.localeCompare(a.date));
-  const labList = labsSorted.map((l) => {
+  const renderCard = (l) => {
     const d = domainById.get(l.domain);
     const team = d.team;
     const platformName = platformById.get(l.platform).name;
+    const lvl = escapeHtml(l.level);
+    const lvlName = escapeHtml(cap(l.level));
     const tools = l.tools.map((t) => `<span class="sj-tool">${escapeHtml(t)}</span>`).join('');
     const tags = l.tags.map((t) => `<button type="button" class="sj-tag" data-sj-tag="${escapeHtml(t.toLowerCase())}">${escapeHtml(t)}</button>`).join('');
-    const search = escapeHtml([l.title, l.skill, l.subskill, l.lesson, platformName, d.name, ...l.tools, ...l.tags].join(' ').toLowerCase());
+    const search = escapeHtml([l.title, l.skill, l.subskill, l.lesson, platformName, d.name, l.level, ...l.tools, ...l.tags].join(' ').toLowerCase());
     const tagsLower = escapeHtml(l.tags.map((t) => t.toLowerCase()).join('|'));
     const walk = l.walkthroughUrl ? `<a class="sj-lab-link" href="${escapeHtml(l.walkthroughUrl)}" rel="noreferrer">Walkthrough →</a>` : '';
-    return `<li class="sj-lab" data-team="${escapeHtml(team)}" data-domain="${escapeHtml(l.domain)}" data-platform="${escapeHtml(l.platform)}" data-tags="${tagsLower}" data-search="${search}"><div class="sj-lab-main"><div class="sj-lab-top"><span class="sj-platform-badge">${escapeHtml(platformName)}</span><span class="sj-lab-domain sj-team-${escapeHtml(team)}">${escapeHtml(d.name)}</span><span class="sj-lab-hours">${l.hours}h</span></div><h3 class="sj-lab-title">${escapeHtml(l.title)}</h3><p class="sj-lab-skill"><b>${escapeHtml(l.skill)}</b> <span>&#9656; ${escapeHtml(l.subskill)}</span></p><p class="sj-lab-lesson">${escapeHtml(l.lesson)}</p><div class="sj-lab-tools">${tools}</div><div class="sj-lab-tags">${tags}</div></div><div class="sj-lab-side"><time datetime="${escapeHtml(l.date)}">${escapeHtml(l.date)}</time>${walk}</div></li>`;
-  }).join('\n');
+    const detail = `<div class="sj-detail"><div class="sj-detail-top"><span class="sj-platform-badge">${escapeHtml(platformName)}</span><span class="sj-lab-domain sj-team-${escapeHtml(team)}">${escapeHtml(d.name)}</span><span class="sj-level lvl-${lvl}">${lvlName}</span><span class="sj-detail-hours">${l.hours}h</span></div><h2 class="sj-detail-title">${escapeHtml(l.title)}</h2><p class="sj-detail-skill"><b>${escapeHtml(l.skill)}</b> <span>&#9656; ${escapeHtml(l.subskill)}</span></p><p class="sj-detail-lesson">${escapeHtml(l.lesson)}</p><div class="sj-detail-block"><h3>Tools</h3><div class="sj-lab-tools">${tools}</div></div><div class="sj-detail-block"><h3>Tags</h3><div class="sj-lab-tags">${tags}</div></div><div class="sj-detail-foot"><time datetime="${escapeHtml(l.date)}">${escapeHtml(l.date)}</time>${walk}</div></div>`;
+    return `<article class="sj-card sj-team-${escapeHtml(team)}" data-team="${escapeHtml(team)}" data-domain="${escapeHtml(l.domain)}" data-platform="${escapeHtml(l.platform)}" data-level="${lvl}" data-tags="${tagsLower}" data-search="${search}"><button type="button" class="sj-card-face" data-sj-open aria-haspopup="dialog"><span class="sj-card-accent" aria-hidden="true"></span><span class="sj-card-row"><span class="sj-card-platform">${escapeHtml(platformName)}</span><span class="sj-level lvl-${lvl}">${lvlName}</span></span><span class="sj-card-title">${escapeHtml(l.title)}</span><span class="sj-card-skill">${escapeHtml(l.skill)}</span><span class="sj-card-foot"><span class="sj-card-domain">${escapeHtml(d.name)}</span><span class="sj-card-hours">${l.hours}h</span></span></button><template class="sj-card-detail">${detail}</template></article>`;
+  };
+  const rows = sj.teams.flatMap((team) =>
+    sj.domains.filter((d) => d.team === team.id && agg.get(d.id).count > 0).map((d) => {
+      const domLabs = labsSorted.filter((l) => l.domain === d.id);
+      const cards = domLabs.map(renderCard).join('');
+      return `<section class="sj-row" data-row-domain="${escapeHtml(d.id)}" data-row-team="${escapeHtml(team.id)}"><header class="sj-row-head sj-team-${escapeHtml(team.id)}"><span class="sj-team-dot" aria-hidden="true"></span><h3>${escapeHtml(d.name)}</h3><span class="sj-row-count">${domLabs.length} ${domLabs.length === 1 ? 'lab' : 'labs'}</span></header><div class="sj-row-scroll">${cards}</div></section>`;
+    })
+  ).join('\n');
 
   return {
     eyebrow: sj.intro.eyebrow,
@@ -368,7 +385,7 @@ function renderSkillJar(sj) {
     remaining: num(remaining),
     bands,
     filterbar,
-    labList
+    labList: rows
   };
 }
 
