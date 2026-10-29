@@ -80,7 +80,7 @@
           },
           {
             "metric": "Kubernetes nodes/proxy RCE",
-            "description": "Investigated kubelet exec activity, contained the process, and confirmed recovery, preventing $380K in potential impact."
+            "description": "Investigated kubelet exec activity, contained the process, and confirmed recovery, preventing $380,000 in potential impact."
           }
         ]
       },

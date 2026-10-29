@@ -455,6 +455,17 @@ h1 span, .gradient-text { color: #9eb6ff; background: var(--gradient); backgroun
 .blog-prose tbody tr:hover { background: #151b26; }
 .blog-prose .terminal-block { transition: border-color .2s ease, box-shadow .2s ease; }
 .blog-prose .terminal-block:hover { border-color: #4b5d7d; }
+/* Syntax tokens — tuned for the always-dark terminal block, drawn from the site accent palette. */
+.blog-prose .terminal-block .tok-comment { color: #5c6b7e; font-style: italic; }
+.blog-prose .terminal-block .tok-string { color: #5fd49a; }
+.blog-prose .terminal-block .tok-keyword { color: #a891e6; }
+.blog-prose .terminal-block .tok-builtin,
+.blog-prose .terminal-block .tok-function { color: #83aaff; }
+.blog-prose .terminal-block .tok-property { color: #5fd4c4; }
+.blog-prose .terminal-block .tok-variable { color: #e0a36a; }
+.blog-prose .terminal-block .tok-attr { color: #d4b86a; }
+.blog-prose .terminal-block .tok-number { color: #d08b6a; }
+.blog-prose .terminal-block .tok-operator { color: #8ba0b8; }
 .process-step { transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
 .process-step:hover { transform: translateY(-3px); border-color: #56657f; box-shadow: 0 12px 26px rgb(0 0 0 / 28%); }
 

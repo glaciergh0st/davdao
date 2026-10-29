@@ -6,7 +6,7 @@
   "slug": "splunk-vs-elastic",
   "openGraphImagePrompt": "A restrained technical illustration on a charcoal background: two distinct streams of security events flowing through clean field-mapping layers into one analyst investigation timeline; muted blue, teal, and small violet accents; editorial, precise, no logos, no text, no neon effects.",
   "tags": ["Splunk Enterprise Security", "Elastic Security", "SIEM", "Detection Engineering", "Security Operations"],
-  "keyTakeaway": "Splunk Enterprise Security and Elastic Security can both support serious detection programs, but their day-to-day tradeoffs depend on how your team ingests, normalizes, searches, and maintains telemetry. Compare them with the same data and detection tests, then measure analyst effort and operating cost alongside coverage.",
+  "keyTakeaway": "Splunk Enterprise Security and Elastic Security can both support solid detection programs, but their day-to-day tradeoffs depend on how your team ingests, normalizes, searches, and maintains telemetry. Compare them with the same data and detection tests, then measure analyst effort and operating cost alongside coverage.",
   "summary": "A practical comparison of Splunk Enterprise Security and Elastic Security, focused on telemetry, detection workflows, investigation quality, and how to test both platforms using the same telemetry.",
   "author": "David Awosusi",
   "category": "Detection Engineering",

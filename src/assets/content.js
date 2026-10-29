@@ -727,10 +727,10 @@
     if (updated) { updated.dateTime = post.updatedAt || post.publishedAt; updated.textContent = post.updatedAt || post.publishedAt; }
     const tags = page.querySelector('[data-bind="blog.tags"]');
     if (tags) tags.replaceChildren(...post.tags.map((tag) => make('span', '', tag)));
-    // The infographics are rendered at build time and enhanced into an interactive
-    // stepper by stepper.js; the client leaves the static markup in place.
-    const body = page.querySelector('[data-bind="blog.body"]');
-    if (body) body.replaceChildren(renderMarkdown(post.bodyMarkdown, 0));
+    // The article body (including infographics and code blocks) is rendered at
+    // build time, enhanced into interactive steppers by stepper.js and given
+    // syntax highlighting by highlight-init.js; the client leaves the static
+    // markup in place rather than re-rendering and wiping those enhancements.
   }
 
   function hydrateProject(site, projects) {
