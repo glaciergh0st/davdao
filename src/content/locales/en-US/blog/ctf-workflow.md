@@ -59,7 +59,7 @@
 
 ## The approach
 
-I work most boxes in the same eight stages and keep to the order. Each stage sets up the next, and working in order makes the write-up easier at the end. This is my process, not a full command list.
+I approach most boxes using the same eight stages in a streamlined process. Each stage sets up the next, and working in order makes the write-up easier at the end. This is my process, not a full command list.
 
 ## Stage 1: Getting connected
 
