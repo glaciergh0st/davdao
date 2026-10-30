@@ -23,6 +23,7 @@
     { "label": "About", "href": "/about/" },
     { "label": "Experience", "href": "#experience" },
     { "label": "Tools & Projects", "href": "#work" },
+    { "label": "SkillJar", "href": "/skilljar/" },
     { "label": "Blog", "href": "/blog/" },
     { "label": "Professional development", "href": "#credentials" },
     { "label": "Contact", "href": "#contact" }

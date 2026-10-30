@@ -237,6 +237,179 @@ function renderBlogInfographics(post) {
   return `<section class="article-visuals" data-blog-infographics aria-label="Article visuals"><figure class="article-visual-card"><figcaption><p class="eyebrow">At a glance</p><h2>${escapeHtml(post.visual.title)}</h2><p>${escapeHtml(post.visual.caption)}</p></figcaption><ol class="process-flow">${steps}</ol></figure><figure class="article-visual-card schema-card"><figcaption><p class="eyebrow">At a glance</p><h2>${escapeHtml(post.schema.title)}</h2><p>${escapeHtml(post.schema.caption)}</p></figcaption><div class="schema-flow"><div class="schema-standards">${standards}</div><div class="schema-connector" aria-hidden="true"><span>${escapeHtml(post.schema.joinLabel || 'fields map to')}</span><b>→</b></div>${output}</div></figure></section>`;
 }
 
+function validateSkillJar(data) {
+  if (!isRecord(data) || data.schemaVersion !== 1) throw new Error('skilljar.json must use schemaVersion 1');
+  if (!isRecord(data.intro)) throw new Error('skilljar.intro must be an object');
+  for (const key of ['eyebrow', 'title', 'highlight', 'description']) requireString(data.intro[key], `skilljar.intro.${key}`);
+  if (typeof data.intro.goalHours !== 'number' || data.intro.goalHours <= 0) throw new Error('skilljar.intro.goalHours must be a positive number');
+  const teamIds = new Set();
+  if (!Array.isArray(data.teams) || data.teams.length === 0) throw new Error('skilljar.teams must be a non-empty array');
+  data.teams.forEach((t, i) => {
+    if (!isRecord(t)) throw new Error(`skilljar.teams[${i}] must be an object`);
+    requireString(t.id, `skilljar.teams[${i}].id`, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    if (teamIds.has(t.id)) throw new Error(`Duplicate team id: ${t.id}`);
+    teamIds.add(t.id);
+    for (const key of ['name', 'tagline', 'framework']) requireString(t[key], `skilljar.teams[${i}].${key}`);
+    for (const key of ['concepts', 'stack']) {
+      if (!Array.isArray(t[key]) || t[key].length === 0 || t[key].some((v) => typeof v !== 'string' || !v.trim())) throw new Error(`skilljar.teams[${i}].${key} must be a non-empty string array`);
+    }
+  });
+  const domainIds = new Set();
+  if (!Array.isArray(data.domains) || data.domains.length === 0) throw new Error('skilljar.domains must be a non-empty array');
+  data.domains.forEach((d, i) => {
+    if (!isRecord(d)) throw new Error(`skilljar.domains[${i}] must be an object`);
+    requireString(d.id, `skilljar.domains[${i}].id`, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    if (domainIds.has(d.id)) throw new Error(`Duplicate domain id: ${d.id}`);
+    domainIds.add(d.id);
+    for (const key of ['name', 'blurb']) requireString(d[key], `skilljar.domains[${i}].${key}`);
+    requireString(d.team, `skilljar.domains[${i}].team`);
+    if (!teamIds.has(d.team)) throw new Error(`skilljar.domains[${i}].team '${d.team}' is not a defined team`);
+    if (typeof d.targetHours !== 'number' || d.targetHours <= 0) throw new Error(`skilljar.domains[${i}].targetHours must be a positive number`);
+  });
+  const platformIds = new Set();
+  if (!Array.isArray(data.platforms) || data.platforms.length === 0) throw new Error('skilljar.platforms must be a non-empty array');
+  data.platforms.forEach((p, i) => {
+    if (!isRecord(p)) throw new Error(`skilljar.platforms[${i}] must be an object`);
+    requireString(p.id, `skilljar.platforms[${i}].id`, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    if (platformIds.has(p.id)) throw new Error(`Duplicate platform id: ${p.id}`);
+    platformIds.add(p.id);
+    requireString(p.name, `skilljar.platforms[${i}].name`);
+  });
+  if (!Array.isArray(data.labs)) throw new Error('skilljar.labs must be an array');
+  const labIds = new Set();
+  data.labs.forEach((l, i) => {
+    if (!isRecord(l)) throw new Error(`skilljar.labs[${i}] must be an object`);
+    requireString(l.id, `skilljar.labs[${i}].id`, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    if (labIds.has(l.id)) throw new Error(`Duplicate lab id: ${l.id}`);
+    labIds.add(l.id);
+    for (const key of ['title', 'skill', 'subskill', 'lesson']) requireString(l[key], `skilljar.labs[${i}].${key}`);
+    requireString(l.platform, `skilljar.labs[${i}].platform`);
+    if (!platformIds.has(l.platform)) throw new Error(`skilljar.labs[${i}].platform '${l.platform}' is not a defined platform`);
+    requireString(l.domain, `skilljar.labs[${i}].domain`);
+    if (!domainIds.has(l.domain)) throw new Error(`skilljar.labs[${i}].domain '${l.domain}' is not a defined domain`);
+    requireString(l.level, `skilljar.labs[${i}].level`);
+    if (!['beginner', 'intermediate', 'advanced'].includes(l.level)) throw new Error(`skilljar.labs[${i}].level must be beginner, intermediate, or advanced`);
+    if (l.alsoDomains !== undefined) {
+      if (!Array.isArray(l.alsoDomains) || l.alsoDomains.some((x) => typeof x !== 'string')) throw new Error(`skilljar.labs[${i}].alsoDomains must be an array of domain ids`);
+      if (new Set(l.alsoDomains).size !== l.alsoDomains.length) throw new Error(`skilljar.labs[${i}].alsoDomains has duplicates`);
+      l.alsoDomains.forEach((dx) => {
+        if (!domainIds.has(dx)) throw new Error(`skilljar.labs[${i}].alsoDomains '${dx}' is not a defined domain`);
+        if (dx === l.domain) throw new Error(`skilljar.labs[${i}].alsoDomains must not repeat the primary domain (hours count once, there)`);
+      });
+    }
+    if (typeof l.hours !== 'number' || l.hours < 0) throw new Error(`skilljar.labs[${i}].hours must be a non-negative number`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(l.date || '')) throw new Error(`skilljar.labs[${i}].date must be YYYY-MM-DD`);
+    if (!Array.isArray(l.tools) || l.tools.some((v) => typeof v !== 'string' || !v.trim())) throw new Error(`skilljar.labs[${i}].tools must be a string array`);
+    if (!Array.isArray(l.tags) || l.tags.some((v) => typeof v !== 'string' || !v.trim())) throw new Error(`skilljar.labs[${i}].tags must be a string array`);
+    if (l.walkthroughUrl !== undefined && l.walkthroughUrl !== '' && !safeHttpsUrl(l.walkthroughUrl)) throw new Error(`skilljar.labs[${i}].walkthroughUrl must be HTTPS`);
+  });
+  return data;
+}
+
+function renderSkillJar(sj) {
+  const num = (n) => n.toLocaleString('en-US');
+  const domainById = new Map(sj.domains.map((d) => [d.id, d]));
+  const platformById = new Map(sj.platforms.map((p) => [p.id, p]));
+  const agg = new Map(sj.domains.map((d) => [d.id, { hours: 0, count: 0 }]));
+  for (const lab of sj.labs) { const a = agg.get(lab.domain); a.hours += lab.hours; a.count += 1; }
+  const totalHours = sj.labs.reduce((s, l) => s + l.hours, 0);
+  const goal = sj.intro.goalHours;
+  const pct = totalHours / goal * 100;
+  const pctLabel = totalHours === 0 ? '0%' : (pct < 1 ? `${pct.toFixed(2)}%` : `${pct.toFixed(1)}%`);
+  const remaining = Math.max(0, goal - totalHours);
+
+  const jarFill = (d) => {
+    const a = agg.get(d.id);
+    const p = a.hours / d.targetHours * 100;
+    const display = a.hours > 0 ? Math.max(2, Math.min(100, p)) : 0;
+    const label = a.hours === 0 ? '0%' : (p < 1 ? `${p.toFixed(1)}%` : `${Math.round(p)}%`);
+    return { display: display.toFixed(2), label, hours: a.hours, count: a.count };
+  };
+
+  const bands = sj.teams.map((team) => {
+    const domains = sj.domains.filter((d) => d.team === team.id);
+    if (domains.length === 0) return '';
+    const teamHours = domains.reduce((s, d) => s + agg.get(d.id).hours, 0);
+    const teamTarget = domains.reduce((s, d) => s + d.targetHours, 0);
+    const jars = domains.map((d) => {
+      const f = jarFill(d);
+      return `<article class="sj-jar" data-domain="${escapeHtml(d.id)}" data-team="${escapeHtml(team.id)}" data-hours="${f.hours}" data-target="${d.targetHours}" data-labs="${f.count}"><button type="button" class="sj-jar-visual" data-sj-jar="${escapeHtml(d.id)}" aria-label="${escapeHtml(d.name)}: ${f.hours} of ${num(d.targetHours)} hours logged, ${f.count} ${f.count === 1 ? 'lab' : 'labs'}. Filter the log to this domain."><span class="sj-jar-glass"><span class="sj-jar-liquid" style="height:${f.display}%" data-fill="${f.display}"></span><span class="sj-jar-shine" aria-hidden="true"></span><span class="sj-jar-ticks" aria-hidden="true"></span></span><span class="sj-jar-pct">${f.label}</span></button><div class="sj-jar-meta"><h3>${escapeHtml(d.name)}</h3><p class="sj-jar-blurb">${escapeHtml(d.blurb)}</p><p class="sj-jar-stat"><b>${f.hours}h</b> / ${num(d.targetHours)}h · ${f.count} ${f.count === 1 ? 'lab' : 'labs'}</p></div></article>`;
+    }).join('');
+    const concepts = team.concepts.map((c) => `<li>${escapeHtml(c)}</li>`).join('');
+    const stack = team.stack.map((c) => `<li>${escapeHtml(c)}</li>`).join('');
+    return `<section class="sj-band sj-team-${escapeHtml(team.id)}" data-team="${escapeHtml(team.id)}"><header class="sj-band-head"><div class="sj-band-title"><span class="sj-team-dot" aria-hidden="true"></span><h2>${escapeHtml(team.name)}</h2><span class="sj-team-tag">${escapeHtml(team.tagline)}</span></div><span class="sj-band-hours"><b>${teamHours}h</b> / ${num(teamTarget)}h</span></header><details class="sj-brief"><summary>Framework · must-know · stack</summary><div class="sj-brief-body"><div><h4>Framework</h4><p>${escapeHtml(team.framework)}</p></div><div><h4>Must-know</h4><ul>${concepts}</ul></div><div><h4>Must-master stack</h4><ul>${stack}</ul></div></div></details><div class="sj-jar-grid">${jars}</div></section>`;
+  }).join('\n');
+
+  const usedPlatforms = sj.platforms.filter((p) => sj.labs.some((l) => l.platform === p.id));
+  const usedTags = [...new Set(sj.labs.flatMap((l) => l.tags))].sort((a, b) => a.localeCompare(b));
+  const usedTeams = sj.teams.filter((t) => sj.domains.some((d) => d.team === t.id && agg.get(d.id).count > 0));
+  const levelOrder = ['beginner', 'intermediate', 'advanced'];
+  const usedLevels = levelOrder.filter((lv) => sj.labs.some((l) => l.level === lv));
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+  const teamChips = `<button type="button" class="sj-chip is-on" data-group="team" data-facet="all">All teams</button>` +
+    usedTeams.map((t) => `<button type="button" class="sj-chip sj-chip-team sj-team-${escapeHtml(t.id)}" data-group="team" data-facet="${escapeHtml(t.id)}">${escapeHtml(t.name)}</button>`).join('');
+  const levelChips = `<button type="button" class="sj-chip is-on" data-group="level" data-facet="all">All levels</button>` +
+    usedLevels.map((lv) => `<button type="button" class="sj-chip sj-chip-level lvl-${lv}" data-group="level" data-facet="${lv}">${cap(lv)}</button>`).join('');
+  const platformChips = `<button type="button" class="sj-chip is-on" data-group="platform" data-facet="all">All platforms</button>` +
+    usedPlatforms.map((p) => `<button type="button" class="sj-chip" data-group="platform" data-facet="${escapeHtml(p.id)}">${escapeHtml(p.name)}</button>`).join('');
+  const tagChips = `<button type="button" class="sj-chip is-on" data-group="tag" data-facet="all">All tags</button>` +
+    usedTags.map((t) => `<button type="button" class="sj-chip" data-group="tag" data-facet="${escapeHtml(t.toLowerCase())}">${escapeHtml(t)}</button>`).join('');
+  const filterbar = `<div class="sj-facet-row"><span class="sj-facet-label">Team</span><div class="sj-facet-group" role="group" aria-label="Filter by team">${teamChips}</div></div><div class="sj-facet-row"><span class="sj-facet-label">Level</span><div class="sj-facet-group" role="group" aria-label="Filter by level">${levelChips}</div></div><div class="sj-facet-row"><span class="sj-facet-label">Platform</span><div class="sj-facet-group" role="group" aria-label="Filter by platform">${platformChips}</div></div><div class="sj-facet-row"><span class="sj-facet-label">Tag</span><div class="sj-facet-group" role="group" aria-label="Filter by tag">${tagChips}</div></div>`;
+
+  const labsSorted = [...sj.labs].sort((a, b) => b.date.localeCompare(a.date));
+  // A lab's hours only ever count toward its primary domain. `alsoDomains`
+  // cross-lists the SAME card in other domain rows for discovery (shared=true):
+  // those instances are marked and show no hours, so the 25,000 total and the
+  // jar fills stay honest.
+  const renderCard = (l, rowDomainId, shared) => {
+    const home = domainById.get(l.domain);
+    const team = home.team;
+    const platformName = platformById.get(l.platform).name;
+    const lvl = escapeHtml(l.level);
+    const lvlName = escapeHtml(cap(l.level));
+    const tools = l.tools.map((t) => `<span class="sj-tool">${escapeHtml(t)}</span>`).join('');
+    const tags = l.tags.map((t) => `<button type="button" class="sj-tag" data-sj-tag="${escapeHtml(t.toLowerCase())}">${escapeHtml(t)}</button>`).join('');
+    const search = escapeHtml([l.title, l.skill, l.subskill, l.lesson, platformName, home.name, l.level, ...l.tools, ...l.tags].join(' ').toLowerCase());
+    const tagsLower = escapeHtml(l.tags.map((t) => t.toLowerCase()).join('|'));
+    const walk = l.walkthroughUrl ? `<a class="sj-lab-link" href="${escapeHtml(l.walkthroughUrl)}" rel="noreferrer">Walkthrough →</a>` : '';
+    const sharedNote = shared ? `<p class="sj-detail-shared">Shared here for context. Its ${l.hours}h count once, in ${escapeHtml(home.name)}.</p>` : '';
+    const detail = `<div class="sj-detail"><div class="sj-detail-top"><span class="sj-platform-badge">${escapeHtml(platformName)}</span><span class="sj-lab-domain sj-team-${escapeHtml(team)}">${escapeHtml(home.name)}</span><span class="sj-level lvl-${lvl}">${lvlName}</span><span class="sj-detail-hours">${l.hours}h</span></div><h2 class="sj-detail-title">${escapeHtml(l.title)}</h2><p class="sj-detail-skill"><b>${escapeHtml(l.skill)}</b> <span>&#9656; ${escapeHtml(l.subskill)}</span></p>${sharedNote}<p class="sj-detail-lesson">${escapeHtml(l.lesson)}</p><div class="sj-detail-block"><h3>Tools</h3><div class="sj-lab-tools">${tools}</div></div><div class="sj-detail-block"><h3>Tags</h3><div class="sj-lab-tags">${tags}</div></div><div class="sj-detail-foot"><time datetime="${escapeHtml(l.date)}">${escapeHtml(l.date)}</time>${walk}</div></div>`;
+    const foot = shared
+      ? `<span class="sj-card-shared" title="Hours count in ${escapeHtml(home.name)}">&#8599; Shared</span>`
+      : `<span class="sj-card-hours">${l.hours}h</span>`;
+    const cls = `sj-card sj-team-${escapeHtml(team)}${shared ? ' is-shared' : ''}`;
+    const flag = shared ? ' data-crosslisted="1"' : '';
+    return `<article class="${cls}" data-lab-id="${escapeHtml(l.id)}" data-team="${escapeHtml(team)}" data-domain="${escapeHtml(rowDomainId)}" data-platform="${escapeHtml(l.platform)}" data-level="${lvl}" data-tags="${tagsLower}" data-search="${search}"${flag}><button type="button" class="sj-card-face" data-sj-open aria-haspopup="dialog"><span class="sj-card-accent" aria-hidden="true"></span><span class="sj-card-row"><span class="sj-card-platform">${escapeHtml(platformName)}</span><span class="sj-level lvl-${lvl}">${lvlName}</span></span><span class="sj-card-title">${escapeHtml(l.title)}</span><span class="sj-card-skill">${escapeHtml(l.skill)}</span><span class="sj-card-foot"><span class="sj-card-domain">${escapeHtml(home.name)}</span>${foot}</span></button><template class="sj-card-detail">${detail}</template></article>`;
+  };
+  const hasRow = (d) => agg.get(d.id).count > 0 || sj.labs.some((l) => (l.alsoDomains || []).includes(d.id));
+  const rows = sj.teams.flatMap((team) =>
+    sj.domains.filter((d) => d.team === team.id && hasRow(d)).map((d) => {
+      const primary = labsSorted.filter((l) => l.domain === d.id);
+      const sharedLabs = labsSorted.filter((l) => (l.alsoDomains || []).includes(d.id));
+      const cards = primary.map((l) => renderCard(l, d.id, false)).join('') + sharedLabs.map((l) => renderCard(l, d.id, true)).join('');
+      const note = sharedLabs.length ? ` <span class="sj-row-shared">+${sharedLabs.length} shared</span>` : '';
+      return `<section class="sj-row" data-row-domain="${escapeHtml(d.id)}" data-row-team="${escapeHtml(team.id)}"><header class="sj-row-head sj-team-${escapeHtml(team.id)}"><span class="sj-team-dot" aria-hidden="true"></span><h3>${escapeHtml(d.name)}</h3><span class="sj-row-count">${primary.length} ${primary.length === 1 ? 'lab' : 'labs'}${note}</span></header><div class="sj-row-scroll">${cards}</div></section>`;
+    })
+  ).join('\n');
+
+  return {
+    eyebrow: sj.intro.eyebrow,
+    title: sj.intro.title,
+    highlight: sj.intro.highlight,
+    description: sj.intro.description,
+    total: String(totalHours),
+    goal: num(goal),
+    pct: (totalHours === 0 ? 0 : Math.max(0.5, Math.min(100, pct))).toFixed(2),
+    pctLabel,
+    labs: String(sj.labs.length),
+    domains: String(sj.domains.length),
+    remaining: num(remaining),
+    bands,
+    filterbar,
+    labList: rows
+  };
+}
+
 function validateSiteContent(content, locale) {
   if (!isRecord(content) || content.schemaVersion !== 1) throw new Error('site.json must use schemaVersion 1');
   if (content.locale !== locale) throw new Error(`site.json locale must match PUBLIC_SITE_LOCALE (${locale})`);
@@ -253,7 +426,7 @@ function validateSiteContent(content, locale) {
   content.navigation.forEach((item, i) => {
     if (!isRecord(item)) throw new Error(`navigation[${i}] must be an object`);
     requireString(item.label, `navigation[${i}].label`);
-    requireString(item.href, `navigation[${i}].href`, /^(?:#[a-z][a-z0-9-]*|\/(?:about|blog)\/)$/);
+    requireString(item.href, `navigation[${i}].href`, /^(?:#[a-z][a-z0-9-]*|\/(?:about|blog|skilljar)\/)$/);
   });
   for (const key of ['eyebrow', 'title', 'highlight', 'description', 'primaryAction', 'secondaryAction']) requireString(content.hero[key], `hero.${key}`);
   requireString(content.hero.secondaryHref, 'hero.secondaryHref', /^\/about\/$/);
@@ -341,11 +514,15 @@ if (blogEntries.length === 0) throw new Error('At least one blog Markdown post i
 if (new Set(blogEntries.map((post) => post.slug)).size !== blogEntries.length) throw new Error('Blog slugs must be unique');
 blogEntries.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt) || a.title.localeCompare(b.title));
 
+const rawSkillJar = JSON.parse(await readFile(path.join(localeDir, 'skilljar.json'), 'utf8'));
+const skilljar = validateSkillJar(rawSkillJar);
+
 await rm(output, { recursive: true, force: true });
 await mkdir(path.join(output, 'assets'), { recursive: true });
 await mkdir(path.join(output, 'projects'), { recursive: true });
 await mkdir(path.join(output, 'about'), { recursive: true });
 await mkdir(path.join(output, 'blog'), { recursive: true });
+await mkdir(path.join(output, 'skilljar'), { recursive: true });
 await mkdir(path.join(output, 'content'), { recursive: true });
 await cp(path.join(source, 'assets', 'styles.css'), path.join(output, 'assets', 'styles.css'));
 await cp(path.join(source, 'assets', 'content.js'), path.join(output, 'assets', 'content.js'));
@@ -353,6 +530,7 @@ await cp(path.join(source, 'assets', 'reader.js'), path.join(output, 'assets', '
 await cp(path.join(source, 'assets', 'interactive.js'), path.join(output, 'assets', 'interactive.js'));
 await cp(path.join(source, 'assets', 'stepper.js'), path.join(output, 'assets', 'stepper.js'));
 await cp(path.join(source, 'assets', 'highlight-init.js'), path.join(output, 'assets', 'highlight-init.js'));
+await cp(path.join(source, 'assets', 'skilljar.js'), path.join(output, 'assets', 'skilljar.js'));
 await cp(path.join(source, 'assets', 'icons'), path.join(output, 'assets', 'icons'), { recursive: true });
 await cp(path.join(root, 'public', '_headers'), path.join(output, '_headers'));
 await cp(path.join(root, 'public', 'robots.txt'), path.join(output, 'robots.txt'));
@@ -567,6 +745,43 @@ const aboutHtml = aboutTemplate
 if (/\{\{[A-Z_]+\}\}/.test(aboutHtml)) throw new Error('Unresolved template token in about page');
 await writeFile(path.join(output, 'about', 'index.html'), aboutHtml);
 
+const skilljarTemplate = await readFile(path.join(source, 'templates', 'skilljar.html'), 'utf8');
+const sj = renderSkillJar(skilljar);
+const skilljarCanonical = siteUrl ? `<link rel="canonical" href="${escapeHtml(siteUrl)}/skilljar/">` : '';
+const skilljarHtml = skilljarTemplate
+  .replaceAll('{{LANG}}', escapeHtml(locale))
+  .replaceAll('{{DIR}}', escapeHtml(siteContent.direction))
+  .replaceAll('{{DESCRIPTION}}', escapeHtml(sj.description))
+  .replaceAll('{{PAGE_TITLE}}', escapeHtml(`SkillJar — ${siteContent.site.name}`))
+  .replaceAll('{{CANONICAL_LINK}}', skilljarCanonical)
+  .replaceAll('{{SKIP_LABEL}}', escapeHtml(siteContent.labels.skipToContent))
+  .replaceAll('{{SIDE_NAV}}', sideNav)
+  .replaceAll('{{MESSAGE_SHORTCUT}}', messageShortcut)
+  .replaceAll('{{SOCIAL_LINKS}}', socialLinksMarkup)
+  .replaceAll('{{BRAND_ARIA}}', escapeHtml(`${siteContent.site.name} — ${siteContent.site.person}, home`))
+  .replaceAll('{{BRAND_NAME}}', escapeHtml(siteContent.site.name))
+  .replaceAll('{{BRAND_BYLINE}}', escapeHtml(`${siteContent.site.person} · Security Engineering`))
+  .replaceAll('{{NAV_LABEL}}', escapeHtml(siteContent.labels.mainNavigation))
+  .replaceAll('{{NAV_LINKS}}', navLinks)
+  .replaceAll('{{SKILLJAR_EYEBROW}}', escapeHtml(sj.eyebrow))
+  .replaceAll('{{SKILLJAR_TITLE}}', escapeHtml(sj.title))
+  .replaceAll('{{SKILLJAR_HIGHLIGHT}}', escapeHtml(sj.highlight))
+  .replaceAll('{{SKILLJAR_DESCRIPTION}}', escapeHtml(sj.description))
+  .replaceAll('{{SJ_TOTAL}}', escapeHtml(sj.total))
+  .replaceAll('{{SJ_GOAL}}', escapeHtml(sj.goal))
+  .replaceAll('{{SJ_PCT}}', escapeHtml(sj.pct))
+  .replaceAll('{{SJ_PCT_LABEL}}', escapeHtml(sj.pctLabel))
+  .replaceAll('{{SJ_LABS}}', escapeHtml(sj.labs))
+  .replaceAll('{{SJ_DOMAINS}}', escapeHtml(sj.domains))
+  .replaceAll('{{SJ_REMAINING}}', escapeHtml(sj.remaining))
+  .replaceAll('{{SKILLJAR_FILTERBAR}}', sj.filterbar)
+  .replaceAll('{{SKILLJAR_BANDS}}', sj.bands)
+  .replaceAll('{{SKILLJAR_LABS}}', sj.labList)
+  .replaceAll('{{FOOTER}}', escapeHtml(siteContent.footer))
+  .replaceAll('{{HOME_LABEL}}', escapeHtml(siteContent.labels.home));
+if (/\{\{[A-Z_]+\}\}/.test(skilljarHtml)) throw new Error('Unresolved template token in skilljar page');
+await writeFile(path.join(output, 'skilljar', 'index.html'), skilljarHtml);
+
 const blogIndexTemplate = await readFile(path.join(source, 'templates', 'blog-index.html'), 'utf8');
 const blogIndexCanonical = siteUrl ? `<link rel="canonical" href="${escapeHtml(siteUrl)}/blog/">` : '';
 const blogIndexHtml = blogIndexTemplate
@@ -675,6 +890,7 @@ if (siteUrl) {
   const sitemapUrls = [
     `${siteUrl}/`,
     `${siteUrl}/about/`,
+    `${siteUrl}/skilljar/`,
     `${siteUrl}/blog/`,
     ...publicBlog.map((post) => `${siteUrl}${post.url}`),
     ...projectEntries.map((project) => `${siteUrl}/projects/${project.slug}.html`)
