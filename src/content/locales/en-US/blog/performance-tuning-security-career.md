@@ -68,7 +68,7 @@ I keep a small set of inputs and check them on a rhythm so I'm not reacting to e
 - Newsletters and threat-intel alerts for the day's signal.
 - CISA advisories and the KEV catalog for what is being exploited now.
 - Vendor reports when I want depth on a specific campaign.
-- GitHub security trends to catch new tooling before it is everywhere.
+- GitHub security trends to catch new tooling early, so I can test it and build defenses before it is everywhere.
 - A few SMEs I follow by name, plus two or three podcasts for commute time.
 - Dark web monitoring for exposure that touches me or a client.
 
