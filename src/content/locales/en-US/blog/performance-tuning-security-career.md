@@ -7,13 +7,13 @@
   "openGraphImagePrompt": "A restrained technical illustration on a charcoal background: five small habit loops linked into one larger cycle, with a simple log or ledger beside them; muted blue, teal, and a little violet; editorial, precise, no logos, no text, no neon.",
   "tags": ["Career Development", "Continuous Learning", "Threat Intelligence", "CTF", "Detection Engineering"],
   "keyTakeaway": "Five habits keep me sharp: stay informed, build, practice, engage, and train. The value is in running them on a schedule and tracking them honestly, so the hours compound instead of scattering.",
-  "summary": "The five-habit routine I run to keep improving as a security professional, staying informed, building, practicing, engaging, and training, plus how I keep it honest.",
+  "summary": "The five-habit routine I run to keep improving as a security professional, staying informed, building, practicing, engaging, and training.",
   "author": "David Awosusi",
   "category": "Career Development",
   "publishedAt": "2026-10-29",
   "updatedAt": "2026-10-29",
   "visual": {
-    "title": "The loop I run on",
+    "title": "The Loop",
     "caption": "Five habits on rotation. I keep each one small and regular instead of cramming it all at once.",
     "steps": [
       { "label": "Stay informed", "detail": "Feeds, CISA and the KEV catalog, vendor reports, GitHub trends, podcasts, and a few SMEs, checked on a rhythm." },
