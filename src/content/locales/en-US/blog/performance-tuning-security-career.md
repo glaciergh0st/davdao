@@ -136,11 +136,11 @@ Start with two rows and add the rest once those two are automatic. A small routi
 
 Everyone's stack looks a little different. Here are solid options under each habit; choose what fits your role, your budget, and your time.
 
-- **Stay informed:** CISA KEV and advisories; newsletters like tl;dr sec, Risky Biz News, or SANS NewsBites; podcasts like Risky Business, Darknet Diaries, or Malicious Life; GitHub trending and vendor threat reports.
-- **Build:** a public GitHub repo for your scripts and notes; a home lab; contributing to an open-source security project; turning a technique you just learned into a detection or a small tool.
-- **Practice:** Hack The Box, OffSec Proving Grounds, pwnedlabs, TryHackMe, CyberDefenders, Blue Team Labs Online, RangeForce, or Splunk BOTS.
-- **Engage:** a blog; your local OWASP chapter, DEF CON group, or BSides; CTFs; responsible disclosure and bug bounty; submitting a talk to a CFP.
-- **Train:** Antisiphon and Black Hills, SANS, TCM Security, Zero-Point Security, or OffSec; conferences like Black Hat, DEF CON, or a regional BSides.
+- **Stay informed:** [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) and advisories; newsletters like [tl;dr sec](https://tldrsec.com), [Risky Biz News](https://risky.biz), or [SANS NewsBites](https://www.sans.org/newsletters/newsbites/); podcasts like [Risky Business](https://risky.biz), [Darknet Diaries](https://darknetdiaries.com), or [Malicious Life](https://malicious.life); [GitHub trending](https://github.com/trending) and vendor threat reports.
+- **Build:** a public [GitHub](https://github.com) repo for your scripts and notes; a home lab; contributing to an open-source security project; turning a technique you just learned into a detection or a small tool.
+- **Practice:** [Hack The Box](https://www.hackthebox.com), [OffSec Proving Grounds](https://www.offsec.com/labs/), [pwnedlabs](https://pwnedlabs.io), [TryHackMe](https://tryhackme.com), [CyberDefenders](https://cyberdefenders.org), [Blue Team Labs Online](https://blueteamlabs.online), [RangeForce](https://www.rangeforce.com), or [Splunk BOTS](https://www.splunk.com/en_us/blog/security/what-you-need-to-know-about-boss-of-the-soc.html).
+- **Engage:** a blog; your local [OWASP chapter](https://owasp.org/chapters/), [DEF CON group](https://defcongroups.org), or [BSides](https://www.securitybsides.com); CTFs; responsible disclosure and bug bounty; submitting a talk to a CFP.
+- **Train:** [Antisiphon](https://www.antisyphontraining.com) and [Black Hills](https://www.blackhillsinfosec.com), [SANS](https://www.sans.org), [TCM Security](https://tcm-sec.com), [Zero-Point Security](https://www.zeropointsecurity.co.uk), or [OffSec](https://www.offsec.com); conferences like [Black Hat](https://www.blackhat.com), [DEF CON](https://defcon.org), or a regional BSides.
 
 ## Keeping it honest
 
