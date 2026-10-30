@@ -20,12 +20,12 @@
       { "label": "Build", "detail": "Tools, exploit work, and projects that turn what I read into something I can explain." },
       { "label": "Practice", "detail": "Weekly reps on Hack The Box, Proving Grounds, pwnedlabs, and detection labs." },
       { "label": "Engage", "detail": "Responsible disclosure, CTFs, writing, networking, and my local security chapter." },
-      { "label": "Train", "detail": "Antisiphon, SANS and GIAC, and Black Hat where they buy depth or access." }
+      { "label": "Train", "detail": "Antisiphon, SANS, and Black Hat, when paid training is worth the money." }
     ]
   },
   "schema": {
     "title": "Where the time and money go",
-    "caption": "Most of this costs only time. I spend money where it buys depth or access I can't get free, then track the output so I know it is working.",
+    "caption": "Most of this costs only time. I pay for the few things free resources can't cover, then track the output so I know it's working.",
     "joinLabel": "feeds",
     "standards": [
       {
@@ -109,7 +109,7 @@ Visibility and credibility come from showing the work consistently, over a long 
 
 ## Train
 
-I pay for training where it buys me something I can't get on my own time.
+I pay for training when I've gone as far as free resources take me.
 
 - Antisiphon for pay-what-you-can live courses that fit around work.
 - SANS training when I want to go deep on a specific topic with structured material.
@@ -127,7 +127,7 @@ That's my routine. If you want to build your own, here is a cadence to start fro
 | Build | Weekly | Ship one small thing, a script, a tool, or a written note, from what you read that week. |
 | Practice | Weekly | Finish one lab end to end; log the hours and the skill it built. |
 | Engage | Monthly | Publish one write-up, play one CTF, or show up to one meetup; disclose anything real you find. |
-| Train | Quarterly | Book one course or conference that buys depth or access you can't get on your own time. |
+| Train | Quarterly | Book one paid course or conference once you've outgrown the free options. |
 | Review | Weekly, 10 min | Look back at your log, mark which habits you dropped, and start next week from the gap. |
 
 Start with two rows and add the rest once those two are automatic. A small routine you keep beats a big one you abandon in week three.
