@@ -32,7 +32,7 @@ const factIconPaths = {
   certifications: 'M17 9a5 5 0 1 1-10 0 5 5 0 0 1 10 0 M9 13l-2 8 5-3 5 3-2-8',
   education: 'M3 9l9-4 9 4-9 4-9-4z M7 11.5V16c0 1.1 2.2 2.5 5 2.5s5-1.4 5-2.5v-4.5 M21 9v4'
 };
-const factPalette = ['#83aaff', '#5fd49a', '#a891e6', '#d08b6a'];
+const factGlow = '#ec6a67';
 
 function renderAboutPoints(points) {
   return `<ul class="about-point-list">${points.map((point) => `<li><span class="about-point-icon icon-${point.icon}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${aboutIconPaths[point.icon]}"/></svg></span><p>${escapeHtml(point.text)}</p></li>`).join('')}</ul>`;
@@ -679,7 +679,7 @@ const indexHtml = indexTemplate
   .replaceAll('{{SPOTLIGHT_NOTE}}', escapeHtml(siteContent.spotlight.result.note))
   .replaceAll('{{SPOTLIGHT_FACTS}}', siteContent.spotlight.facts.map((f, i) => {
     const d = factIconPaths[f.icon] || '';
-    const color = factPalette[i % factPalette.length];
+    const color = factGlow;
     const icon = d ? `<span class="fact-icon" style="--glow:${color}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg></span>` : '';
     return `<div class="fact">${icon}<dt>${escapeHtml(f.label)}</dt><dd>${escapeHtml(f.value)}</dd></div>`;
   }).join(''))
