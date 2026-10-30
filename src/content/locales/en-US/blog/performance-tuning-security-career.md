@@ -6,7 +6,7 @@
   "slug": "performance-tuning-security-career",
   "openGraphImagePrompt": "A restrained technical illustration on a charcoal background: five small habit loops linked into one larger cycle, with a simple log or ledger beside them; muted blue, teal, and a little violet; editorial, precise, no logos, no text, no neon.",
   "tags": ["Career Development", "Continuous Learning", "Threat Intelligence", "CTF", "Detection Engineering"],
-  "keyTakeaway": "Five habits keep me sharp: stay informed, build, practice, engage, and train. The value is in running them on a schedule and tracking them honestly, so the hours compound instead of scattering.",
+  "keyTakeaway": "A simple five-item checklist keeps me sharp: stay informed, build, practice, engage, and train. The value is in running it on a schedule and tracking it honestly, so the hours compound instead of scattering.",
   "summary": "The five-habit routine I run to keep improving as a security professional, staying informed, building, practicing, engaging, and training.",
   "author": "David Awosusi",
   "category": "Career Development",
