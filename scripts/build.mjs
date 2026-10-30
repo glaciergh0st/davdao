@@ -25,12 +25,12 @@ const aboutIconPaths = {
   route: 'M4 19 9 5l3 8 8-8-4 14-4-8-8 8Z'
 };
 
-// Neon spotlight-fact icons (stroke, 24x24), one per fact.
+// Neon spotlight-fact icons (solid/filled, 24x24, even-odd), one per fact.
 const factIconPaths = {
-  focus: 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0 M12 1v3 M12 20v3 M1 12h3 M20 12h3',
-  experience: 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M12 7v5l3 2',
-  certifications: 'M17 9a5 5 0 1 1-10 0 5 5 0 0 1 10 0 M9 13l-2 8 5-3 5 3-2-8',
-  education: 'M3 9l9-4 9 4-9 4-9-4z M7 11.5V16c0 1.1 2.2 2.5 5 2.5s5-1.4 5-2.5v-4.5 M21 9v4'
+  focus: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 3a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm0 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z',
+  experience: 'M5 3h14v3l-5 6 5 6v3H5v-3l5-6-5-6V3Z',
+  certifications: 'M12 2 20 5v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5l8-3Zm-1.2 12.7 4.9-4.9-1.4-1.4-3.5 3.5-1.1-1.1-1.4 1.4 2.5 2.5Z',
+  education: 'M12 3 1.5 8 12 13l10.5-5L12 3ZM6 11.2 12 14l6-2.8V15c0 1.5-2.7 2.7-6 2.7S6 16.5 6 15v-3.8ZM20.5 8v4.4h1V8zM21 12.1a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z'
 };
 const factPalette = ['#83aaff', '#5fd49a', '#a891e6', '#d08b6a'];
 
@@ -680,7 +680,7 @@ const indexHtml = indexTemplate
   .replaceAll('{{SPOTLIGHT_FACTS}}', siteContent.spotlight.facts.map((f, i) => {
     const d = factIconPaths[f.icon] || '';
     const color = factPalette[i % factPalette.length];
-    const icon = d ? `<span class="fact-icon" style="--glow:${color}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg></span>` : '';
+    const icon = d ? `<span class="fact-icon" style="--glow:${color}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="${d}"/></svg></span>` : '';
     return `<div class="fact">${icon}<dt>${escapeHtml(f.label)}</dt><dd>${escapeHtml(f.value)}</dd></div>`;
   }).join(''))
   .replaceAll('{{SKILL_NODES}}', skillNodes)
