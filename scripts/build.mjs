@@ -25,6 +25,15 @@ const aboutIconPaths = {
   route: 'M4 19 9 5l3 8 8-8-4 14-4-8-8 8Z'
 };
 
+// Neon spotlight-fact icons (stroke, 24x24), one per fact.
+const factIconPaths = {
+  focus: 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0 M12 1v3 M12 20v3 M1 12h3 M20 12h3',
+  experience: 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M12 7v5l3 2',
+  certifications: 'M17 9a5 5 0 1 1-10 0 5 5 0 0 1 10 0 M9 13l-2 8 5-3 5 3-2-8',
+  education: 'M3 9l9-4 9 4-9 4-9-4z M7 11.5V16c0 1.1 2.2 2.5 5 2.5s5-1.4 5-2.5v-4.5 M21 9v4'
+};
+const factPalette = ['#83aaff', '#5fd49a', '#a891e6', '#d08b6a'];
+
 function renderAboutPoints(points) {
   return `<ul class="about-point-list">${points.map((point) => `<li><span class="about-point-icon icon-${point.icon}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${aboutIconPaths[point.icon]}"/></svg></span><p>${escapeHtml(point.text)}</p></li>`).join('')}</ul>`;
 }
@@ -668,7 +677,12 @@ const indexHtml = indexTemplate
   .replaceAll('{{SPOTLIGHT_AFTER}}', escapeHtml(siteContent.spotlight.result.after))
   .replaceAll('{{SPOTLIGHT_LABEL}}', escapeHtml(siteContent.spotlight.result.label))
   .replaceAll('{{SPOTLIGHT_NOTE}}', escapeHtml(siteContent.spotlight.result.note))
-  .replaceAll('{{SPOTLIGHT_FACTS}}', siteContent.spotlight.facts.map((f) => `<div class="fact"><dt>${escapeHtml(f.label)}</dt><dd>${escapeHtml(f.value)}</dd></div>`).join(''))
+  .replaceAll('{{SPOTLIGHT_FACTS}}', siteContent.spotlight.facts.map((f, i) => {
+    const d = factIconPaths[f.icon] || '';
+    const color = factPalette[i % factPalette.length];
+    const icon = d ? `<span class="fact-icon" style="--glow:${color}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg></span>` : '';
+    return `<div class="fact">${icon}<dt>${escapeHtml(f.label)}</dt><dd>${escapeHtml(f.value)}</dd></div>`;
+  }).join(''))
   .replaceAll('{{SKILL_NODES}}', skillNodes)
   .replaceAll('{{SKILL_LEGEND}}', skillLegend)
   .replaceAll('{{FEATURED_EYEBROW}}', escapeHtml(siteContent.featured.eyebrow))
