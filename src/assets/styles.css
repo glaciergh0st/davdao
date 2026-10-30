@@ -75,9 +75,21 @@ nav .nav-contact:hover { border-color: #8d7ed0; background: #1b1930; color: #c6b
 .result-label { margin: 0 0 14px; color: var(--ink); font-size: 15px; font-weight: 600; }
 .result-note { max-width: 440px; margin: 0; color: var(--body); font-size: 13px; line-height: 1.6; }
 .facts-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 0; border: 1px solid #243040; border-radius: 12px; overflow: hidden; background: #243040; }
-.facts-grid .fact { margin: 0; padding: 18px 20px; background: linear-gradient(150deg, #0e141d, #0a0f16); }
+.facts-grid .fact { margin: 0; padding: 18px 20px; background: linear-gradient(150deg, #0e141d, #0a0f16); display: grid; grid-template-columns: auto 1fr; column-gap: 13px; align-items: center; }
 .facts-grid dt { margin: 0 0 8px; color: #8aa7d6; font: 650 10px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase; }
 .facts-grid dd { margin: 0; color: var(--ink); font-size: 14px; font-weight: 500; line-height: 1.4; }
+.fact-icon { grid-row: 1 / span 2; display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; color: var(--glow, var(--accent)); border-radius: 50%; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--glow) 22%, transparent), transparent 72%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glow) 34%, transparent); }
+.fact-icon svg { width: 21px; height: 21px; filter: drop-shadow(0 0 4px color-mix(in srgb, var(--glow) 45%, transparent)); animation: factGlow 2.8s ease-in-out infinite; }
+.facts-grid .fact:nth-child(2) .fact-icon svg { animation-delay: .5s; }
+.facts-grid .fact:nth-child(3) .fact-icon svg { animation-delay: 1s; }
+.facts-grid .fact:nth-child(4) .fact-icon svg { animation-delay: 1.5s; }
+@keyframes factGlow {
+  0%, 100% { filter: drop-shadow(0 0 3px color-mix(in srgb, var(--glow) 35%, transparent)); }
+  50% { filter: drop-shadow(0 0 9px color-mix(in srgb, var(--glow) 90%, transparent)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fact-icon svg { animation: none; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--glow) 60%, transparent)); }
+}
 @media (max-width: 820px) { .spotlight { grid-template-columns: 1fr; } }
 @media (max-width: 440px) { .facts-grid { grid-template-columns: 1fr; } .result-metric { gap: 8px; } }
 .eyebrow { margin: 0 0 17px; color: #91adf2; font-size: 12px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }

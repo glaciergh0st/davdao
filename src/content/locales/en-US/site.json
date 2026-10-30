@@ -46,10 +46,10 @@
       "note": "SOAR-to-CrowdStrike API automation with approval controls, on Fortune 10 healthcare response."
     },
     "facts": [
-      { "label": "Focus", "value": "Detection & response engineering" },
-      { "label": "Experience", "value": "3.5 yrs consulting · 8 yrs IT ops" },
-      { "label": "Certifications", "value": "GIAC GCIA · eCPPT · Security+" },
-      { "label": "Education", "value": "M.Eng. Cybersecurity, Univ. of Maryland" }
+      { "icon": "focus", "label": "Focus", "value": "Detection & response engineering" },
+      { "icon": "experience", "label": "Experience", "value": "3.5 yrs consulting · 8 yrs IT ops" },
+      { "icon": "certifications", "label": "Certifications", "value": "GIAC GCIA · eCPPT · Security+" },
+      { "icon": "education", "label": "Education", "value": "M.Eng. Cybersecurity, Univ. of Maryland" }
     ]
   },
   "about": {
